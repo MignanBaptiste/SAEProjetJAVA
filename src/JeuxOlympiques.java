@@ -23,6 +23,7 @@ public class JeuxOlympiques{
      * @param epv
      */
     public void addEpreuve(Epreuve epv){
+        
     }
 
     /**
@@ -44,18 +45,18 @@ public class JeuxOlympiques{
     }
 
     /**
-     * Renvoy le score d'un athlète
+     * Renvoie le score d'un athlète
      * @param ath
-     * @return
+     * @return 
      */
     public int getScoreAthlete(Athlete ath){
 
     }
 
     /**
-     * Renvoy le score d'un équipe
+     * Renvoie le score d'un équipe
      * @param equ
-     * @return
+     * @return 
      */
     public int getScoreEquipe(Equipe equ){
         
@@ -64,6 +65,7 @@ public class JeuxOlympiques{
     /**
      * Modifie le score d'une équipe
      * @param equ
+     * @return 
      */
     public void setScoreEquipe(Equipe equ){
 
@@ -72,6 +74,7 @@ public class JeuxOlympiques{
     /**
      * Modifie le score d'un athlète
      * @param ath
+     * @return 
      */
     public void setScoreAthlète(Athlete ath){
 
