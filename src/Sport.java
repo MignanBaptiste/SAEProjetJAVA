@@ -3,7 +3,7 @@ public abstract class Sport {
     private int nbjoueurs;
 
     /**
-     * Permet de crer un tout nouveau sport
+     * Permet de créer un tout nouveau sport
      */
     public Sport(){
 
