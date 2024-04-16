@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+        "Tests"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/hamcrest-2.2.jar",
+        "lib/junit-4.13.2.jar"
+    ]
+}

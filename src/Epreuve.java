@@ -14,7 +14,7 @@ public abstract class Epreuve {
      * Renvoie le sexe de l'épreuve
      * @return String
      */
-    public String getSexe(){return "";}
+    public String getSexe(){return null;}
     /**
      * Renvoie le sport de l'épreuve
      * @return Sport
