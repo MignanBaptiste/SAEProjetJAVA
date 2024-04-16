@@ -1,4 +1,3 @@
-import java.util.List;
 /** Interface Participant contenant les méthodes pour qu'un(e) Athlète/Equipe participe à une épreuve */
 public interface Participant {
     /**

@@ -1,14 +1,9 @@
+/** Class d'épreuve individuelle, hérite de la classe Epreuve */
 public class Individuelle extends Epreuve{
-    public Individuelle(String sexe, Sport sport){
-        super(sexe, sport);
-    }
-    public List<Athlète> getParticipants(){
-
-    }
-    public Athlète gagnant(){
-
-    }
-    public List<Athlète> classement(){
-        
-    }
+    /**
+     * Permet de créer une épreuve individuelle
+     * @param sexe
+     * @param sport
+     */
+    public Individuelle(String sexe, Sport sport){super(sexe, sport);}
 }
