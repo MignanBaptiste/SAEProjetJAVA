@@ -7,7 +7,9 @@ public abstract class Sport {
     /**
      * Permet de créer un tout nouveau sport
      */
-    public Sport(){
+    public Sport(String categorie, int nbjoueurs){
+        this.categorie = categorie;
+        this.nbjoueurs = nbjoueurs;
 
     }
 
@@ -16,6 +18,7 @@ public abstract class Sport {
      * @return la catégorie du sport
      */
     public String getCategorie(){
+        return this.categorie;
 
     }
 
@@ -24,5 +27,6 @@ public abstract class Sport {
      * @return le nombre de joueurs du sport
      */
     public int getNbjoueurs(){
+        return this.nbjoueurs;
     }
 }
