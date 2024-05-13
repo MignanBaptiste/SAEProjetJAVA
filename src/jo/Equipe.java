@@ -1,4 +1,5 @@
 package jo;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Equipe implements Participant{
@@ -13,7 +14,10 @@ public class Equipe implements Participant{
      * @param ath
      */
     public Equipe(String nomEquipe, Pays pays) {
-
+        this.nomEquipe = nomEquipe;
+        this.pays = pays;
+        this.score = 0;
+        this.athletes = new ArrayList<>();
     }
 
     /**
@@ -21,7 +25,7 @@ public class Equipe implements Participant{
      * @return
      */
     public String getNomEquipe() {
-
+        return this.nomEquipe;
     }
 
     /**
@@ -29,7 +33,7 @@ public class Equipe implements Participant{
      * @return
      */
     public int getScore() {
-
+        return this.score;
     }
 
     /**
@@ -37,7 +41,7 @@ public class Equipe implements Participant{
      * @return
      */
     public Pays getPays() {
-
+        return this.pays;
     }
 
     /**
@@ -45,7 +49,7 @@ public class Equipe implements Participant{
      * @return
      */
     public List<Athlete> getAthletes() {
-
+        return this.athletes;
     }
 
     /**
@@ -53,7 +57,6 @@ public class Equipe implements Participant{
      * @param ath
      */
     public void addAthlete(Athlete ath) {
-
+        this.athletes.add(ath);
     }
-
 }
