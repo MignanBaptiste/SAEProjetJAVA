@@ -1,9 +1,10 @@
+package jo;
 import java.util.List;
 
 public class Equipe implements Participant{
-    private String nomRquipe;
+    private String nomEquipe;
     private int score;
-    private Pays pays;
+    private final Pays pays;
     private List<Athlete> athletes;
 
     /**
@@ -11,7 +12,7 @@ public class Equipe implements Participant{
      * possédant un nom, un score, un pays, et une liste d'athlètes.
      * @param ath
      */
-    public Equipe(String nomRquipe) {
+    public Equipe(String nomEquipe, Pays pays) {
 
     }
 
@@ -19,7 +20,7 @@ public class Equipe implements Participant{
      * Renvoie le nom de l'équipe
      * @return
      */
-    public String getNomRquipe() {
+    public String getNomEquipe() {
 
     }
 
@@ -38,7 +39,7 @@ public class Equipe implements Participant{
     public Pays getPays() {
 
     }
-    
+
     /**
      * Renvoie la liste des athlètes de l'équipe
      * @return
@@ -54,4 +55,5 @@ public class Equipe implements Participant{
     public void addAthlete(Athlete ath) {
 
     }
+
 }
