@@ -1,4 +1,4 @@
-import jo.Epreuve;
+import jo.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 
