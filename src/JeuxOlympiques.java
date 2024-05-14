@@ -1,6 +1,12 @@
+import jo.Epreuve;
+import jo.Participant;
+import java.util.ArrayList;
+import java.util.List;
+
 public class JeuxOlympiques{
 
     private int annee;
+    private List<Epreuve>epreuves;
 
     /**
      * Le constructeur
@@ -8,14 +14,20 @@ public class JeuxOlympiques{
      */
     public JeuxOlympiques(int annee){
         this.annee = annee;
+        this.epreuves = new ArrayList<>();
     }
 
     /**
      * 
      * @return toutes les épreuves
      */
-    public epreuves getEpreuves(){
-        
+    public List<Epreuve> getEpreuves(){
+        List<Epreuve> liste = new ArrayList<Epreuve>() ;
+        for(int i=0; i< epreuves.size(); ++i){
+            liste.add(epreuves.get(i));
+        }
+        return liste;
+
     }
 
     /**
@@ -23,7 +35,7 @@ public class JeuxOlympiques{
      * @param epv
      */
     public void addEpreuve(Epreuve epv){
-        
+        this.epreuves.add(epv);
     }
 
     /**
@@ -32,7 +44,7 @@ public class JeuxOlympiques{
      * @param epv
      */
     public void participerAthlete(Athlete ath, Epreuve epv){
-
+        epv.addParticipant(ath);
     }
 
     /**
@@ -40,7 +52,7 @@ public class JeuxOlympiques{
      * @param equ
      * @param epv
      */
-    public void participerEquipe(Equipe equ, Epreuve epv){
+    public void participerEquipe(Equipe equ){
 
     }
 
@@ -50,7 +62,7 @@ public class JeuxOlympiques{
      * @return 
      */
     public int getScoreAthlete(Athlete ath){
-
+        return getScoreAthlete(ath);
     }
 
     /**
@@ -59,7 +71,7 @@ public class JeuxOlympiques{
      * @return 
      */
     public int getScoreEquipe(Equipe equ){
-        
+        return getScoreEquipe(equ);
     }
 
     /**
@@ -68,7 +80,7 @@ public class JeuxOlympiques{
      * @return 
      */
     public void setScoreEquipe(Equipe equ){
-
+        setScore(getScoreEquipe(equ));
     }
 
     /**
@@ -77,6 +89,6 @@ public class JeuxOlympiques{
      * @return 
      */
     public void setScoreAthlète(Athlete ath){
-
+        
     }
 }
