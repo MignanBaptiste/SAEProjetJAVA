@@ -1,4 +1,4 @@
-package jo;
+package jo.sport;
 
 public abstract class Sport {
     private String categorie;
