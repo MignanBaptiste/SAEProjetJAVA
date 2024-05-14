@@ -1,3 +1,6 @@
+package jo;
+import Sport;
+
 /** Class d'épreuve individuelle, hérite de la classe Epreuve */
 public class Individuelle extends Epreuve{
     /**

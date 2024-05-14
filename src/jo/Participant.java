@@ -1,3 +1,4 @@
+package jo;
 /** Interface Participant contenant les méthodes pour qu'un(e) Athlète/Equipe participe à une épreuve */
 public interface Participant {
     /**

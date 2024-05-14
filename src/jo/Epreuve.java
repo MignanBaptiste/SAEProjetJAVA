@@ -1,3 +1,4 @@
+package jo;
 import java.util.List;
 /** Class permettant de créer une épreuve ayant des participants */
 public abstract class Epreuve {
