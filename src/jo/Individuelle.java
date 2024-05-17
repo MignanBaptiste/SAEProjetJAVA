@@ -1,3 +1,4 @@
+package jo;
 public class Individuelle extends Epreuve{
     public Individuelle(String sexe, Sport sport){
         super(sexe, sport);

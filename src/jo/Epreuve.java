@@ -1,3 +1,4 @@
+package jo;
 public class Epreuve {
     private String sexe;
     private Sport sport;

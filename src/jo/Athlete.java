@@ -1,4 +1,8 @@
-public class Athlete {
+package jo;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Athlete implements Participant{
     private String nomAthlete;
     private String prenomAthlete;
     private String sexe;
@@ -17,9 +21,17 @@ public class Athlete {
      * @param agilite
      * @param endurance
      * @param score
+     * @param pays
      */
-    public Athlete(String nom, String prenom, String sexe, int force, int agilite, int endurance, int score) {
-
+    public Athlete(String nom, String prenom, String sexe, int force, int agilite, int endurance, int score, Pays pays) {
+        this.nomAthlete = nom;
+        this.prenomAthlete = prenom;
+        this.sexe = sexe;
+        this.force = force;
+        this.agilite = agilite;
+        this.endurance = endurance;
+        this.score = score;
+        this.pays = pays;
     }
 
     /**
@@ -27,7 +39,7 @@ public class Athlete {
      * @return
      */
     public String getNomAthlete() {
-
+        return this.nomAthlete;
     }
 
     /**
@@ -35,7 +47,7 @@ public class Athlete {
      * @return
      */
     public String getPrenomAthlete() {
-
+        return this.prenomAthlete;
     }
 
     /**
@@ -43,7 +55,7 @@ public class Athlete {
      * @return
      */
     public String getSexe() {
-
+        return this.sexe;
     }
 
     /**
@@ -51,7 +63,7 @@ public class Athlete {
      * @return
      */
     public int getForce() {
-
+        return this.force;
     }
 
     /**
@@ -59,7 +71,7 @@ public class Athlete {
      * @return
      */
     public int getAgilite() {
-
+        return this.agilite;
     }
 
     /**
@@ -67,7 +79,7 @@ public class Athlete {
      * @return
      */
     public int getEndurance() {
-    
+        return this.endurance;
     }
 
     /**
@@ -75,7 +87,7 @@ public class Athlete {
      * @return
      */
     public int getScore() {
-
+        return this.score;
     }
 
     /**
@@ -83,6 +95,6 @@ public class Athlete {
      * @return
      */
     public Pays getPays() {
-
+        return this.pays;
     }
 }
