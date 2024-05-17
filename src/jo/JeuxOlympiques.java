@@ -1,3 +1,4 @@
+package jo;
 public class JeuxOlympiques{
 
     private int annee;
