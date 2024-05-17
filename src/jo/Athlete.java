@@ -21,6 +21,7 @@ public class Athlete implements Participant{
      * @param agilite
      * @param endurance
      * @param score
+     * @param pays
      */
     public Athlete(String nom, String prenom, String sexe, int force, int agilite, int endurance, int score, Pays pays) {
         this.nomAthlete = nom;
