@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class TestAthlete {
+    /** On veut pouvoir créer un nouvel athlète */
     @Test
     public void testAthlete(){
         Pays france = new Pays("France");
@@ -12,6 +13,7 @@ public class TestAthlete {
         Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
     }
 
+    /** On veut obtenir le nom de l'athlète */
     @Test
     public void testGetNomAthlete(){
         Pays france = new Pays("France");
@@ -21,6 +23,7 @@ public class TestAthlete {
         assertEquals("Riner", ath2.getNomAthlete());
     }
 
+    /** On veut obtenir le prénom de l'athlète */
     @Test
     public void testGetPrenomAthlete(){
         Pays france = new Pays("France");
@@ -30,6 +33,7 @@ public class TestAthlete {
         assertEquals("Teddy", ath2.getPrenomAthlete());
     }
 
+    /** On veut obtenir sex de l'athlète */
     @Test
     public void testGetSexe(){
         Pays france = new Pays("France");
@@ -39,6 +43,7 @@ public class TestAthlete {
         assertEquals("male", ath2.getSexe());
     }
 
+    /** On veut obtenir la force de l'athlète */
     @Test
     public void testGetForce(){
         Pays france = new Pays("France");
@@ -48,6 +53,7 @@ public class TestAthlete {
         assertEquals(89, ath2.getForce());
     }
 
+    /** On veut obtenir l'agilité de l'athlète */
     @Test
     public void testGetAgilite(){
         Pays france = new Pays("France");
@@ -57,6 +63,7 @@ public class TestAthlete {
         assertEquals(67, ath2.getAgilite());
     }
 
+    /** On veut obtenir l'endurance de l'athlète */
     @Test
     public void testGetEndurance(){
         Pays france = new Pays("France");
@@ -66,6 +73,7 @@ public class TestAthlete {
         assertEquals(53, ath2.getEndurance());
     }
 
+    /** On veut obtenir le score de l'athlète */
     @Test
     public void testGetScore(){
         Pays france = new Pays("France");
@@ -75,6 +83,7 @@ public class TestAthlete {
         assertEquals(45, ath2.getScore());
     }
 
+    /** On veut obtenir le pays de l'athlète */
     @Test
     public void testGetPays(){
         Pays france = new Pays("France");
