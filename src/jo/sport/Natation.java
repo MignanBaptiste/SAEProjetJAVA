@@ -1,4 +1,4 @@
-package jo;
+package jo.sport;
 
 public class Natation extends Sport{
     

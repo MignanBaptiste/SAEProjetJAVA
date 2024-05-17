@@ -1,4 +1,4 @@
-package jo;
+package jo.sport;
 
 public class Handball extends Sport{
     
