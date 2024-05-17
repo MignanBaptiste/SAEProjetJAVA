@@ -8,15 +8,15 @@ public class TestAthlete {
     @Test
     public void testAthlete(){
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34);
-        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
     }
 
     @Test
     public void testGetNomAthlete(){
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34);
-        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
         assertEquals("Manaudou", ath1.getNomAthlete());
         assertEquals("Riner", ath2.getNomAthlete());
     }
