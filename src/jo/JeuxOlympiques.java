@@ -1,4 +1,6 @@
+import jo.Athlete;
 import jo.Epreuve;
+import jo.Equipe;
 import jo.Participant;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ public class JeuxOlympiques{
     public JeuxOlympiques(int annee){
         this.annee = annee;
         this.epreuves = new ArrayList<>();
+        
     }
 
     /**
@@ -44,7 +47,9 @@ public class JeuxOlympiques{
      * @param epv
      */
     public void participerAthlete(Athlete ath, Epreuve epv){
-        epv.addParticipant(ath);
+        if (this.epreuves.contains(epv)) {
+            epv.addParticipant(ath);
+        }
     }
 
     /**
@@ -52,8 +57,10 @@ public class JeuxOlympiques{
      * @param equ
      * @param epv
      */
-    public void participerEquipe(Equipe equ){
-
+    public void participerEquipe(Equipe equ, Equipe epv){
+        if (this.epreuves.contains(epv)) {
+            epv.addParticipant(equ);
+        }
     }
 
     /**
@@ -62,7 +69,7 @@ public class JeuxOlympiques{
      * @return 
      */
     public int getScoreAthlete(Athlete ath){
-        return getScoreAthlete(ath);
+        return ath.getScore();
     }
 
     /**
@@ -71,24 +78,13 @@ public class JeuxOlympiques{
      * @return 
      */
     public int getScoreEquipe(Equipe equ){
-        return getScoreEquipe(equ);
+        int scoreEqu = 0;
+        for (Epreuve epreuve : epreuves) {
+            if (epreuve.getParticipants().contains(equ)) {
+                scoreEqu += equ.getScore();
+            }
+        }
     }
 
-    /**
-     * Modifie le score d'une équipe
-     * @param equ
-     * @return 
-     */
-    public void setScoreEquipe(Equipe equ){
-        setScore(getScoreEquipe(equ));
-    }
-
-    /**
-     * Modifie le score d'un athlète
-     * @param ath
-     * @return 
-     */
-    public void setScoreAthlète(Athlete ath){
-        
-    }
+    
 }
