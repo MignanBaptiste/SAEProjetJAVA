@@ -23,7 +23,7 @@ public class Pays {
      * @return
      */
     public String getNom() {
-
+        return this.nomPays;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Pays {
      * @return
      */
     public List<Equipe> getEquipes() {
-
+        return this.equipes;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Pays {
      * @return
      */
     public List<Athlete> getAthletes() {
-
+        return this.athletes;
     }
     
     /**
@@ -47,7 +47,7 @@ public class Pays {
      * @param equipe
      */
     public void ajouteEquipe(Equipe equipe) {
-
+        this.equipes.add(equipe);
     }
 
     /**
@@ -55,6 +55,6 @@ public class Pays {
      * @param athlete
      */
     public void ajouteAthlete(Athlete athlete) {
-
+        this.athletes.add(athlete);
     }
 }
