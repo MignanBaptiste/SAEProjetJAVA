@@ -1,5 +1,6 @@
 package tests;
 import jo.*;
+import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -31,6 +32,16 @@ public class TestAthlete {
         Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
         assertEquals("Florent", ath1.getPrenomAthlete());
         assertEquals("Teddy", ath2.getPrenomAthlete());
+    }
+
+    /** On veut obtenir le nom complet d'un athlète */
+    @Test
+    public void testGetNom(){
+        Pays france = new Pays("France");
+        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
+        assertEquals("Manaudou Florent", ath1.getNom());
+        assertEquals("Riner Teddy", ath2.getNom());
     }
 
     /** On veut obtenir sex de l'athlète */
@@ -91,5 +102,25 @@ public class TestAthlete {
         Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
         assertEquals(france, ath1.getPays());
         assertEquals(france, ath2.getPays());
+    }
+
+    /** On veut modifier le score de l'athlète */
+    @Test
+    public void testSetScore(){
+        Pays france = new Pays("France");
+        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
+        ath1.setScore(100);
+        ath2.setScore(200);
+    }
+
+    /** On veut ajouter un ahtlète à une épreuve */
+    @Test
+    public void testParticiper(){
+        Pays france = new Pays("France");
+        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
+        Sport escrime = new Escrime("Épée individuelle", 1);
+        Epreuve epv1 = new Individuelle("male", escrime);
+        ath1.participer(epv1);
     }
 }
