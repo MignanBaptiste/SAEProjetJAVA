@@ -51,6 +51,14 @@ public class Athlete implements Participant{
     }
 
     /**
+     * Renvoie le nom complet de l'athlète
+     * @return
+     */
+    public String getNom() {
+        return this.nomAthlete + " " + this.prenomAthlete;
+    }
+
+    /**
      * Renvoie le sexe de l'athlète
      * @return
      */
@@ -96,5 +104,21 @@ public class Athlete implements Participant{
      */
     public Pays getPays() {
         return this.pays;
+    }
+
+    /**
+     * Permet de modifier le score de l'athlète
+     * @param score
+     * @return
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
+     * Permet d'ajouter un athlète à une épreuve
+     */
+    public void participer(Epreuve epreuve) {
+        epreuve.addParticipant(this);
     }
 }
