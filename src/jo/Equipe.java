@@ -24,7 +24,7 @@ public class Equipe implements Participant{
      * Renvoie le nom de l'équipe
      * @return
      */
-    public String getNomEquipe() {
+    public String getNom() {
         return this.nomEquipe;
     }
 
@@ -34,6 +34,14 @@ public class Equipe implements Participant{
      */
     public int getScore() {
         return this.score;
+    }
+
+    /**
+     * Modifie le score de l'équipe
+     * @param score
+     */
+    public void setScore(int score) {
+        this.score = score;        
     }
 
     /**
@@ -58,5 +66,13 @@ public class Equipe implements Participant{
      */
     public void addAthlete(Athlete ath) {
         this.athletes.add(ath);
+    }
+
+    /**
+     * Permet d'ajouter une équipe à une épreuve
+     * @param epreuve
+     */
+    public void participer(Epreuve epreuve) {
+        epreuve.addParticipant(this);
     }
 }
