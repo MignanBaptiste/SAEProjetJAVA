@@ -5,7 +5,7 @@ import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class TestAthlete {
+public class TestsAthlete {
     /** On veut pouvoir créer un nouvel athlète */
     @Test
     public void testAthlete(){
