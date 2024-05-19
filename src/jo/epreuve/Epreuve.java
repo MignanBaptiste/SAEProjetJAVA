@@ -1,4 +1,4 @@
-package jo;
+package jo.epreuve;
 import java.util.ArrayList;
 import java.util.List;
 /** Class permettant de créer une épreuve ayant des participants */

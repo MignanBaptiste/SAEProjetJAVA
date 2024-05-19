@@ -1,5 +1,4 @@
-package jo;
-import Sport;
+package jo.epreuve;
 
 /** Class d'épreuve individuelle, hérite de la classe Epreuve */
 public class Individuelle extends Epreuve{
