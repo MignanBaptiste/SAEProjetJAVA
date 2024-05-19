@@ -1,7 +1,14 @@
 package jo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jo.epreuve.*;
+
 public class JeuxOlympiques{
 
     private int annee;
+    private List<Epreuve> lesepreuves;
 
     /**
      * Le constructeur
@@ -9,13 +16,15 @@ public class JeuxOlympiques{
      */
     public JeuxOlympiques(int annee){
         this.annee = annee;
+        this.lesepreuves = new ArrayList<>();
     }
 
     /**
      * 
      * @return toutes les épreuves
      */
-    public epreuves getEpreuves(){
+    public List<Epreuve> getEpreuves(){
+        return this.lesepreuves;
         
     }
 
@@ -24,6 +33,7 @@ public class JeuxOlympiques{
      * @param epv
      */
     public void addEpreuve(Epreuve epv){
+        this.lesepreuves.add(epv);
         
     }
 
@@ -32,7 +42,8 @@ public class JeuxOlympiques{
      * @param ath
      * @param epv
      */
-    public void participerAthlete(Athlete ath, Epreuve epv){
+    public void participerAthlete(Athlete ath, Individuelle epv){ //AMELIORER
+        epv.addParticipant(ath);
 
     }
 
@@ -41,7 +52,8 @@ public class JeuxOlympiques{
      * @param equ
      * @param epv
      */
-    public void participerEquipe(Equipe equ, Epreuve epv){
+    public void participerEquipe(Equipe equ, Epreuve epv){ //IDEM
+        epv.addParticipant(equ);
 
     }
 
@@ -51,6 +63,7 @@ public class JeuxOlympiques{
      * @return 
      */
     public int getScoreAthlete(Athlete ath){
+        return ath.getScore();
 
     }
 
@@ -60,6 +73,7 @@ public class JeuxOlympiques{
      * @return 
      */
     public int getScoreEquipe(Equipe equ){
+        return equ.getScore();
         
     }
 
@@ -68,7 +82,8 @@ public class JeuxOlympiques{
      * @param equ
      * @return 
      */
-    public void setScoreEquipe(Equipe equ){
+    public void setScoreEquipe(Equipe equ, int score){
+        equ.setScore(score);
 
     }
 
@@ -77,7 +92,12 @@ public class JeuxOlympiques{
      * @param ath
      * @return 
      */
-    public void setScoreAthlète(Athlete ath){
+    public void setScoreAthlète(Athlete ath, int score){
+        ath.setScore(score);
 
+    }
+
+    public int getAnnee(){
+        return this.annee;
     }
 }

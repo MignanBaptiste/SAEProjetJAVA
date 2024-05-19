@@ -1,11 +1,13 @@
 package jo.epreuve;
 import java.util.ArrayList;
 import java.util.List;
+
+import jo.sport.Sport;
 /** Class permettant de créer une épreuve ayant des participants */
 public abstract class Epreuve {
     private String sexe;
     private Sport sport;
-    private List<Participant> participants;
+    private List<Object> participants;
     /**
      * Permet de créer une épreuve
      * @param sexe
@@ -30,12 +32,12 @@ public abstract class Epreuve {
      * Permet d'ajouter un participant à une épreuve
      * @param participant
      */
-    public void addParticipant(Participant participant){this.participants.add(participant);}
+    public void addParticipant(Object participant){this.participants.add(participant);}
     /**
      * Renvoie la liste des participants à l'épreuve
      * @return List<Participant>
      */
-    public List<Participant> getParticipants(){return this.participants;}
+    public List<Object> getParticipants(){return this.participants;}
     /**
      * Renvoie le gagnant de l'épreuve
      * @return Participant

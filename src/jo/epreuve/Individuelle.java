@@ -1,5 +1,7 @@
 package jo.epreuve;
 
+import jo.sport.Sport;
+
 /** Class d'épreuve individuelle, hérite de la classe Epreuve */
 public class Individuelle extends Epreuve{
     /**

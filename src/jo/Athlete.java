@@ -1,6 +1,6 @@
 package jo;
-import java.util.ArrayList;
-import java.util.List;
+
+import jo.epreuve.Epreuve;
 
 public class Athlete implements Participant{
     private String nomAthlete;

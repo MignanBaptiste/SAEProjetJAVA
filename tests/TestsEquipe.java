@@ -1,10 +1,8 @@
-package tests;
 import jo.*;
+import jo.epreuve.Individuelle;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.util.Arrays;
 
 public class TestsEquipe {
@@ -70,7 +68,7 @@ public class TestsEquipe {
         Equipe equ1 = new Equipe("equ1", france);
         equ1.addAthlete(ath1);
         Sport escrime = new Escrime("Épée individuelle", 1);
-        Epreuve epv1 = new Individuelle("male", escrime);
+        Individuelle epv1 = new Individuelle("male", escrime);
         equ1.participer(epv1);
     }
 }

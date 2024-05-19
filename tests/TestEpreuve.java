@@ -1,5 +1,5 @@
-import jo.*;
-import jo.epreuve.Individuelle;
+import jo.epreuve.*;
+import jo.sport.*;
 
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class TestEpreuve {
     @Test
     public void test(){
-        VolleyBall volleyBall = new VolleyBall();
+        VolleyBall volleyBall = new VolleyBall("Volley", 14);
         Individuelle individuelle = new Individuelle("M", volleyBall);
         Collective collective = new Collective("F", volleyBall);
         assertEquals(individuelle.getSexe(), "M");

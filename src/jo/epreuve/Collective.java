@@ -1,4 +1,6 @@
-package jo;
+package jo.epreuve;
+
+import jo.sport.Sport;
 
 /** Class d'épreuve collective, hérite de la classe Epreuve */
 public class Collective extends Epreuve{

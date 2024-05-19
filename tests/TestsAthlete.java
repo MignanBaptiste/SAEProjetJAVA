@@ -1,9 +1,8 @@
-package tests;
 import jo.*;
+import jo.epreuve.Individuelle;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class TestsAthlete {
     /** On veut pouvoir créer un nouvel athlète */
@@ -120,7 +119,7 @@ public class TestsAthlete {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
         Sport escrime = new Escrime("Épée individuelle", 1);
-        Epreuve epv1 = new Individuelle("male", escrime);
+        Individuelle epv1 = new Individuelle("male", escrime);
         ath1.participer(epv1);
     }
 }

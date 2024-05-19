@@ -1,9 +1,6 @@
-package tests;
 import jo.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.util.Arrays;
 
 public class TestsPays {

@@ -1,8 +1,7 @@
-package tests;
-import jo.*;
+import jo.sport.*;
+
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class TestsSport {
     @Test 
