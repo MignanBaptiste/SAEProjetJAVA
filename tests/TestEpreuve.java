@@ -1,4 +1,4 @@
-import jo.epreuve.*;
+import jo.*;
 import jo.sport.*;
 import jo.Sexe;
 
@@ -9,8 +9,8 @@ public class TestEpreuve {
     @Test
     public void test(){
         VolleyBall volleyBall = new VolleyBall("Volley", 14);
-        Individuelle individuelle = new Individuelle(Sexe.HOMME, volleyBall);
-        Collective collective = new Collective(Sexe.FEMME, volleyBall);
+        Epreuve individuelle = new Epreuve(Sexe.HOMME, volleyBall);
+        Epreuve collective = new Epreuve(Sexe.FEMME, volleyBall);
         assertEquals(individuelle.getSexe(), Sexe.HOMME);
         assertEquals(collective.getSexe(), Sexe.FEMME);
         assertEquals(volleyBall, individuelle.getSport());

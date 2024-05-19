@@ -1,5 +1,4 @@
 import jo.*;
-import jo.epreuve.Individuelle;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
@@ -119,7 +118,7 @@ public class TestsAthlete {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
         Sport escrime = new Escrime("Épée individuelle", 1);
-        Individuelle epv1 = new Individuelle(Sexe.HOMME, escrime);
+        Epreuve epv1 = new Epreuve(Sexe.HOMME, escrime);
         ath1.participer(epv1);
     }
 }

@@ -3,8 +3,6 @@ package jo;
 import java.util.ArrayList;
 import java.util.List;
 
-import jo.epreuve.*;
-
 public class JeuxOlympiques{
 
     private int annee;
@@ -42,7 +40,7 @@ public class JeuxOlympiques{
      * @param ath
      * @param epv
      */
-    public void participerAthlete(Athlete ath, Individuelle epv){ //AMELIORER
+    public void participerAthlete(Athlete ath, Epreuve epv){ //AMELIORER
         epv.addParticipant(ath);
 
     }

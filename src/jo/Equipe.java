@@ -2,8 +2,6 @@ package jo;
 import java.util.ArrayList;
 import java.util.List;
 
-import jo.epreuve.Epreuve;
-
 public class Equipe implements Participant{
     private String nomEquipe;
     private int score;

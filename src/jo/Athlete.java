@@ -1,7 +1,5 @@
 package jo;
 
-import jo.epreuve.Epreuve;
-
 public class Athlete implements Participant{
     private String nomAthlete;
     private String prenomAthlete;
