@@ -1,5 +1,6 @@
 package jo.epreuve;
 
+import jo.Sexe;
 import jo.sport.Sport;
 
 /** Class d'épreuve individuelle, hérite de la classe Epreuve */
@@ -9,5 +10,5 @@ public class Individuelle extends Epreuve{
      * @param sexe
      * @param sport
      */
-    public Individuelle(String sexe, Sport sport){super(sexe, sport);}
+    public Individuelle(Sexe sexe, Sport sport){super(sexe, sport);}
 }

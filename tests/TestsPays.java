@@ -57,10 +57,10 @@ public class TestsPays {
     public void testAjouteAthlete(){
         Pays france = new Pays("France");
         Pays espagne = new Pays("Espagne");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
-        Athlete ath3 = new Athlete("García", "Jesús Ángel", "male", 39, 58, 84, 54, france);
-        Athlete ath4 = new Athlete("Canales", "Elia", "female", 64, 43, 56, 67, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
+        Athlete ath3 = new Athlete("García", "Jesús Ángel", Sexe.HOMME, 39, 58, 84, 54, france);
+        Athlete ath4 = new Athlete("Canales", "Elia", Sexe.FEMME, 64, 43, 56, 67, france);
         france.ajouteAthlete(ath1);
         france.ajouteAthlete(ath2);
         espagne.ajouteAthlete(ath3);
@@ -72,10 +72,10 @@ public class TestsPays {
     public void testGetAthlete(){
         Pays france = new Pays("France");
         Pays espagne = new Pays("Espagne");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
-        Athlete ath3 = new Athlete("García", "Jesús Ángel", "male", 39, 58, 84, 54, france);
-        Athlete ath4 = new Athlete("Canales", "Elia", "female", 64, 43, 56, 67, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
+        Athlete ath3 = new Athlete("García", "Jesús Ángel", Sexe.HOMME, 39, 58, 84, 54, france);
+        Athlete ath4 = new Athlete("Canales", "Elia", Sexe.FEMME, 64, 43, 56, 67, france);
         france.ajouteAthlete(ath1);
         france.ajouteAthlete(ath2);
         espagne.ajouteAthlete(ath3);

@@ -45,15 +45,15 @@ public class TestsEquipe {
     public void testAddAthletes(){
         Pays france = new Pays("France");
         Equipe equ1 = new Equipe("equ1", france);
-        equ1.addAthlete(new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france));
+        equ1.addAthlete(new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france));
     }
 
     /** On veut obtenir les athlètes de l'équpe */
     @Test
     public void testGetAthletes(){
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", "male", 89, 67, 53, 45, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
         Equipe equ1 = new Equipe("equ1", france);
         equ1.addAthlete(ath1);
         equ1.addAthlete(ath2);
@@ -64,11 +64,11 @@ public class TestsEquipe {
     @Test
     public void testParticiper(){
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", "male", 56, 87, 78, 34, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
         Equipe equ1 = new Equipe("equ1", france);
         equ1.addAthlete(ath1);
         Sport escrime = new Escrime("Épée individuelle", 1);
-        Individuelle epv1 = new Individuelle("male", escrime);
+        Individuelle epv1 = new Individuelle(Sexe.HOMME, escrime);
         equ1.participer(epv1);
     }
 }

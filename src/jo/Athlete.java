@@ -5,7 +5,7 @@ import jo.epreuve.Epreuve;
 public class Athlete implements Participant{
     private String nomAthlete;
     private String prenomAthlete;
-    private String sexe;
+    private Sexe sexe;
     private int force;
     private int agilite;
     private int endurance;
@@ -23,7 +23,7 @@ public class Athlete implements Participant{
      * @param score
      * @param pays
      */
-    public Athlete(String nom, String prenom, String sexe, int force, int agilite, int endurance, int score, Pays pays) {
+    public Athlete(String nom, String prenom, Sexe sexe, int force, int agilite, int endurance, int score, Pays pays) {
         this.nomAthlete = nom;
         this.prenomAthlete = prenom;
         this.sexe = sexe;
@@ -62,7 +62,7 @@ public class Athlete implements Participant{
      * Renvoie le sexe de l'athlète
      * @return
      */
-    public String getSexe() {
+    public Sexe getSexe() {
         return this.sexe;
     }
 
