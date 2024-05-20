@@ -22,4 +22,5 @@ public interface Participant {
      * @param score
      */
     public void setScore(int score);
+    
 }

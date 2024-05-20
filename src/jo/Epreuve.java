@@ -1,7 +1,9 @@
 package jo;
+
 import java.util.ArrayList;
 import java.util.List;
 import jo.sport.Sport;
+
 /** Class permettant de créer une épreuve ayant des participants */
 public class Epreuve<T>{
     private Sexe sexe;
@@ -38,13 +40,8 @@ public class Epreuve<T>{
      */
     public List<T> getParticipants(){return this.participants;}
     /**
-     * Renvoie le gagnant de l'épreuve
+     * Renvoie le gagnant de l'épreuve (pas d'information sur le comment du choix du gagnat, nous la laisson donc vide)
      * @return Participant
      */
-    public Participant gagnant(){return null;}
-    /**
-     * Renvoie la liste des participants triée selon leur classement
-     * @return
-     */
-    public List<Participant> classement(){return null;}
+    public T gagnant(){return null;}
 }
