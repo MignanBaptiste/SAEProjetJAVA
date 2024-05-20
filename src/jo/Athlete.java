@@ -1,5 +1,7 @@
 package jo;
 
+import jo.exception.InvalidTypeException;
+
 /**
  * Représente un athlète participant à des compétitions.
  * Implémente les interfaces Participant et Comparable<Athlete>.
@@ -155,15 +157,20 @@ public class Athlete implements Participant, Comparable<Athlete> {
      */
     public void setScore(int score) {
         this.score += score;
-        this.equipe.setScore(score);
+        if (this.equipe != null){
+        this.equipe.setScore(score);}
     }
 
     /**
-     * Permet à l'athlète de participer à une épreuve.
-     * @param epreuve L'épreuve à laquelle l'athlète participe.
-     */
+    * Permet à l'athlète de participer à une épreuve.
+    * @param epreuve L'épreuve à laquelle l'athlète participe.
+    */
     public void participer(Epreuve epreuve) {
-        epreuve.addParticipant(this);
+        try {
+            epreuve.addParticipant(this);
+        } catch (InvalidTypeException e) {
+            System.out.println("Impossible de participer à cette épreuve.");
+        }
     }
 
     @Override

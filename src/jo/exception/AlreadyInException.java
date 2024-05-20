@@ -1,4 +1,4 @@
-package jo;
+package jo.exception;
 
 public class AlreadyInException extends Exception{
 

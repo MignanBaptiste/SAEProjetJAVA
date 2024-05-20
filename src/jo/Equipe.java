@@ -3,6 +3,8 @@ package jo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jo.exception.InvalidTypeException;
+
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant, Comparable<Equipe>{
     private String nomEquipe; // Le nom de l'équipe
@@ -77,7 +79,11 @@ public class Equipe implements Participant, Comparable<Equipe>{
      * @param epreuve L'épreuve à laquelle l'équipe participe.
      */
     public void participer(Epreuve epreuve) {
-        epreuve.addParticipant(this);
+        try {
+            epreuve.addParticipant(this);
+        } catch (InvalidTypeException e) {
+            System.out.println("Impossible de participer à cette épreuve.");
+        }
     }
 
     /**

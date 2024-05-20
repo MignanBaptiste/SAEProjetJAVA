@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import jo.exception.InvalidTypeException;
+
 // Classe représentant les Jeux Olympiques
 public class JeuxOlympiques{
 
@@ -54,8 +56,8 @@ public class JeuxOlympiques{
      * Renvoie tous les athlètes.
      * @return List<Epreuve> Liste de tous les athlètes.
      */
-    public List<Epreuve> getAthletes(){
-        return this.lesEpreuves;
+    public List<Athlete> getAthletes(){
+        return this.lesAthletes;
         
     }
 
@@ -92,7 +94,11 @@ public class JeuxOlympiques{
      * @param epv L'épreuve à laquelle l'athlète participe.
      */
     public void participerAthlete(Athlete ath, Epreuve epv){ 
-        epv.addParticipant(ath);
+        try {
+            epv.addParticipant(ath);
+        } catch (InvalidTypeException e) {
+            // erreur
+        }
     }
 
     /**
@@ -101,7 +107,11 @@ public class JeuxOlympiques{
      * @param epv L'épreuve à laquelle l'équipe participe.
      */
     public void participerEquipe(Equipe equ, Epreuve epv){
-        epv.addParticipant(equ);
+        try {
+            epv.addParticipant(equ);
+        } catch (InvalidTypeException e) {
+            // erreur
+        }
     }
 
     /**

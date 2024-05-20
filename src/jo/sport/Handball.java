@@ -3,7 +3,9 @@ package jo.sport;
 public class Handball extends Sport{
     
     /**
-     * crée une nouvelle instance d'Handball
+     * Constructeur pour initialiser un nouveau sport.
+     * @param categorie La catégorie du sport.
+     * @param nbjoueurs Le nombre de joueurs dans le sport.
      */
     public Handball (String categorie, int nbjoueurs){
         super(categorie, nbjoueurs);
