@@ -1,6 +1,11 @@
 package jo;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -176,5 +181,25 @@ public class JeuxOlympiques{
         List<Equipe> res = new ArrayList<>(this.lesEquipes);
         Collections.sort(res);
         return res;
+    }
+
+    public void load_csv(String chemin){
+        List<String> results = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(chemin))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                results.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Fichier invalide");
+        }
+    }
+
+    public void load_database(){
+
+    }
+
+    public void save_database(){
+
     }
 }
