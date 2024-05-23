@@ -12,15 +12,15 @@ public interface Participant {
      * @return String
      */
     public String getNom();
-    /**
-     * Renvoie le score d'un participant
-     * @return
-     */
-    public int getScore();
-    /**
-     * Permet de définir le score d'un athlète
-     * @param score
-     */
-    public void setScore(int score);
+
+    public Equipe getEquipe();
+
+    public Pays getPays();
+
+    public int getForce();
+
+    public int getAgilite();
+
+    public int getEndurance();
     
 }

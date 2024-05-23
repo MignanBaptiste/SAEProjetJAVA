@@ -2,6 +2,7 @@ package jo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
@@ -10,6 +11,7 @@ import jo.exception.InvalidTypeException;
 public class JeuxOlympiques{
 
     private int annee; // L'année des Jeux Olympiques
+    private List<Pays> lespays;
     private List<Epreuve> lesEpreuves; // Liste des épreuves des Jeux Olympiques
     private List<Athlete> lesAthletes; // Liste des athlètes des Jeux Olympiques
     private List<Equipe> lesEquipes; // Liste des équipes des Jeux Olympiques
@@ -23,6 +25,14 @@ public class JeuxOlympiques{
         this.lesEpreuves = new ArrayList<>();
         this.lesAthletes = new ArrayList<>();
         this.lesEquipes = new ArrayList<>();
+    }
+
+    public List<Pays> getPays(){
+        return this.lespays;
+    }
+
+    public void ajoutPays(Pays pays){
+        this.lespays.add(pays);
     }
 
     /**
@@ -93,7 +103,7 @@ public class JeuxOlympiques{
      * @param ath L'athlète à faire participer.
      * @param epv L'épreuve à laquelle l'athlète participe.
      */
-    public void participerAthlete(Athlete ath, Epreuve epv){ 
+    public void participerAthlete(Athlete ath, Epreuve<Athlete> epv){ 
         try {
             epv.addParticipant(ath);
         } catch (InvalidTypeException e) {
@@ -106,7 +116,7 @@ public class JeuxOlympiques{
      * @param equ L'équipe à faire participer.
      * @param epv L'épreuve à laquelle l'équipe participe.
      */
-    public void participerEquipe(Equipe equ, Epreuve epv){
+    public void participerEquipe(Equipe equ, Epreuve<Equipe> epv){
         try {
             epv.addParticipant(equ);
         } catch (InvalidTypeException e) {
@@ -114,67 +124,51 @@ public class JeuxOlympiques{
         }
     }
 
-    /**
-     * Renvoie le score d'un athlète.
-     * @param ath L'athlète dont on veut le score.
-     * @return int Le score de l'athlète.
-     */
-    public int getScoreAthlete(Athlete ath){
-        return ath.getScore();
-    }
-
-    /**
-     * Renvoie le score d'une équipe.
-     * @param equ L'équipe dont on veut le score.
-     * @return int Le score de l'équipe.
-     */
-    public int getScoreEquipe(Equipe equ){
-        return equ.getScore();
-    }
-
-    /**
-     * Met à jour le score d'une équipe en lui ajoutant le score rentré en paramètre.
-     * @param equ L'équipe dont on veut mettre à jour le score.
-     * @param points Le nombre de points à ajouter au score de l'équipe.
-     */
-    public void setScoreEquipe(Equipe equ, int points){
-        equ.setScore(points);
-    }
-
-    /**
-     * Met à jour le score d'un athlète et de son équipe en leur ajoutant le nombre de points donné en paramètre.
-     * @param ath L'athlète dont on veut mettre à jour le score.
-     * @param points Le nombre de points à ajouter au score de l'athlète et de son équipe.
-     */
-    public void setScoreAthlète(Athlete ath, int points){
-        ath.setScore(points);
-    }
-
-    /**
-     * Renvoie l'année des Jeux Olympiques.
-     * @return int L'année des Jeux Olympiques.
-     */
-    public int getAnnee(){
-        return this.annee;
-    }
-
-    /**
-     * Renvoie le classement des athlètes en fonction de leur score.
-     * @return List<Athlete> Le classement des athlètes.
-     */
-    public List<Athlete> classementAth(){
-        List<Athlete> res = new ArrayList<>(this.lesAthletes);
-        Collections.sort(res);
+    public HashMap<Pays, HashMap<String, Integer>> medaillesParPays(){
+        HashMap<Pays, HashMap<String, Integer>> res = new HashMap<>();
+        for (Pays p: this.lespays){
+            int or = 0;
+            int argent = 0;
+            int bronze = 0;
+            for (Equipe e: p.getEquipes()){
+                or += e.getClassement().getOr();
+                argent += e.getClassement().getArgent();
+                bronze += e.getClassement().getBronze();
+            }
+            HashMap<String, Integer> temp = new HashMap<>();
+            temp.put("Medailles d'or", or);
+            temp.put("Medailles d'argent", argent);
+            temp.put("Medailles de bronze", bronze);
+            res.put(p, temp);
+        }
         return res;
     }
 
-    /**
-     * Renvoie le classement des équipes en fonction de leur score.
-     * @return List<Equipe> Le classement des équipes.
-     */
-    public List<Equipe> classementEqu(){
-        List<Equipe> res = new ArrayList<>(this.lesEquipes);
-        Collections.sort(res);
+    public List<Pays> medaillesOr(){
+        List<Pays> res = new ArrayList<>(this.lespays);
+        HashMap<Pays, Integer> temp = new HashMap<>();
+        for (Pays p: this.lespays){
+            int or = 0;
+            for (Equipe e: p.getEquipes()){
+                or += e.getClassement().getOr();
+            }
+            temp.put(p, or);
+        }
+        res.sort((p1, p2) -> temp.get(p2).compareTo(temp.get(p1)));
+        return res;
+    }
+
+    public List<Pays> medaillesTotales(){
+        List<Pays> res = new ArrayList<>(this.lespays);
+        HashMap<Pays, Integer> temp = new HashMap<>();
+        for (Pays p: this.lespays){
+            int total = 0;
+            for (Equipe e: p.getEquipes()){
+                total += e.getClassement().getOr() + e.getClassement().getArgent() + e.getClassement().getBronze();
+            }
+            temp.put(p, total);
+        }
+        res.sort((p1, p2) -> temp.get(p2).compareTo(temp.get(p1)));
         return res;
     }
 }

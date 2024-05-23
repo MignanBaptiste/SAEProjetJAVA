@@ -7,8 +7,10 @@ public class Athletisme extends Sport{
      * @param categorie La catégorie du sport.
      * @param nbjoueurs Le nombre de joueurs dans le sport.
      */
-    public Athletisme (String categorie, int nbjoueurs){
-        super(categorie, nbjoueurs);
-
+    public Athletisme (String categorie){
+        super(categorie);
+        this.coeffForce = 4;
+        this.coeffAgilite = 3;
+        this.coeffForce = 3;
     }
 }

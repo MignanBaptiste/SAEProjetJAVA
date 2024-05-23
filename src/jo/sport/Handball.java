@@ -8,7 +8,9 @@ public class Handball extends Sport{
      * @param nbjoueurs Le nombre de joueurs dans le sport.
      */
     public Handball (String categorie, int nbjoueurs){
-        super(categorie, nbjoueurs);
-
+        super(categorie);
+        this.coeffForce = 4;
+        this.coeffAgilite = 4;
+        this.coeffForce = 3;
     }
 }

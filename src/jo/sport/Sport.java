@@ -5,16 +5,17 @@ package jo.sport;
  */
 public abstract class Sport {
     private String categorie; // La catégorie du sport
-    private int nbjoueurs; // Le nombre de joueurs dans le sport
+    protected int coeffForce;
+    protected int coeffAgilite;
+    protected int coeffEndurance;
 
     /**
      * Constructeur pour initialiser un nouveau sport.
      * @param categorie La catégorie du sport.
      * @param nbjoueurs Le nombre de joueurs dans le sport.
      */
-    public Sport(String categorie, int nbjoueurs){
+    public Sport(String categorie){
         this.categorie = categorie;
-        this.nbjoueurs = nbjoueurs;
     }
 
     /**
@@ -29,8 +30,16 @@ public abstract class Sport {
      * Renvoie le nombre de joueurs dans le sport.
      * @return Le nombre de joueurs dans le sport.
      */
-    public int getNbjoueurs(){
-        return this.nbjoueurs;
+    public int getCoeffForce(){
+        return this.coeffForce;
+    }
+
+    public int getCoeffAgilite(){
+        return this.coeffAgilite;
+    }
+
+    public int getCoeffEndurance(){
+        return this.coeffEndurance;
     }
 }
 

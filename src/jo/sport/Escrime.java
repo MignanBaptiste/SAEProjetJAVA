@@ -8,7 +8,9 @@ public class Escrime extends Sport{
      * @param nbjoueurs Le nombre de joueurs dans le sport.
      */
     public Escrime (String categorie, int nbjoueurs){
-        super(categorie, nbjoueurs);
-
+        super(categorie);
+        this.coeffForce = 2;
+        this.coeffAgilite = 5;
+        this.coeffForce = 3;
     }
 }

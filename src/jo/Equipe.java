@@ -6,11 +6,11 @@ import java.util.List;
 import jo.exception.InvalidTypeException;
 
 // Classe représentant une équipe participant à une compétition
-public class Equipe implements Participant, Comparable<Equipe>{
+public class Equipe implements Participant{
     private String nomEquipe; // Le nom de l'équipe
-    private int score; // Le score de l'équipe
     private final Pays pays; // Le pays auquel appartient l'équipe
     private List<Athlete> athletes; // La liste des athlètes de l'équipe
+    private Classement classement;
 
     /**
      * Création d'une nouvelle équipe avec un nom, un pays et une liste d'athlètes.
@@ -20,8 +20,9 @@ public class Equipe implements Participant, Comparable<Equipe>{
     public Equipe(String nomEquipe, Pays pays) {
         this.nomEquipe = nomEquipe;
         this.pays = pays;
-        this.score = 0;
         this.athletes = new ArrayList<>();
+        this.classement = new Classement();
+        this.pays.ajouteEquipe(this);
     }
 
     /**
@@ -32,20 +33,32 @@ public class Equipe implements Participant, Comparable<Equipe>{
         return this.nomEquipe;
     }
 
-    /**
-     * Renvoie le score de l'équipe.
-     * @return int Le score de l'équipe.
-     */
-    public int getScore() {
-        return this.score;
+    public Equipe getEquipe(){
+        return this;
     }
 
-    /**
-     * Met à jour le score de l'équipe en y ajoutant le score donné en paramètre.
-     * @param score Le score à ajouter.
-     */
-    public void setScore(int score) {
-        this.score += score;        
+    public int getForce(){
+        int totalF = 0;
+        for(Athlete a : this.athletes){
+            totalF += a.getForce();
+        }
+        return totalF;
+    }
+
+    public int getAgilite(){
+        int totalA = 0;
+        for(Athlete a : this.athletes){
+            totalA += a.getAgilite();
+        }
+        return totalA;
+    }
+
+    public int getEndurance(){
+        int totalE = 0;
+        for(Athlete a : this.athletes){
+            totalE += a.getEndurance();
+        }
+        return totalE;
     }
 
     /**
@@ -64,13 +77,16 @@ public class Equipe implements Participant, Comparable<Equipe>{
         return this.athletes;
     }
 
+    public Classement getClassement(){
+        return this.classement;
+    }
+
     /**
-     * Ajoute un athlète à l'équipe et met à jour le score de l'équipe.
+     * Ajoute un athlète à l'équipe, l'équipe est aussi ajoutée à l'athlète.
      * @param ath L'athlète à ajouter.
      */
     public void addAthlete(Athlete ath) {
         this.athletes.add(ath);
-        this.score += ath.getScore();
         ath.ajoutEquipe(this);
     }
 
@@ -84,15 +100,5 @@ public class Equipe implements Participant, Comparable<Equipe>{
         } catch (InvalidTypeException e) {
             System.out.println("Impossible de participer à cette épreuve.");
         }
-    }
-
-    /**
-     * Compare deux équipes en fonction de leur score.
-     * @param e L'équipe à comparer.
-     * @return int Renvoie un entier négatif, zéro ou positif selon que le score de cette équipe est inférieur, égal ou supérieur à celui de l'équipe comparée.
-     */
-    @Override
-    public int compareTo(Equipe e){
-        return e.score - this.score; // Compare les scores pour déterminer l'ordre de tri
     }
 }
