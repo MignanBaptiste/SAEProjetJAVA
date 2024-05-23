@@ -7,14 +7,14 @@ import java.util.Arrays;
 
 public class TestEpreuve {
     private VolleyBall volleyBall;
-    private Epreuve individuelle;
-    private Epreuve collective;
+    private Epreuve<Athlete> individuelle; // Mise à jour du type d'Epreuve
+    private Epreuve<Equipe> collective; // Mise à jour du type d'Epreuve
 
     @Before
     public void setUp() {
-        volleyBall = new VolleyBall("Volley", 14);
-        individuelle = new Epreuve(Sexe.HOMME, volleyBall);
-        collective = new Epreuve(Sexe.FEMME, volleyBall);
+        volleyBall = new VolleyBall("Volley");
+        individuelle = new Epreuve<>(Sexe.HOMME, volleyBall); // Utilisation de type paramétré
+        collective = new Epreuve<>(Sexe.FEMME, volleyBall); // Utilisation de type paramétré
     }
 
     /** Test de récupération du sexe de l'épreuve */
@@ -31,12 +31,12 @@ public class TestEpreuve {
         assertEquals(volleyBall, collective.getSport());
     }
 
-    /** Test d'ajout des participants (devrait être null au départ) */
+    /** Test d'ajout des participants */
     @Test
     public void testAddParticipants() {
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
 
         Equipe equipe = new Equipe("equ1", france);
         equipe.addAthlete(ath1);
@@ -45,21 +45,19 @@ public class TestEpreuve {
             individuelle.addParticipant(ath1);
             individuelle.addParticipant(ath2);
             collective.addParticipant(equipe);
-            individuelle.addParticipant(equipe); //ne doit pas marcher
-            collective.addParticipant(ath2); //ne doit pas marcher
         } catch (InvalidTypeException e) {
+            // gestion de l'exception
         }
-        assertEquals(individuelle.getParticipants().size(), 2);
-        assertEquals(collective.getParticipants().size(), 1);
-        
+        assertEquals(2, individuelle.getParticipants().size());
+        assertEquals(1, collective.getParticipants().size());
     }
 
-    /** Test de récupération des participants (devrait être null au départ) */
+    /** Test de récupération des participants */
     @Test
     public void testGetParticipants() {
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
         Equipe equipe = new Equipe("equ1", france);
         equipe.addAthlete(ath1);
         equipe.addAthlete(ath2);
@@ -67,19 +65,13 @@ public class TestEpreuve {
             individuelle.addParticipant(ath1);
             individuelle.addParticipant(ath2);
             collective.addParticipant(equipe);
-            
-        } catch (InvalidTypeException e) {}
-        
-        try {
-            individuelle.addParticipant(equipe); //ne doit pas marcher
-        } catch (Exception e) {}
-        
-        try {
-            collective.addParticipant(ath2); //ne doit pas marcher
-            } catch (Exception e) {}
-        assertEquals(individuelle.getParticipants(), Arrays.asList(ath1, ath2));
-        assertEquals(collective.getParticipants(), Arrays.asList(equipe));
-        
+
+        } catch (InvalidTypeException e) {
+            // gestion de l'exception
+        }
+
+        assertEquals(Arrays.asList(ath1, ath2), individuelle.getParticipants());
+        assertEquals(Arrays.asList(equipe), collective.getParticipants());
+
     }
 }
-

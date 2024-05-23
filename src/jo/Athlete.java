@@ -34,7 +34,6 @@ public class Athlete implements Participant {
         this.agilite = agilite;
         this.endurance = endurance;
         this.pays = pays;
-        this.pays.ajouteAthlete(this);
     }
 
     /**
@@ -57,7 +56,6 @@ public class Athlete implements Participant {
         this.endurance = endurance;
         this.pays = pays;
         this.equipe = equipe;
-        this.pays.ajouteAthlete(this);
     }
 
     /**

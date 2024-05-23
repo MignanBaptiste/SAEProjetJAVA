@@ -1,11 +1,7 @@
 import jo.*;
 import jo.sport.*;
 import org.junit.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import static org.junit.Assert.*;
 
 public class TestsAthlete {
     private Athlete ath1;
@@ -13,12 +9,12 @@ public class TestsAthlete {
     private Athlete ath3;
     private Pays france;
 
-    @Before //Le BeforeEach n'étant pas utilisable lors des version présédentes de junit nous avons décidé d'utiliser Before
+    @Before
     public void setUp() {
         france = new Pays("France");
-        ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
-        ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
-        ath3 = new Athlete("Dumerc", "Céline", Sexe.FEMME, 45, 78, 65, 50, france);
+        ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        ath3 = new Athlete("Dumerc", "Céline", Sexe.FEMME, 45, 78, 65, france);
     }
 
     /** On veut pouvoir créer un nouvel athlète */
@@ -93,15 +89,6 @@ public class TestsAthlete {
         assertEquals(65, ath3.getEndurance());
     }
 
-    /** On veut obtenir le score de l'athlète */
-    @Test
-    public void testGetScore() {
-        // Test de récupération du score de l'athlète
-        assertEquals(34, ath1.getScore());
-        assertEquals(45, ath2.getScore());
-        assertEquals(50, ath3.getScore());
-    }
-
     /** On veut obtenir le pays de l'athlète */
     @Test
     public void testGetPays() {
@@ -111,60 +98,18 @@ public class TestsAthlete {
         assertEquals(france, ath3.getPays());
     }
 
-    /** On veut modifier le score de l'athlète */
-    @Test
-    public void testSetScore() {
-        // Test de modification du score de l'athlète
-        ath1.setScore(100);
-        ath2.setScore(200);
-        ath3.setScore(150);
-        assertEquals(134, ath1.getScore());
-        assertEquals(245, ath2.getScore());
-        assertEquals(200, ath3.getScore());
-    }
-
     /** 
-    * Test de participation de l'athlète à une épreuve
-    */
+     * Test de participation de l'athlète à une épreuve
+     */
     @Test
     public void testParticiper() {
         // Création d'une épreuve individuelle (pour Athlete)
-        Sport athletisme = new Athletisme("100m", 1);
-        Epreuve epv1 = new Epreuve(Sexe.HOMME, athletisme);
+        Sport athletisme = new Athletisme("100m");
+        Epreuve<Athlete> epv1 = new Epreuve(Sexe.HOMME, athletisme);
 
-        // Tentative de participation de l'athlète à une épreuve individuelle (qui accepte seulement les athlètes)
+        // Tentative de participation de l'athlète à une épreuve individuelle 
         ath2.participer(epv1);
-        assertNotNull(epv1.getParticipants()); // Vérifie si l'athlète a été ajouté à l'épreuve
-        
-        // Création d'une épreuve collective (pour Equipe)
-        Sport handball = new Handball("Handball", 7);
-        Epreuve epv2 = new Epreuve(Sexe.HOMME, handball);
-        Equipe equipe = new Equipe("Equipe de France", france);
-        equipe.addAthlete(ath1);
-        equipe.addAthlete(ath2);
-        // Tentative de participation de l'athlète à une épreuve collective (qui accepte seulement les équipes)
-        equipe.participer(epv2);
-        ath3.participer(epv2);
-        assertEquals(epv2.getParticipants().size(), 1); //On vérifie que l'athlète n'a pas pu être ajouter
-    }
-
-
-    /** On veut trier une liste d'athlètes en fonction de leur score */
-    @Test
-    public void testCompareTo() {
-        // Création d'une liste d'athlètes
-        List<Athlete> athletes = new ArrayList<>();
-        athletes.add(ath1);
-        athletes.add(ath2);
-        athletes.add(ath3);
-
-        // Trier la liste d'athlètes
-        Collections.sort(athletes);
-
-        // Vérifier si les athlètes sont triés par ordre décroissant de score
-        assertEquals(ath3, athletes.get(0)); // ath2 a le score le plus élevé
-        assertEquals(ath2, athletes.get(1)); // ath3 a le deuxième score le plus élevé
-        assertEquals(ath1, athletes.get(2)); // ath1 a le score le plus bas
+        assertNotNull(epv1.getParticipants()); // Vérifie si l'athlète a été ajouté à l'épreuve*
     }
 }
-
+   

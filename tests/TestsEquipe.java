@@ -15,8 +15,8 @@ public class TestsEquipe {
     @Before
     public void setUp() {
         france = new Pays("France");
-        ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france);
-        ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, 45, france);
+        ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
         equ1 = new Equipe("equ1", france);
     }
 
@@ -32,15 +32,6 @@ public class TestsEquipe {
         assertEquals("equ1", equ1.getNom());
     }
 
-    /** On veut obtenir le score de l'équipe et le modifier */
-    @Test
-    public void testGetScore(){
-        assertEquals(0, equ1.getScore());
-
-        equ1.setScore(100);
-        assertEquals(100, equ1.getScore());
-    }
-
     /** On veut obtenir le pays de l'équipe */
     @Test
     public void testGetPays(){
@@ -50,11 +41,11 @@ public class TestsEquipe {
     /** On veut pouvoir ajouter un athlète à l'équipe */
     @Test
     public void testAddAthletes(){
-        equ1.addAthlete(new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, 34, france));
-        assertEquals(equ1.getAthletes().size(), 1);
+        equ1.addAthlete(new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france));
+        assertEquals(1, equ1.getAthletes().size());
     }
 
-    /** On veut obtenir les athlètes de l'équpe */
+    /** On veut obtenir les athlètes de l'équipe */
     @Test
     public void testGetAthletes(){
         equ1.addAthlete(ath1);
@@ -65,9 +56,9 @@ public class TestsEquipe {
     /** On veut ajouter une équipe à une épreuve */
     @Test
     public void testParticiper(){
-        equ1.addAthlete(ath1);
-        Sport escrime = new Escrime("Escrime", 1);
+        Sport escrime = new Escrime("Escrime");
         Epreuve epv1 = new Epreuve(Sexe.HOMME, escrime);
         equ1.participer(epv1);
+        assertEquals(1, epv1.getParticipants().size());
     }
 }

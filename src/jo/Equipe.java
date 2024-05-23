@@ -22,7 +22,6 @@ public class Equipe implements Participant{
         this.pays = pays;
         this.athletes = new ArrayList<>();
         this.classement = new Classement();
-        this.pays.ajouteEquipe(this);
     }
 
     /**
