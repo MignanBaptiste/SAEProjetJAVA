@@ -9,33 +9,36 @@ import jo.sport.Sport;
 
 /** Class permettant de créer une épreuve ayant des participants */
 public class Epreuve<T extends Participant>{
-    private Sexe sexe;
-    private Sport sport;
-    private List<T> participants;
+    private Sexe sexe; // Le sexe de l'épreuve
+    private Sport sport; // Le sport de l'épreuve
+    private List<T> participants; // La liste des participants à l'épreuve
+
     /**
-     * Permet de créer une épreuve
-     * @param sexe
-     * @param sport
+     * Permet de créer une épreuve.
+     * @param sexe Le sexe de l'épreuve.
+     * @param sport Le sport de l'épreuve.
      */
     public Epreuve(Sexe sexe, Sport sport){
         this.sexe = sexe;
         this.sport = sport;
         this.participants = new ArrayList<>();
     }
+
     /**
-     * Renvoie le sexe de l'épreuve
-     * @return String
+     * Renvoie le sexe de l'épreuve.
+     * @return Sexe Le sexe de l'épreuve.
      */
     public Sexe getSexe(){return this.sexe;}
+
     /**
-     * Renvoie le sport de l'épreuve
-     * @return Sport
+     * Renvoie le sport de l'épreuve.
+     * @return Sport Le sport de l'épreuve.
      */
     public Sport getSport(){return this.sport;}
     
     /**
-     * Permet d'ajouter un participant à une épreuve
-     * @param participant
+     * Permet d'ajouter un participant à une épreuve.
+     * @param participant Le participant à ajouter.
      */
     public void addParticipant(T participant) throws InvalidTypeException {
         if(!(this.participants.isEmpty())){
@@ -48,20 +51,21 @@ public class Epreuve<T extends Participant>{
             else{
                 throw new InvalidTypeException();
             }
-        } //Ces 2 tests permettent de créer des épreuves constituées uniquement d'équipe ou uniquement d'athlete
+        } // Ces 2 tests permettent de créer des épreuves constituées uniquement d'équipe ou uniquement d'athlete
         else if(this.participants.isEmpty()){
-            this.participants.add(participant);}
+            this.participants.add(participant);
+        }
     }
     
     /**
-     * Renvoie la liste des participants à l'épreuve
-     * @return List<Participant>
+     * Renvoie la liste des participants à l'épreuve.
+     * @return List<Participant> La liste des participants à l'épreuve.
      */
     public List<T> getParticipants(){return this.participants;}
     
     /**
-     * Renvoie le gagnant de l'épreuve
-     * @return Participant
+     * Renvoie le résultat de l'épreuve.
+     * @return HashMap<T, Integer> Le résultat de l'épreuve.
      */
     public HashMap<T, Integer> resultats(){
         HashMap<T, Integer> res = new HashMap<>();
@@ -80,10 +84,23 @@ public class Epreuve<T extends Participant>{
         return res;
     }
 
+    /**
+     * Renvoie le classement de l'épreuve.
+     * @return List<T> Le classement de l'épreuve.
+     */
     public List<T> classementEpv(){
         HashMap<T, Integer> res = this.resultats();
         List<T> participantsTri = new ArrayList<>(this.participants);
-        participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); //Tri par ordre décroissant des scores
+        participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); // Tri par ordre décroissant des scores
         return participantsTri;
+    }
+
+    @Override
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de l'objet Epreuve.
+     * @return Représentation sous forme de chaîne.
+     */
+    public String toString() {
+        return "Epreuve de " + this.sport.getCategorie();
     }
 }

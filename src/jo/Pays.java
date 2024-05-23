@@ -59,5 +59,14 @@ public class Pays {
     public void ajouteAthlete(Athlete athlete) {
         this.athletes.add(athlete);
     }
+
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères du pays.
+     * @return La représentation du pays sous forme de chaîne de caractères.
+     */
+    @Override
+    public String toString() {
+        return "" + nomPays;
+    }
 }
 

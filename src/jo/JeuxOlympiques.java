@@ -11,7 +11,7 @@ import jo.exception.InvalidTypeException;
 public class JeuxOlympiques{
 
     private int annee; // L'année des Jeux Olympiques
-    private List<Pays> lespays;
+    private List<Pays> lespays; // Liste des pays participant aux Jeux Olympiques
     private List<Epreuve> lesEpreuves; // Liste des épreuves des Jeux Olympiques
     private List<Athlete> lesAthletes; // Liste des athlètes des Jeux Olympiques
     private List<Equipe> lesEquipes; // Liste des équipes des Jeux Olympiques
@@ -25,12 +25,21 @@ public class JeuxOlympiques{
         this.lesEpreuves = new ArrayList<>();
         this.lesAthletes = new ArrayList<>();
         this.lesEquipes = new ArrayList<>();
+        this.lespays = new ArrayList<>();
     }
 
+    /**
+     * Renvoie la liste des pays participant aux Jeux Olympiques.
+     * @return List<Pays> Liste des pays participant aux Jeux Olympiques.
+     */
     public List<Pays> getPays(){
         return this.lespays;
     }
 
+    /**
+     * Ajoute un pays à la liste des pays participant aux Jeux Olympiques.
+     * @param pays Le pays à ajouter.
+     */
     public void ajoutPays(Pays pays){
         this.lespays.add(pays);
     }
@@ -45,57 +54,51 @@ public class JeuxOlympiques{
     }
 
     /**
-     * Renvoie toutes les épreuves.
-     * @return List<Epreuve> Liste de toutes les épreuves.
+     * Renvoie toutes les épreuves des Jeux Olympiques.
+     * @return List<Epreuve> Liste de toutes les épreuves des Jeux Olympiques.
      */
     public List<Epreuve> getEpreuves(){
         return this.lesEpreuves;
-        
     }
 
     /**
-     * Ajoute une épreuve à la liste des épreuves.
+     * Ajoute une épreuve à la liste des épreuves des Jeux Olympiques.
      * @param epv L'épreuve à ajouter.
      */
     public void addEpreuve(Epreuve epv){
         this.lesEpreuves.add(epv);
-        
     }
 
     /**
-     * Renvoie tous les athlètes.
-     * @return List<Epreuve> Liste de tous les athlètes.
+     * Renvoie tous les athlètes des Jeux Olympiques.
+     * @return List<Epreuve> Liste de tous les athlètes des Jeux Olympiques.
      */
     public List<Athlete> getAthletes(){
         return this.lesAthletes;
-        
     }
 
     /**
-     * Ajoute un athlète à la liste des athlètes.
+     * Ajoute un athlète à la liste des athlètes des Jeux Olympiques.
      * @param ath L'athlète à ajouter.
      */
     public void addAthlete(Athlete ath){
         this.lesAthletes.add(ath);
-        
     }
 
     /**
-     * Renvoie toutes les équipes.
-     * @return List<Equipe> Liste de toutes les équipes.
+     * Renvoie toutes les équipes des Jeux Olympiques.
+     * @return List<Equipe> Liste de toutes les équipes des Jeux Olympiques.
      */
     public List<Equipe> getEquipes(){
         return this.lesEquipes;
-        
     }
 
     /**
-     * Ajoute une équipe à la liste des équipes.
+     * Ajoute une équipe à la liste des équipes des Jeux Olympiques.
      * @param equ L'équipe à ajouter.
      */
     public void addEquipe(Equipe equ){
         this.lesEquipes.add(equ);
-        
     }
 
     /**
@@ -124,6 +127,10 @@ public class JeuxOlympiques{
         }
     }
 
+    /**
+     * Calcule le nombre de médailles par pays.
+     * @return HashMap<Pays, HashMap<String, Integer>> Nombre de médailles par pays.
+     */
     public HashMap<Pays, HashMap<String, Integer>> medaillesParPays(){
         HashMap<Pays, HashMap<String, Integer>> res = new HashMap<>();
         for (Pays p: this.lespays){
@@ -144,6 +151,10 @@ public class JeuxOlympiques{
         return res;
     }
 
+    /**
+     * Renvoie la liste des pays classés par nombre de médailles d'or.
+     * @return List<Pays> Liste des pays classés par nombre de médailles d'or.
+     */
     public List<Pays> medaillesOr(){
         List<Pays> res = new ArrayList<>(this.lespays);
         HashMap<Pays, Integer> temp = new HashMap<>();
@@ -158,6 +169,10 @@ public class JeuxOlympiques{
         return res;
     }
 
+    /**
+     * Renvoie la liste des pays classés par nombre total de médailles.
+     * @return List<Pays> Liste des pays classés par nombre total de médailles.
+     */
     public List<Pays> medaillesTotales(){
         List<Pays> res = new ArrayList<>(this.lespays);
         HashMap<Pays, Integer> temp = new HashMap<>();
@@ -172,3 +187,4 @@ public class JeuxOlympiques{
         return res;
     }
 }
+

@@ -2,8 +2,8 @@ package jo;
 
 // Enumération représentant les sexes des participants et des épreuves
 public enum Sexe {
-    HOMME("homme"), // Constante pour homme
-    FEMME("femme"); // Constante pour femme
+    HOMME("Mr."), // Constante pour homme
+    FEMME("Mme."); // Constante pour femme
 
     private final String sexe; // Chaîne de caractères représentant le sexe
 
