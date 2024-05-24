@@ -11,6 +11,6 @@ public class TestLoadSave{
 
     @Test
     public void testLoadCSV(){
-        this.jo.load_csv("../donnees.csv");
+        this.jo.load_csv("./donnees.csv");
     }
 }

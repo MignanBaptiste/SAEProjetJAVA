@@ -184,14 +184,27 @@ public class JeuxOlympiques{
     }
 
     public void load_csv(String chemin){
-        List<String> results = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(chemin))) {
+        // Chargement d'un fichier CSV où chaque ligne est une liste
+        List<List<String>> records = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(chemin))) {
             String line;
-            while((line = reader.readLine()) != null) {
-                results.add(line);
-            }
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                records.add(Arrays.asList(values));
+    }
         } catch (IOException e) {
             System.out.println("Fichier invalide");
+        }
+        // Création des instances de class
+        for (List<String> liste : records){
+            Sexe sexe;
+            if (liste.get(2).equals("homme")){
+                sexe = Sexe.HOMME;
+            }
+            else{
+                sexe = Sexe.FEMME;
+            }
+            Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), 1, new Pays(liste.get(8)));
         }
     }
 
