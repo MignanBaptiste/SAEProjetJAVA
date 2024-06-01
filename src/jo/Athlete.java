@@ -1,6 +1,7 @@
 package jo;
 
 import jo.exception.InvalidTypeException;
+import jo.sport.Sport;
 
 /**
  * Représente un athlète participant à des compétitions.
@@ -164,6 +165,32 @@ public class Athlete implements Participant {
      */
     public String toString() {
         return this.sexe + this.getNom() + ", Pays : " + this.pays.getNom() + ", Equipe : " + this.equipe.getNom();
+    }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Athlete)){return false;}
+        Athlete a = (Athlete) o;
+        return this.nomAthlete.equals(a.getNomAthlete()) && this.prenomAthlete.equals(a.getPrenomAthlete()) && 
+        this.force == a.getForce() && this.agilite == a.getAgilite() && this.endurance == a.getEndurance();
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.nomAthlete.length() * this.prenomAthlete.length() * this.force * this.agilite * this.endurance) / 17 ;
     }
 
 }

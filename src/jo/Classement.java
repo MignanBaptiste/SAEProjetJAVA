@@ -73,5 +73,30 @@ public class Classement {
     public int totalMedailles(){
         return this.medailleBronze + this.medailleArgent + this.medailleOr;
     }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Classement)){return false;}
+        Classement c = (Classement) o;
+        return this.medailleBronze == c.getBronze() && this.medailleArgent == c.getArgent() && this.medailleOr == c.getOr();
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.medailleBronze * this.medailleArgent * this.medailleOr) / 17 ;
+    }
 }
 

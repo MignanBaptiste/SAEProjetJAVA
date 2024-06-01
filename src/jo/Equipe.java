@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
+import jo.sport.Sport;
 
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant{
@@ -124,6 +125,31 @@ public class Equipe implements Participant{
     @Override
     public String toString() {
         return "Cette équipe représente le pays suivant : " + pays.getNom();
+    }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Equipe)){return false;}
+        Equipe e = (Equipe) o;
+        return this.pays.equals(e.getPays()) && this.athletes.equals(e.getAthletes());
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.pays.hashCode() * this.athletes.size()) / 17 ;
     }
 }
 

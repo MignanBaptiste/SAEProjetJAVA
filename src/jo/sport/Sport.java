@@ -48,6 +48,32 @@ public abstract class Sport {
     public int getCoeffEndurance(){
         return this.coeffEndurance;
     }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Sport)){return false;}
+        Sport s = (Sport) o;
+        return this.categorie.equals(s.getCategorie()) && this.coeffForce == s.getCoeffForce() && 
+        this.coeffAgilite == s.coeffAgilite && this.coeffEndurance == s.coeffEndurance;
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.coeffAgilite * this.coeffEndurance * this.coeffForce + this.categorie.length()) / 17 ;
+    }
 }
 
 

@@ -3,6 +3,8 @@ package jo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jo.sport.Sport;
+
 // Classe représentant un pays participant à une compétition
 public class Pays {
     private String nomPays; // Le nom du pays
@@ -77,6 +79,31 @@ public class Pays {
     @Override
     public String toString() {
         return "" + nomPays;
+    }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Pays)){return false;}
+        Pays p = (Pays) o;
+        return this.nomPays.equals(p.getNom());
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.nomPays.length() * this.athletes.size() * this.equipes.size()) / 17 ;
     }
 }
 

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
+import jo.sport.Sport;
 
 // Classe représentant les Jeux Olympiques
 public class JeuxOlympiques {
@@ -136,6 +137,31 @@ public class JeuxOlympiques {
         res.addAll(medaillesTotales.keySet());
         res.sort((p1, p2) -> medaillesTotales.get(p2).compareTo(medaillesTotales.get(p1)));
         return res;
+    }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof JeuxOlympiques)){return false;}
+        JeuxOlympiques jo = (JeuxOlympiques) o;
+        return this.annee == jo.getAnnee() && this.lesEpreuves.equals(jo.getEpreuves());
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.annee * this.lesEpreuves.size()) / 17 ;
     }
 
     //public void load_csv(String chemin){
