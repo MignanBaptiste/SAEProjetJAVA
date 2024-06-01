@@ -57,33 +57,21 @@ public class JeuxOlympiques {
     /**
      * Calcule le nombre de médailles par pays.
      * 
-     * @return HashMap<Pays, HashMap<String, Integer>> Nombre de médailles par pays.
+     * @return HashMap<Pays, Classement>> Nombre de médailles par pays.
      */
-    public HashMap<Pays, HashMap<String, Integer>> medaillesParPays() {
-        HashMap<Pays, HashMap<String, Integer>> res = new HashMap<>();
+    public HashMap<Pays, Classement> medaillesParPays() {
+        HashMap<Pays, Classement> res = new HashMap<>();
         HashSet<Equipe> equipesTraitees = new HashSet<>();
-        
         // Parcours de toutes les épreuves
         for (Epreuve epv : this.lesEpreuves) {
             // Obtention de tous les participants de l'épreuve
             List<Participant> participants = epv.getParticipants();
             // Parcours de tous les participants
             for (Participant participant : participants) {
-                // Si le participant est une équipe
-                if (participant instanceof Equipe) {
-                    Equipe equipe = (Equipe) participant;
-                    // Vérifier si l'équipe a déjà été traitée
-                    if (!equipesTraitees.contains(equipe)) {
-                        Pays pays = equipe.getPays();
-                        // Mise à jour des médailles pour le pays de l'équipe
-                        HashMap<String, Integer> medailles = res.getOrDefault(pays, new HashMap<>());
-                        medailles.merge("Medailles d'or", equipe.getClassement().getOr(), Integer::sum);
-                        medailles.merge("Medailles d'argent", equipe.getClassement().getArgent(), Integer::sum);
-                        medailles.merge("Medailles de bronze", equipe.getClassement().getBronze(), Integer::sum);
-                        res.put(pays, medailles);
-                        // Ajouter l'équipe à l'ensemble des équipes traitées
-                        equipesTraitees.add(equipe);
-                    }
+                Pays p = participant.getPays();
+                Classement c = p.getClassement();
+                if (!(res.containsKey(p))){
+                    res.put(p, c);
                 }
             }
         }
@@ -99,7 +87,6 @@ public class JeuxOlympiques {
     public List<Pays> medaillesOr() {
         List<Pays> res = new ArrayList<>();
         HashMap<Pays, Integer> medaillesOr = new HashMap<>();
-        HashSet<Equipe> equipesTraitees = new HashSet<>();
         
         // Parcours de toutes les épreuves
         for (Epreuve epv : this.lesEpreuves) {
@@ -108,23 +95,15 @@ public class JeuxOlympiques {
             // Parcours de tous les participants
             for (Participant participant : participants) {
                 // Si le participant est une équipe
-                if (participant instanceof Equipe) {
-                    Equipe equipe = (Equipe) participant;
-                    // Vérifier si l'équipe a déjà été traitée
-                    if (!equipesTraitees.contains(equipe)) {
-                        Pays pays = equipe.getPays();
-                        // Mise à jour du nombre de médailles d'or pour le pays de l'équipe
-                        medaillesOr.merge(pays, equipe.getClassement().getOr(), Integer::sum);
-                        // Ajouter l'équipe à l'ensemble des équipes traitées
-                        equipesTraitees.add(equipe);
-                    }
-                }   
-            }
+                Pays p = participant.getPays();
+                int i = p.getClassement().getOr();
+                if (!(medaillesOr.containsKey(p))){
+                    medaillesOr.put(p, i);
+                }
+            }   
         }
-    
-        // Tri des pays en fonction du nombre de médailles d'or
         res.addAll(medaillesOr.keySet());
-        res.sort((p1, p2) -> medaillesOr.get(p2).compareTo(medaillesOr.get(p1)));
+        res.sort((p1, p2) -> medaillesOr.get(p2).compareTo(medaillesOr.get(p1))); // Tri des pays en fonction du nombre de médailles d'or
         return res;
     }
 
@@ -146,23 +125,13 @@ public class JeuxOlympiques {
             // Parcours de tous les participants
             for (Participant participant : participants) {
                 // Si le participant est une équipe
-                if (participant instanceof Equipe) {
-                    Equipe equipe = (Equipe) participant;
-                    // Vérifier si l'équipe a déjà été traitée
-                    if (!equipesTraitees.contains(equipe)) {
-                        Pays pays = equipe.getPays();
-                        // Calcul du nombre total de médailles pour le pays de l'équipe
-                        int total = equipe.getClassement().getOr() + equipe.getClassement().getArgent()
-                                + equipe.getClassement().getBronze();
-                        // Mise à jour du nombre total de médailles pour le pays
-                        medaillesTotales.merge(pays, total, Integer::sum);
-                        // Ajouter l'équipe à l'ensemble des équipes traitées
-                        equipesTraitees.add(equipe);
-                    }
+                Pays p = participant.getPays();
+                int i = p.getClassement().totalMedailles();
+                if (!(medaillesTotales.containsKey(p))){
+                    medaillesTotales.put(p, i);
                 }
             }
         }
-        
         // Tri des pays en fonction du nombre total de médailles
         res.addAll(medaillesTotales.keySet());
         res.sort((p1, p2) -> medaillesTotales.get(p2).compareTo(medaillesTotales.get(p1)));

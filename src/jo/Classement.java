@@ -65,5 +65,13 @@ public class Classement {
     public void addBronze(int nb){
         this.medailleBronze += nb;
     }
+
+    /**
+     * Renvoie le nombre de médailles totales.
+     * @return int Le nombre de médailles totales.
+     */
+    public int totalMedailles(){
+        return this.medailleBronze + this.medailleArgent + this.medailleOr;
+    }
 }
 

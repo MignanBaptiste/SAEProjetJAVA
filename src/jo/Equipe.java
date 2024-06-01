@@ -7,21 +7,18 @@ import jo.exception.InvalidTypeException;
 
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant{
-    private String nomEquipe; // Le nom de l'équipe
     private final Pays pays; // Le pays auquel appartient l'équipe
     private List<Athlete> athletes; // La liste des athlètes de l'équipe
-    private Classement classement; // Le classement de l'équipe
+    
 
     /**
      * Création d'une nouvelle équipe avec un nom, un pays et une liste d'athlètes.
      * @param nomEquipe Le nom de l'équipe.
      * @param pays Le pays auquel appartient l'équipe.
      */
-    public Equipe(String nomEquipe, Pays pays) {
-        this.nomEquipe = nomEquipe;
+    public Equipe(Pays pays) {
         this.pays = pays;
         this.athletes = new ArrayList<>();
-        this.classement = new Classement();
     }
 
     /**
@@ -30,14 +27,6 @@ public class Equipe implements Participant{
      */
     public List<Athlete> getAthletes() {
         return this.athletes;
-    }
-
-    /**
-     * Renvoie le classement de l'équipe.
-     * @return Classement Le classement de l'équipe.
-     */
-    public Classement getClassement(){
-        return this.classement;
     }
 
     /**
@@ -51,11 +40,11 @@ public class Equipe implements Participant{
 
     @Override
     /**
-     * Renvoie le nom de l'équipe.
-     * @return String Le nom de l'équipe.
+     * Renvoie le nom du pays de l'équipe.
+     * @return String nom du pays de l'équipe.
      */
     public String getNom() {
-        return this.nomEquipe;
+        return this.pays.getNom();
     }
 
     @Override
@@ -134,7 +123,7 @@ public class Equipe implements Participant{
      */
     @Override
     public String toString() {
-        return "Équipe: " + nomEquipe + " (" + pays.getNom() + ")";
+        return "Cette équipe représente le pays suivant : " + pays.getNom();
     }
 }
 

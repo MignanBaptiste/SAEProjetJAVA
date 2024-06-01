@@ -7,7 +7,8 @@ import java.util.List;
 public class Pays {
     private String nomPays; // Le nom du pays
     private List<Equipe> equipes; // Liste des équipes du pays
-    private List<Athlete> athletes; // Liste des athlètes du pays   
+    private List<Athlete> athletes; // Liste des athlètes du pays
+    private Classement classement; // Le classement de l'équipe   
 
     /**
      * Créer un nouveau pays avec une liste d'équipes
@@ -18,6 +19,7 @@ public class Pays {
         this.nomPays = pays;
         this.equipes = new ArrayList<>();
         this.athletes = new ArrayList<>();
+        this.classement = new Classement();
     }
 
     /**
@@ -42,6 +44,14 @@ public class Pays {
      */
     public List<Athlete> getAthletes() {
         return this.athletes;
+    }
+
+    /**
+     * Renvoie le classement du pays.
+     * @return Classement Le classement du pays.
+     */
+    public Classement getClassement(){
+        return this.classement;
     }
     
     /**
