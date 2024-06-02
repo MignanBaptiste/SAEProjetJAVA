@@ -164,7 +164,7 @@ public class Athlete implements Participant {
      * @return Représentation sous forme de chaîne.
      */
     public String toString() {
-        return this.sexe + this.getNom() + ", Pays : " + this.pays.getNom() + ", Equipe : " + this.equipe.getNom();
+        return this.sexe + this.getNom() + ", Pays : " + this.pays.getNom();
     }
 
     @Override

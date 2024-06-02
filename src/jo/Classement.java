@@ -98,5 +98,15 @@ public class Classement {
     public int hashCode(){
         return (31 * this.medailleBronze * this.medailleArgent * this.medailleOr) / 17 ;
     }
+
+    @Override
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de cet objet.
+     * 
+     * @return une chaîne de caractères représentant les attributs de l'objet
+     */
+    public String toString() {
+        return "Médailles d'or : " + this.medailleOr + ", Médailles d'argent : " + this.medailleArgent + ", Médailles de bronze : " + this.medailleBronze;
+    }
 }
 

@@ -74,6 +74,22 @@ public abstract class Sport {
     public int hashCode(){
         return (31 * this.coeffAgilite * this.coeffEndurance * this.coeffForce + this.categorie.length()) / 17 ;
     }
+
+    @Override
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de cet objet.
+     * 
+     * @return une chaîne de caractères représentant les attributs de l'objet
+     */
+    public String toString() {
+        return "Sport {" +
+                "categorie='" + categorie + '\'' +
+                ", coeffForce=" + coeffForce +
+                ", coeffAgilite=" + coeffAgilite +
+                ", coeffEndurance=" + coeffEndurance +
+                '}';
+    }
+
 }
 
 

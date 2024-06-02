@@ -79,8 +79,8 @@ public class Epreuve<T extends Participant>{
         List<T> participantsTri = new ArrayList<>(this.participants);
         participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); //tri par ordre décroissant du nombre de points
         participantsTri.get(0).getEquipe().getPays().getClassement().addOr(1); //on ajoute pour les 3 premiers une médaille
-        participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);
-        participantsTri.get(2).getEquipe().getPays().getClassement().addBronze(1); 
+        if (participantsTri.size() >= 2) {participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);}
+        if (participantsTri.size() >= 3) {participantsTri.get(2).getEquipe().getPays().getClassement().addBronze(1);} 
         return res;
     }
 

@@ -3,8 +3,6 @@ package jo;
 import java.util.ArrayList;
 import java.util.List;
 
-import jo.sport.Sport;
-
 // Classe représentant un pays participant à une compétition
 public class Pays {
     private String nomPays; // Le nom du pays
@@ -78,7 +76,7 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "" + nomPays;
+        return "" + this.nomPays;
     }
 
     @Override

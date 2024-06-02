@@ -164,7 +164,17 @@ public class JeuxOlympiques {
         return (31 * this.annee * this.lesEpreuves.size()) / 17 ;
     }
 
-    //public void load_csv(String chemin){
+    @Override
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de cet objet.
+     * 
+     * @return une chaîne de caractères représentant les attributs de l'objet
+     */
+    public String toString() {
+        return "Jeux Olympique de " + this.annee;
+    }
+
+    //public void (String chemin)load_csv{
         // Chargement d'un fichier CSV où chaque ligne est une liste
         //List<List<String>> records = new ArrayList<>();
         //try (BufferedReader br = new BufferedReader(new FileReader(chemin))) {
