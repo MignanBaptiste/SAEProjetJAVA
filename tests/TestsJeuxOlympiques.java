@@ -22,8 +22,8 @@ public class TestsJeuxOlympiques {
         jeux2024 = new JeuxOlympiques(2024);
         france = new Pays("France");
         usa = new Pays("USA");
-        equipeFrance = new Equipe("France", france);
-        equipeUSA = new Equipe("USA", usa);
+        equipeFrance = new Equipe(france);
+        equipeUSA = new Equipe(usa);
         athletisme = new Athletisme("Athlétisme");
     }
 
@@ -47,6 +47,14 @@ public class TestsJeuxOlympiques {
     }
 
     @Test
+    public void testGetEpreuve() {
+        Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
+        jeux2024.addEpreuve(ep1);
+        List<Epreuve> epreuves = jeux2024.getEpreuves();
+        assertEquals(ep1, epreuves.get(0));
+    }
+
+    @Test
     public void testMedaillesParPays() {
         // Création d'épreuves
         Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
@@ -63,19 +71,18 @@ public class TestsJeuxOlympiques {
             e.printStackTrace();
         }
         // Ajout des résultats (pour simuler)
-        equipeFrance.getClassement().addOr(2);
-        equipeFrance.getClassement().addArgent(1);
-        equipeUSA.getClassement().addBronze(1);
+        equipeFrance.getPays().getClassement().addOr(2);
+        equipeFrance.getPays().getClassement().addArgent(1);
+        equipeUSA.getPays().getClassement().addBronze(1);
         // Vérification du nombre de médailles
-        HashMap<Pays, HashMap<String, Integer>> medailles = jeux2024.medaillesParPays();
-        assertEquals(2, medailles.get(france).get("Medailles d'or").intValue());
-        assertEquals(1, medailles.get(france).get("Medailles d'argent").intValue());
-        assertEquals(0, medailles.get(france).get("Medailles de bronze").intValue());
-        assertEquals(0, medailles.get(usa).get("Medailles d'or").intValue());
-        assertEquals(0, medailles.get(usa).get("Medailles d'argent").intValue());
-        assertEquals(1, medailles.get(usa).get("Medailles de bronze").intValue());
-}
-
+        HashMap<Pays, Classement> medailles = jeux2024.medaillesParPays();
+        assertEquals(2, medailles.get(france).getOr());
+        assertEquals(1, medailles.get(france).getArgent());
+        assertEquals(0, medailles.get(france).getBronze());
+        assertEquals(0, medailles.get(usa).getOr());
+        assertEquals(0, medailles.get(usa).getArgent());
+        assertEquals(1, medailles.get(usa).getBronze());
+    }
 
     @Test
     public void testMedaillesOr() {
@@ -94,8 +101,8 @@ public class TestsJeuxOlympiques {
             e.printStackTrace();
         }
         // Ajout des résultats (pour simuler)
-        equipeFrance.getClassement().addOr(2);
-        equipeUSA.getClassement().addBronze(1);
+        equipeFrance.getPays().getClassement().addOr(2);
+        equipeUSA.getPays().getClassement().addBronze(1);
         // Vérification du classement par médailles d'or
         List<Pays> medaillesOr = jeux2024.medaillesOr();
         assertEquals(france, medaillesOr.get(0));
@@ -119,9 +126,9 @@ public class TestsJeuxOlympiques {
             e.printStackTrace();
         }
         // Ajout des résultats (pour simuler)
-        equipeFrance.getClassement().addOr(2);
-        equipeFrance.getClassement().addArgent(1);
-        equipeUSA.getClassement().addBronze(1);
+        equipeFrance.getPays().getClassement().addOr(2);
+        equipeFrance.getPays().getClassement().addArgent(1);
+        equipeUSA.getPays().getClassement().addBronze(1);
         // Vérification du classement par médailles totales
         List<Pays> medaillesTotales = jeux2024.medaillesTotales();
         assertEquals(france, medaillesTotales.get(0));

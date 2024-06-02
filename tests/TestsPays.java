@@ -15,8 +15,8 @@ public class TestsPays {
     @Before
     public void setUp() {
         france = new Pays("France");
-        equ1 = new Equipe("equ1", france);
-        equ2 = new Equipe("equ2", france);
+        equ1 = new Equipe(france);
+        equ2 = new Equipe(france);
         ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
         ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
     }
@@ -61,5 +61,25 @@ public class TestsPays {
         france.ajouteAthlete(ath1);
         france.ajouteAthlete(ath2);
         assertEquals(Arrays.asList(ath1, ath2), france.getAthletes());
+    }
+
+    /** Test de récupération du classement du pays */
+    @Test
+    public void testGetClassement() {
+        // Vérification de l'initialisation du classement
+        Classement classementInitial = france.getClassement();
+        assertEquals(0, classementInitial.getOr());
+        assertEquals(0, classementInitial.getArgent());
+        assertEquals(0, classementInitial.getBronze());
+
+        // Ajout de médailles et vérification
+        classementInitial.addOr(2);
+        classementInitial.addArgent(1);
+        classementInitial.addBronze(3);
+
+        Classement classementApres = france.getClassement();
+        assertEquals(2, classementApres.getOr());
+        assertEquals(1, classementApres.getArgent());
+        assertEquals(3, classementApres.getBronze());
     }
 }

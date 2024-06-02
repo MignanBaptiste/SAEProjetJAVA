@@ -17,7 +17,7 @@ public class TestsEquipe {
         france = new Pays("France");
         ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
         ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
-        equ1 = new Equipe("equ1", france);
+        equ1 = new Equipe(france);
     }
 
     /** On veut pouvoir créer une nouvelle équipe  */
@@ -29,13 +29,37 @@ public class TestsEquipe {
     /** On veut obtenir le nom de l'équipe */
     @Test
     public void testGetNomEquipe(){
-        assertEquals("equ1", equ1.getNom());
+        assertEquals("France", equ1.getNom());
     }
 
     /** On veut obtenir le pays de l'équipe */
     @Test
     public void testGetPays(){
         assertEquals(france, equ1.getPays());
+    }
+
+    /** On veut obtenir la force totale de l'équipe */
+    @Test
+    public void testGetForce(){
+        equ1.addAthlete(ath1);
+        equ1.addAthlete(ath2);
+        assertEquals(145, equ1.getForce());
+    }
+
+    /** On veut obtenir l'agilité' totale de l'équipe */
+    @Test
+    public void testGetAgilite(){
+        equ1.addAthlete(ath1);
+        equ1.addAthlete(ath2);
+        assertEquals(154, equ1.getAgilite());
+    }
+
+    /** On veut obtenir l'endurance totale de l'équipe */
+    @Test
+    public void testGetEndurance(){
+        equ1.addAthlete(ath1);
+        equ1.addAthlete(ath2);
+        assertEquals(131, equ1.getEndurance());
     }
 
     /** On veut pouvoir ajouter un athlète à l'équipe */
