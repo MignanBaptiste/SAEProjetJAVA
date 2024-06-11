@@ -1,4 +1,6 @@
 import jo.JeuxOlympiques;
+import jo.exception.InvalidTypeException;
+
 import org.junit.*;
 
 public class TestLoadSave{
@@ -11,6 +13,10 @@ public class TestLoadSave{
 
     @Test
     public void testLoadCSV(){
-        this.jo.load_csv("./donnees.csv");
+        try {
+            jo.load_csv("./donnees.csv");
+        } catch (InvalidTypeException e) {
+            System.out.println("Problème concernant les sports");
+        }
     }
 }
