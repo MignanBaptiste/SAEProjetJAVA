@@ -1,7 +1,6 @@
 package jo;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import jo.exception.InvalidTypeException;
+import jo.exception.*;
 import jo.sport.*;
 
 // Classe représentant les Jeux Olympiques
@@ -19,8 +18,6 @@ public class JeuxOlympiques {
     private int annee; // L'année des Jeux Olympiques
     private List<Epreuve> lesEpreuves; // Liste des épreuves des Jeux Olympiques
     private List<Athlete> lesAthletes;
-    private List<Equipe> lesEquipes;
-    private List<Pays> lesPays;
 
     /**
      * Constructeur de la classe JeuxOlympiques.
@@ -31,8 +28,6 @@ public class JeuxOlympiques {
         this.annee = annee;
         this.lesEpreuves = new ArrayList<>();
         this.lesAthletes = new ArrayList<>();
-        this.lesEquipes = new ArrayList<>();
-        this.lesPays = new ArrayList<>();
     }
 
     /**
@@ -74,15 +69,21 @@ public class JeuxOlympiques {
      * @return int nombre d'Athlete
      */
     public int getNbAthletes(){
-        return this.lesAthletes.size();
+        return this.getAthletes().size();
     }
 
     /**
      * Renvoie la liste d'équipes participant aux Jeux Olympique de cette année
      * @return List<Equipe> liste d'Equipe
      */
-    public List<Equipe> getEquipes() {
-        return this.lesEquipes;
+    public HashSet<Equipe> getEquipes() {
+        HashSet<Equipe> lesEquipes = new HashSet<>();
+        for (Athlete ath: this.lesAthletes){
+            if (ath.getEquipe() != null){
+                lesEquipes.add(ath.getEquipe());
+            }
+        }
+        return lesEquipes;
     }
 
     /**
@@ -90,15 +91,19 @@ public class JeuxOlympiques {
      * @return int nombre de d'Equipe
      */
     public int getNbEquipes(){
-        return this.lesEquipes.size();
+        return this.getEquipes().size();
     }
 
     /**
      * Renvoie les pays participant aux Jeux Olympique de cette année
      * @return List<Pays> liste de Pays
      */
-    public List<Pays> getPays(){
-        return this.lesPays;
+    public HashSet<Pays> getPays(){
+        HashSet<Pays> lesPays = new HashSet<>();
+        for (Athlete ath : this.getAthletes()){
+            lesPays.add(ath.getPays());
+        }
+        return lesPays;
     }
 
     /**
@@ -106,7 +111,7 @@ public class JeuxOlympiques {
      * @return int nombre de Pays
      */
     public int getNbPays(){
-        return this.lesPays.size();
+        return this.getPays().size();
     }
     //
 
@@ -115,7 +120,7 @@ public class JeuxOlympiques {
      * 
      * @param epv L'épreuve à ajouter.
      */
-    public void addEpreuve(Epreuve epv) {
+    public void addEpreuve(Epreuve<Participant> epv) {
         this.lesEpreuves.add(epv);
     }
 
@@ -126,7 +131,6 @@ public class JeuxOlympiques {
      */
     public HashMap<Pays, Classement> medaillesParPays() {
         HashMap<Pays, Classement> res = new HashMap<>();
-        HashSet<Equipe> equipesTraitees = new HashSet<>();
         // Parcours de toutes les épreuves
         for (Epreuve epv : this.lesEpreuves) {
             // Obtention de tous les participants de l'épreuve
@@ -181,7 +185,6 @@ public class JeuxOlympiques {
     public List<Pays> medaillesTotales() {
         List<Pays> res = new ArrayList<>();
         HashMap<Pays, Integer> medaillesTotales = new HashMap<>();
-        HashSet<Equipe> equipesTraitees = new HashSet<>();
         
         // Parcours de toutes les épreuves
         for (Epreuve epv : this.lesEpreuves) {
@@ -278,15 +281,22 @@ public class JeuxOlympiques {
             else{
                 throw new InvalidTypeException();
             }
-            Pays pays = new Pays(liste.get(4));
+            Pays pays = new Pays(liste.get(3));
             Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), pays);
             this.lesAthletes.add(ath);
             // Si la catégorie de l'épreuve contient ces mots clés, c'est une épreuve collective
             if (liste.get(4).contains("relais") || liste.get(4).contains("Handball") || liste.get(4).contains("Volley-Ball")){
                 Epreuve<Equipe> epv = new Epreuve<>(sexe, sport);
+                if (this.lesEpreuves.contains(epv)){
+                    epv = this.lesEpreuves.get(this.lesEpreuves.indexOf(epv));
+                }
+                else{
+                    epv = new Epreuve<>(sexe, sport);
+                    this.lesEpreuves.add(epv);
+                }
                 Equipe eqp = new Equipe(ath.getPays());
                 eqp.addAthlete(ath);
-                this.lesEquipes.add(eqp);
+                ath.ajoutEquipe(eqp);
                 epv.addParticipant(eqp);
                 this.lesEpreuves.add(epv);
             }

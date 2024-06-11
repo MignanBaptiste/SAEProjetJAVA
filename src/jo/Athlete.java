@@ -1,7 +1,6 @@
 package jo;
 
 import jo.exception.InvalidTypeException;
-import jo.sport.Sport;
 
 /**
  * Représente un athlète participant à des compétitions.

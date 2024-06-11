@@ -32,10 +32,10 @@ public class Executable {
             entrer = entrer.toUpperCase();
             // récupération, saisie et modification des données
             if (entrer.equals("V")){
-                System.out.print("Il y a " + jo.getNbEpreuves() + " épreuves en " + jo.getAnnee());
-                System.out.print("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux JO en " + jo.getAnnee());
-                System.out.print("Il y a " + jo.getNbEquipes() + " équipe qui participe aux JO en " + jo.getAnnee());
-                System.out.print("Il y a " + jo.getNbPays() + " pays qui participe aux JO en " + jo.getAnnee());
+                System.out.println("Il y a " + jo.getNbEpreuves() + " épreuves en " + jo.getAnnee());
+                System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux JO en " + jo.getAnnee());
+                System.out.println("Il y a " + jo.getNbEquipes() + " équipe qui participe aux JO en " + jo.getAnnee());
+                System.out.println("Il y a " + jo.getNbPays() + " pays qui participe aux JO en " + jo.getAnnee());
                 System.out.println("N'EST PAS FINI POUR LE MOMENT");
             }
             else if (entrer.equals("M")){
@@ -64,5 +64,6 @@ public class Executable {
             }
 
         }
+        scanner.close();
     }
 }

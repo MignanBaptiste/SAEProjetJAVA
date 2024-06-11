@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
-import jo.sport.Sport;
 
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant{
