@@ -7,6 +7,7 @@ public class Executable {
         JeuxOlympiques jo = new JeuxOlympiques(2021);
         try {
             jo.load_csv("./donnees.csv");
+            System.out.println(jo.getEpreuves());
         } catch (InvalidTypeException e) {
             System.out.println("Problème de chargement des données");
         }
