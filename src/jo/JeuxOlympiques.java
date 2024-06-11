@@ -18,6 +18,9 @@ public class JeuxOlympiques {
 
     private int annee; // L'année des Jeux Olympiques
     private List<Epreuve> lesEpreuves; // Liste des épreuves des Jeux Olympiques
+    private List<Athlete> lesAthletes;
+    private List<Equipe> lesEquipes;
+    private List<Pays> lesPays;
 
     /**
      * Constructeur de la classe JeuxOlympiques.
@@ -27,6 +30,9 @@ public class JeuxOlympiques {
     public JeuxOlympiques(int annee) {
         this.annee = annee;
         this.lesEpreuves = new ArrayList<>();
+        this.lesAthletes = new ArrayList<>();
+        this.lesEquipes = new ArrayList<>();
+        this.lesPays = new ArrayList<>();
     }
 
     /**
@@ -46,6 +52,63 @@ public class JeuxOlympiques {
     public List<Epreuve> getEpreuves() {
         return this.lesEpreuves;
     }
+
+    /**
+     * Renvoie le nombre d'épreuves des Jeux Olympique de cette année
+     * @return int nombre d'Epreuve
+     */
+    public int getNbEpreuves(){
+        return this.lesEpreuves.size();
+    }
+
+    /**
+     * Renvoie la liste d'athlètes participant aux Jeux Olympique de cette année
+     * @return List<Athlete> liste d'Athlete
+     */
+    public List<Athlete> getAthletes() {
+        return this.lesAthletes;
+    }
+
+    /**
+     * Renvoie le nombre d'athlètes participant aux Jeux Olympique de cette année
+     * @return int nombre d'Athlete
+     */
+    public int getNbAthletes(){
+        return this.lesAthletes.size();
+    }
+
+    /**
+     * Renvoie la liste d'équipes participant aux Jeux Olympique de cette année
+     * @return List<Equipe> liste d'Equipe
+     */
+    public List<Equipe> getEquipes() {
+        return this.lesEquipes;
+    }
+
+    /**
+     * Renvoie le nombre d'équipes participant aux Jeux Olympique de cette année
+     * @return int nombre de d'Equipe
+     */
+    public int getNbEquipes(){
+        return this.lesEquipes.size();
+    }
+
+    /**
+     * Renvoie les pays participant aux Jeux Olympique de cette année
+     * @return List<Pays> liste de Pays
+     */
+    public List<Pays> getPays(){
+        return this.lesPays;
+    }
+
+    /**
+     * Renvoie le nombre de pays participant aux Jeux Olympique de cette année
+     * @return int nombre de Pays
+     */
+    public int getNbPays(){
+        return this.lesPays.size();
+    }
+    //
 
     /**
      * Ajoute une épreuve à la liste des épreuves des Jeux Olympiques.
@@ -190,7 +253,7 @@ public class JeuxOlympiques {
         // Création des instances de class
         for (List<String> liste : records){
             Sexe sexe;
-            if (liste.get(2).equals("homme")){
+            if (liste.get(2).equals("M")){
                 sexe = Sexe.HOMME;
             }
             else{
@@ -215,12 +278,15 @@ public class JeuxOlympiques {
             else{
                 throw new InvalidTypeException();
             }
-            Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), new Pays(liste.get(4)));
+            Pays pays = new Pays(liste.get(4));
+            Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), pays);
+            this.lesAthletes.add(ath);
             // Si la catégorie de l'épreuve contient ces mots clés, c'est une épreuve collective
             if (liste.get(4).contains("relais") || liste.get(4).contains("Handball") || liste.get(4).contains("Volley-Ball")){
                 Epreuve<Equipe> epv = new Epreuve<>(sexe, sport);
                 Equipe eqp = new Equipe(ath.getPays());
                 eqp.addAthlete(ath);
+                this.lesEquipes.add(eqp);
                 epv.addParticipant(eqp);
                 this.lesEpreuves.add(epv);
             }
@@ -232,12 +298,12 @@ public class JeuxOlympiques {
         }
     }
 
+    // On ne s'en occupe pas pour le moment.
+    // public void load_database(){
+    //     
+    // }
 
-    public void load_database(){
-        
-    }
+    // public void save_database(){
 
-    public void save_database(){
-
-    }
+    // }
 }

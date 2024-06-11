@@ -101,7 +101,12 @@ public class Epreuve<T extends Participant>{
      * @return Représentation sous forme de chaîne.
      */
     public String toString() {
-        return "Epreuve de " + this.sport.getCategorie();
+        if (this.sexe.equals(Sexe.FEMME)){
+            return "Epreuve de " + this.sport.getCategorie() + " Féminin";
+        }
+        else{
+            return "Epreuve de " + this.sport.getCategorie() + " Masculin";
+        }
     }
 
     @Override
