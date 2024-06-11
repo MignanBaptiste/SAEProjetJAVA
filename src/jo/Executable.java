@@ -8,7 +8,7 @@ public class Executable {
         try {
             jo.load_csv("./donnees.csv");
         } catch (InvalidTypeException e) {
-            System.out.println("Problème concernant les sports");
+            System.out.println("Problème de chargement des données");
         }
     }
 }

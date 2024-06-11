@@ -256,7 +256,7 @@ public class JeuxOlympiques{
     }
 
     public void load_database(){
-
+        
     }
 
     public void save_database(){
