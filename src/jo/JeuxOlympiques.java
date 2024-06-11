@@ -5,12 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
-import jo.sport.Sport;
+import jo.sport.*;
 
 // Classe représentant les Jeux Olympiques
 public class JeuxOlympiques {
@@ -218,7 +219,7 @@ public class JeuxOlympiques {
             // Si la catégorie de l'épreuve contient ces mots clés, c'est une épreuve collective
             if (liste.get(4).contains("relais") || liste.get(4).contains("Handball") || liste.get(4).contains("Volley-Ball")){
                 Epreuve<Equipe> epv = new Epreuve<>(sexe, sport);
-                Equipe eqp = new Equipe(ath.getPays().getNom(), ath.getPays());
+                Equipe eqp = new Equipe(ath.getPays());
                 eqp.addAthlete(ath);
                 epv.addParticipant(eqp);
                 this.lesEpreuves.add(epv);
