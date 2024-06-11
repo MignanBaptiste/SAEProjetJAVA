@@ -77,10 +77,10 @@ public class Epreuve<T extends Participant>{
             res.put(participant, score);
         }
         List<T> participantsTri = new ArrayList<>(this.participants);
-        participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1)));
-        participantsTri.get(0).getEquipe().getClassement().addOr(1);
-        participantsTri.get(1).getEquipe().getClassement().addArgent(1);
-        participantsTri.get(2).getEquipe().getClassement().addBronze(1);
+        participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); //tri par ordre décroissant du nombre de points
+        participantsTri.get(0).getEquipe().getPays().getClassement().addOr(1); //on ajoute pour les 3 premiers une médaille
+        if (participantsTri.size() >= 2) {participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);}
+        if (participantsTri.size() >= 3) {participantsTri.get(2).getEquipe().getPays().getClassement().addBronze(1);} 
         return res;
     }
 
@@ -102,5 +102,30 @@ public class Epreuve<T extends Participant>{
      */
     public String toString() {
         return "Epreuve de " + this.sport.getCategorie();
+    }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Epreuve)){return false;}
+        Epreuve e = (Epreuve) o;
+        return this.sport.equals(e.getSport()) && this.participants.equals(e.getParticipants());
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.sport.hashCode() * this.participants.size()) / 17 ;
     }
 }

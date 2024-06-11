@@ -5,199 +5,175 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
-import jo.sport.Athletisme;
-import jo.sport.Escrime;
-import jo.sport.Handball;
-import jo.sport.Natation;
 import jo.sport.Sport;
-import jo.sport.VolleyBall;
 
 // Classe représentant les Jeux Olympiques
-public class JeuxOlympiques{
+public class JeuxOlympiques {
 
     private int annee; // L'année des Jeux Olympiques
-    private List<Pays> lespays; // Liste des pays participant aux Jeux Olympiques
     private List<Epreuve> lesEpreuves; // Liste des épreuves des Jeux Olympiques
-    private List<Athlete> lesAthletes; // Liste des athlètes des Jeux Olympiques
-    private List<Equipe> lesEquipes; // Liste des équipes des Jeux Olympiques
 
     /**
      * Constructeur de la classe JeuxOlympiques.
+     * 
      * @param annee L'année des Jeux Olympiques.
      */
-    public JeuxOlympiques(int annee){
+    public JeuxOlympiques(int annee) {
         this.annee = annee;
         this.lesEpreuves = new ArrayList<>();
-        this.lesAthletes = new ArrayList<>();
-        this.lesEquipes = new ArrayList<>();
-        this.lespays = new ArrayList<>();
     }
 
     /**
-     * Renvoie la liste des pays participant aux Jeux Olympiques.
-     * @return List<Pays> Liste des pays participant aux Jeux Olympiques.
+     * Renvoie l'année des Jeux Olympiques.
+     * 
+     * @return int L'année des Jeux Olympiques.
      */
-    public List<Pays> getPays(){
-        return this.lespays;
-    }
-
-    /**
-     * Ajoute un pays à la liste des pays participant aux Jeux Olympiques.
-     * @param pays Le pays à ajouter.
-     */
-    public void ajoutPays(Pays pays){
-        this.lespays.add(pays);
-    }
-
-    /**
-     * Ajoute un athlète à une équipe.
-     * @param ath L'athlète à ajouter.
-     * @param equ L'équipe à laquelle ajouter l'athlète.
-     */
-    public void ajoutAth(Athlete ath, Equipe equ){
-        equ.addAthlete(ath);
+    public int getAnnee() {
+        return this.annee;
     }
 
     /**
      * Renvoie toutes les épreuves des Jeux Olympiques.
+     * 
      * @return List<Epreuve> Liste de toutes les épreuves des Jeux Olympiques.
      */
-    public List<Epreuve> getEpreuves(){
+    public List<Epreuve> getEpreuves() {
         return this.lesEpreuves;
     }
 
     /**
      * Ajoute une épreuve à la liste des épreuves des Jeux Olympiques.
+     * 
      * @param epv L'épreuve à ajouter.
      */
-    public void addEpreuve(Epreuve epv){
+    public void addEpreuve(Epreuve epv) {
         this.lesEpreuves.add(epv);
     }
 
     /**
-     * Renvoie tous les athlètes des Jeux Olympiques.
-     * @return List<Epreuve> Liste de tous les athlètes des Jeux Olympiques.
-     */
-    public List<Athlete> getAthletes(){
-        return this.lesAthletes;
-    }
-
-    /**
-     * Ajoute un athlète à la liste des athlètes des Jeux Olympiques.
-     * @param ath L'athlète à ajouter.
-     */
-    public void addAthlete(Athlete ath){
-        this.lesAthletes.add(ath);
-    }
-
-    /**
-     * Renvoie toutes les équipes des Jeux Olympiques.
-     * @return List<Equipe> Liste de toutes les équipes des Jeux Olympiques.
-     */
-    public List<Equipe> getEquipes(){
-        return this.lesEquipes;
-    }
-
-    /**
-     * Ajoute une équipe à la liste des équipes des Jeux Olympiques.
-     * @param equ L'équipe à ajouter.
-     */
-    public void addEquipe(Equipe equ){
-        this.lesEquipes.add(equ);
-    }
-
-    /**
-     * Fait participer un athlète à une épreuve donnée.
-     * @param ath L'athlète à faire participer.
-     * @param epv L'épreuve à laquelle l'athlète participe.
-     */
-    public void participerAthlete(Athlete ath, Epreuve<Athlete> epv){ 
-        try {
-            epv.addParticipant(ath);
-        } catch (InvalidTypeException e) {
-            // erreur
-        }
-    }
-
-    /**
-     * Fait participer une équipe à une épreuve donnée.
-     * @param equ L'équipe à faire participer.
-     * @param epv L'épreuve à laquelle l'équipe participe.
-     */
-    public void participerEquipe(Equipe equ, Epreuve<Equipe> epv){
-        try {
-            epv.addParticipant(equ);
-        } catch (InvalidTypeException e) {
-            // erreur
-        }
-    }
-
-    /**
      * Calcule le nombre de médailles par pays.
-     * @return HashMap<Pays, HashMap<String, Integer>> Nombre de médailles par pays.
+     * 
+     * @return HashMap<Pays, Classement>> Nombre de médailles par pays.
      */
-    public HashMap<Pays, HashMap<String, Integer>> medaillesParPays(){
-        HashMap<Pays, HashMap<String, Integer>> res = new HashMap<>();
-        for (Pays p: this.lespays){
-            int or = 0;
-            int argent = 0;
-            int bronze = 0;
-            for (Equipe e: p.getEquipes()){
-                or += e.getClassement().getOr();
-                argent += e.getClassement().getArgent();
-                bronze += e.getClassement().getBronze();
+    public HashMap<Pays, Classement> medaillesParPays() {
+        HashMap<Pays, Classement> res = new HashMap<>();
+        HashSet<Equipe> equipesTraitees = new HashSet<>();
+        // Parcours de toutes les épreuves
+        for (Epreuve epv : this.lesEpreuves) {
+            // Obtention de tous les participants de l'épreuve
+            List<Participant> participants = epv.getParticipants();
+            // Parcours de tous les participants
+            for (Participant participant : participants) {
+                Pays p = participant.getPays();
+                Classement c = p.getClassement();
+                if (!(res.containsKey(p))){
+                    res.put(p, c);
+                }
             }
-            HashMap<String, Integer> temp = new HashMap<>();
-            temp.put("Medailles d'or", or);
-            temp.put("Medailles d'argent", argent);
-            temp.put("Medailles de bronze", bronze);
-            res.put(p, temp);
         }
         return res;
     }
 
+    
     /**
      * Renvoie la liste des pays classés par nombre de médailles d'or.
+     * 
      * @return List<Pays> Liste des pays classés par nombre de médailles d'or.
      */
-    public List<Pays> medaillesOr(){
-        List<Pays> res = new ArrayList<>(this.lespays);
-        HashMap<Pays, Integer> temp = new HashMap<>();
-        for (Pays p: this.lespays){
-            int or = 0;
-            for (Equipe e: p.getEquipes()){
-                or += e.getClassement().getOr();
-            }
-            temp.put(p, or);
+    public List<Pays> medaillesOr() {
+        List<Pays> res = new ArrayList<>();
+        HashMap<Pays, Integer> medaillesOr = new HashMap<>();
+        
+        // Parcours de toutes les épreuves
+        for (Epreuve epv : this.lesEpreuves) {
+            // Obtention de tous les participants de l'épreuve
+            List<Participant> participants = epv.getParticipants();
+            // Parcours de tous les participants
+            for (Participant participant : participants) {
+                // Si le participant est une équipe
+                Pays p = participant.getPays();
+                int i = p.getClassement().getOr();
+                if (!(medaillesOr.containsKey(p))){
+                    medaillesOr.put(p, i);
+                }
+            }   
         }
-        res.sort((p1, p2) -> temp.get(p2).compareTo(temp.get(p1)));
+        res.addAll(medaillesOr.keySet());
+        res.sort((p1, p2) -> medaillesOr.get(p2).compareTo(medaillesOr.get(p1))); // Tri des pays en fonction du nombre de médailles d'or
         return res;
     }
+
 
     /**
      * Renvoie la liste des pays classés par nombre total de médailles.
+     * 
      * @return List<Pays> Liste des pays classés par nombre total de médailles.
      */
-    public List<Pays> medaillesTotales(){
-        List<Pays> res = new ArrayList<>(this.lespays);
-        HashMap<Pays, Integer> temp = new HashMap<>();
-        for (Pays p: this.lespays){
-            int total = 0;
-            for (Equipe e: p.getEquipes()){
-                total += e.getClassement().getOr() + e.getClassement().getArgent() + e.getClassement().getBronze();
+    public List<Pays> medaillesTotales() {
+        List<Pays> res = new ArrayList<>();
+        HashMap<Pays, Integer> medaillesTotales = new HashMap<>();
+        HashSet<Equipe> equipesTraitees = new HashSet<>();
+        
+        // Parcours de toutes les épreuves
+        for (Epreuve epv : this.lesEpreuves) {
+            // Obtention de tous les participants de l'épreuve
+            List<Participant> participants = epv.getParticipants();
+            // Parcours de tous les participants
+            for (Participant participant : participants) {
+                // Si le participant est une équipe
+                Pays p = participant.getPays();
+                int i = p.getClassement().totalMedailles();
+                if (!(medaillesTotales.containsKey(p))){
+                    medaillesTotales.put(p, i);
+                }
             }
-            temp.put(p, total);
         }
-        res.sort((p1, p2) -> temp.get(p2).compareTo(temp.get(p1)));
+        // Tri des pays en fonction du nombre total de médailles
+        res.addAll(medaillesTotales.keySet());
+        res.sort((p1, p2) -> medaillesTotales.get(p2).compareTo(medaillesTotales.get(p1)));
         return res;
     }
 
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof JeuxOlympiques)){return false;}
+        JeuxOlympiques jo = (JeuxOlympiques) o;
+        return this.annee == jo.getAnnee() && this.lesEpreuves.equals(jo.getEpreuves());
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.annee * this.lesEpreuves.size()) / 17 ;
+    }
+
+    @Override
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de cet objet.
+     * 
+     * @return une chaîne de caractères représentant les attributs de l'objet
+     */
+    public String toString() {
+        return "Jeux Olympique de " + this.annee;
+    }
+    
     public void load_csv(String chemin) throws InvalidTypeException{
         // Chargement d'un fichier CSV où chaque ligne est une liste
         List<List<String>> records = new ArrayList<>();
@@ -255,6 +231,7 @@ public class JeuxOlympiques{
         }
     }
 
+
     public void load_database(){
         
     }
@@ -263,4 +240,3 @@ public class JeuxOlympiques{
 
     }
 }
-

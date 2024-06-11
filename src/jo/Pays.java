@@ -7,7 +7,8 @@ import java.util.List;
 public class Pays {
     private String nomPays; // Le nom du pays
     private List<Equipe> equipes; // Liste des équipes du pays
-    private List<Athlete> athletes; // Liste des athlètes du pays   
+    private List<Athlete> athletes; // Liste des athlètes du pays
+    private Classement classement; // Le classement de l'équipe   
 
     /**
      * Créer un nouveau pays avec une liste d'équipes
@@ -18,6 +19,7 @@ public class Pays {
         this.nomPays = pays;
         this.equipes = new ArrayList<>();
         this.athletes = new ArrayList<>();
+        this.classement = new Classement();
     }
 
     /**
@@ -43,6 +45,14 @@ public class Pays {
     public List<Athlete> getAthletes() {
         return this.athletes;
     }
+
+    /**
+     * Renvoie le classement du pays.
+     * @return Classement Le classement du pays.
+     */
+    public Classement getClassement(){
+        return this.classement;
+    }
     
     /**
      * Permet d'ajouter une équipe à la liste d'équipes du pays.
@@ -66,7 +76,32 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "" + nomPays;
+        return "" + this.nomPays;
+    }
+
+    @Override
+    /**
+     * Vérifie si cet objet est égal à l'objet spécifié.
+     * 
+     * @param o l'objet à comparer avec cet objet
+     * @return true si les objets sont égaux, false sinon
+     */
+    public boolean equals(Object o){
+        if (o == null){return false;}
+        if (this == o){return true;}
+        if (!(o instanceof Pays)){return false;}
+        Pays p = (Pays) o;
+        return this.nomPays.equals(p.getNom());
+    }
+
+    @Override
+    /**
+     * Retourne une valeur de hachage pour cet objet.
+     * 
+     * @return un int représentant la valeur de hachage
+     */
+    public int hashCode(){
+        return (31 * this.nomPays.length() * this.athletes.size() * this.equipes.size()) / 17 ;
     }
 }
 
