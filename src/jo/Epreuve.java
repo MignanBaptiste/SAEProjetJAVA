@@ -121,7 +121,7 @@ public class Epreuve<T extends Participant>{
         if (this == o){return true;}
         if (!(o instanceof Epreuve)){return false;}
         Epreuve e = (Epreuve) o;
-        return this.sport.equals(e.getSport()) && this.participants.equals(e.getParticipants());
+        return this.sport.equals(e.getSport()) && this.sexe.equals(e.getSexe());
     }
 
     @Override
@@ -131,6 +131,6 @@ public class Epreuve<T extends Participant>{
      * @return un int représentant la valeur de hachage
      */
     public int hashCode(){
-        return (31 * this.sport.hashCode() * this.participants.size()) / 17 ;
+        return (31 * this.sport.hashCode() * this.sexe.hashCode()) / 17 ;
     }
 }

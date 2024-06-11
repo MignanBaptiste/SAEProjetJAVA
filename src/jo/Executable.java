@@ -33,9 +33,9 @@ public class Executable {
             // récupération, saisie et modification des données
             if (entrer.equals("V")){
                 System.out.println("Il y a " + jo.getNbEpreuves() + " épreuves en " + jo.getAnnee());
-                System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux JO en " + jo.getAnnee());
-                System.out.println("Il y a " + jo.getNbEquipes() + " équipe qui participe aux JO en " + jo.getAnnee());
-                System.out.println("Il y a " + jo.getNbPays() + " pays qui participe aux JO en " + jo.getAnnee());
+                System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux " + jo);
+                System.out.println("Il y a " + jo.getNbEquipes() + " équipe qui participe aux " + jo);
+                System.out.println("Il y a " + jo.getNbPays() + " pays qui participe aux " + jo);
                 System.out.println("N'EST PAS FINI POUR LE MOMENT");
             }
             else if (entrer.equals("M")){

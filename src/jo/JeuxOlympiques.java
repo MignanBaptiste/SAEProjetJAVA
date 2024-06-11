@@ -291,19 +291,27 @@ public class JeuxOlympiques {
                     epv = this.lesEpreuves.get(this.lesEpreuves.indexOf(epv));
                 }
                 else{
-                    epv = new Epreuve<>(sexe, sport);
                     this.lesEpreuves.add(epv);
                 }
                 Equipe eqp = new Equipe(ath.getPays());
+                if (epv.getParticipants().contains(eqp)){
+                    eqp = epv.getParticipants().get(epv.getParticipants().indexOf(eqp));
+                }
+                else{
+                    epv.addParticipant(eqp);
+                }
                 eqp.addAthlete(ath);
                 ath.ajoutEquipe(eqp);
-                epv.addParticipant(eqp);
-                this.lesEpreuves.add(epv);
             }
             else{
                 Epreuve<Athlete> epv = new Epreuve<>(sexe, sport);
+                if (this.lesEpreuves.contains(epv)){
+                    epv = this.lesEpreuves.get(this.lesEpreuves.indexOf(epv));
+                }
+                else{
+                    this.lesEpreuves.add(epv);
+                }
                 epv.addParticipant(ath);
-                this.lesEpreuves.add(epv);
             }
         }
     }
