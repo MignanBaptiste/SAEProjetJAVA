@@ -293,7 +293,7 @@ public class JeuxOlympiques {
                 else{
                     this.lesEpreuves.add(epv);
                 }
-                Equipe eqp = new Equipe(ath.getPays());
+                Equipe eqp = new Equipe(sport, ath.getPays());
                 if (epv.getParticipants().contains(eqp)){
                     eqp = epv.getParticipants().get(epv.getParticipants().indexOf(eqp));
                 }
@@ -301,7 +301,6 @@ public class JeuxOlympiques {
                     epv.addParticipant(eqp);
                 }
                 eqp.addAthlete(ath);
-                ath.ajoutEquipe(eqp);
             }
             else{
                 Epreuve<Athlete> epv = new Epreuve<>(sexe, sport);

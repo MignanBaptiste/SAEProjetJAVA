@@ -36,7 +36,28 @@ public class Executable {
                 System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux " + jo);
                 System.out.println("Il y a " + jo.getNbEquipes() + " équipe qui participe aux " + jo);
                 System.out.println("Il y a " + jo.getNbPays() + " pays qui participe aux " + jo);
-                System.out.println("N'EST PAS FINI POUR LE MOMENT");
+                System.out.println("Voulez-vous plus d'information ? Y/N");
+                entrer = scanner.next();
+                entrer = entrer.toUpperCase();
+                if (entrer.equals("Y")){
+                    while (!quitter){
+                        System.out.println("####################################################################");
+                        System.out.println("# Que voulez-vous savoir ? (écrivez simplement la première lettre) #");
+                        System.out.println("# E - les Epreuves                                                 #");
+                        System.out.println("# A - les Athlètes                                                 #");
+                        System.out.println("# P - les Pays                                                     #");
+                        System.out.println("# Q - Quitter                                                      #");
+                        System.out.println("####################################################################");
+                        entrer = scanner.next();
+                        entrer = entrer.toUpperCase();
+                        if (entrer.equals("E")){System.out.println(jo.getEpreuves());}
+                        else if (entrer.equals("A")){System.out.println(jo.getAthletes());}
+                        else if (entrer.equals("U")){System.out.println(jo.getEquipes());}
+                        else if (entrer.equals("P")){System.out.println(jo.getPays());}
+                        else{quitter = true;}
+                    }
+                    quitter = false;
+                }
             }
             else if (entrer.equals("M")){
                 System.out.println("NE MARCHE PAS POUR LE MOMENT");
@@ -55,6 +76,10 @@ public class Executable {
             }
 
             // Récupérer les médailles pour les pays.
+            else if (entrer.equals("A")){
+                System.out.println("NE MARCHE PAS POUR LE MOMENT");
+            }
+
             else if (entrer.equals("Q")){
                 quitter = true;
             }

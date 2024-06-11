@@ -50,7 +50,7 @@ public class TestEpreuve {
     @Test
     public void testAddParticipantEquipe() {
         Pays france = new Pays("France");
-        Equipe equipe = new Equipe(france);
+        Equipe equipe = new Equipe(new VolleyBall(null), france);
         try {
             collective.addParticipant(equipe);
         } catch (InvalidTypeException e) {
@@ -67,7 +67,7 @@ public class TestEpreuve {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
-        Equipe equipe = new Equipe(france);
+        Equipe equipe = new Equipe(new VolleyBall(null), france);
         equipe.addAthlete(ath1);
         equipe.addAthlete(ath2);
         collective.addParticipant(equipe);
@@ -93,7 +93,7 @@ public class TestEpreuve {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
-        Equipe equipe = new Equipe(france);
+        Equipe equipe = new Equipe(new VolleyBall(null), france);
         equipe.addAthlete(ath1);
         equipe.addAthlete(ath2);
         try {
@@ -113,7 +113,7 @@ public class TestEpreuve {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
-        Equipe equipe = new Equipe(france);
+        Equipe equipe = new Equipe(new VolleyBall(null), france);
         equipe.addAthlete(ath1);
         equipe.addAthlete(ath2);
         try {
