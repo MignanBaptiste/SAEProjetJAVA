@@ -8,4 +8,5 @@ Reste à faire:
 - faire l'executable de l'application
 - finir le diaporama
 - répartir les slides entre les membres
-- ?
+- changer le diagramme de séquence
+  
