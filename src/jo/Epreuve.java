@@ -116,7 +116,7 @@ public class Epreuve<T extends Participant>{
         if (this == o){return true;}
         if (!(o instanceof Epreuve)){return false;}
         Epreuve<?> e = (Epreuve<?>) o;
-        return this.sport.equals(e.getSport()) && this.participants.equals(e.getParticipants()) && this.sexe.equals(e.getSexe());
+        return this.sport.equals(e.getSport()) && this.sexe.equals(e.getSexe());
     }
 
     @Override

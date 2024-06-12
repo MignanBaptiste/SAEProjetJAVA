@@ -32,7 +32,7 @@ public class Executable {
             entrer = entrer.toUpperCase();
             // récupération, saisie et modification des données
             if (entrer.equals("V")){
-                System.out.println("Il y a " + jo.getNbEpreuves() + " épreuves en " + jo.getAnnee());
+                System.out.println("Il y a " + jo.getNbEpreuves() + " épreuves aux " + jo);
                 System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux " + jo);
                 System.out.println("Il y a " + jo.getNbEquipes() + " équipe qui participe aux " + jo);
                 System.out.println("Il y a " + jo.getNbPays() + " pays qui participe aux " + jo);

@@ -151,19 +151,22 @@ public class JeuxOlympiques {
     public HashMap<Pays, Classement> medaillesParPays() {
         HashMap<Pays, Classement> res = new HashMap<>();
         // Parcours de toutes les épreuves
-        for (@SuppressWarnings("rawtypes") Epreuve epv : this.lesEpreuves) {
-            // Obtention de tous les participants de l'épreuve
-            @SuppressWarnings("unchecked")
-            List<Participant> participants = epv.getParticipants();
-            // Parcours de tous les participants
-            for (Participant participant : participants) {
-                Pays p = participant.getPays();
-                Classement c = p.getClassement();
-                if (!(res.containsKey(p))){
-                    res.put(p, c);
-                }
-            }
+        // for (Epreuve epv : this.lesEpreuves) {
+        //     // Obtention de tous les participants de l'épreuve
+        //     List<Participant> participants = epv.getParticipants();
+        //     // Parcours de tous les participants
+        //     for (Participant participant : participants) {
+        //         Pays p = participant.getPays();
+        //         Classement c = p.getClassement();
+        //         if (!(res.containsKey(p))){
+        //             res.put(p, c);
+        //         }
+        //     }
+        // }
+        for (Pays pays : this.getPays()){
+            res.put(pays, pays.getClassement());
         }
+
         return res;
     }
 
@@ -288,7 +291,6 @@ public class JeuxOlympiques {
                 sexe = Sexe.HOMME;
             }
             else{
-        
                 sexe = Sexe.FEMME;
             }
             Sport sport;
@@ -323,6 +325,7 @@ public class JeuxOlympiques {
                     epv = this.lesEpreuves.get(this.lesEpreuves.indexOf(epv));
                 }
                 else{
+                    System.out.println(epv);
                     this.lesEpreuves.add(epv);
                 }
                 Equipe eqp = new Equipe(sport, ath.getPays());

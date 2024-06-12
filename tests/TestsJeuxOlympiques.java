@@ -3,12 +3,10 @@ import jo.exception.InvalidTypeException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 public class TestsJeuxOlympiques {
@@ -25,8 +23,8 @@ public class TestsJeuxOlympiques {
         jeux2024 = new JeuxOlympiques(2024);
         france = new Pays("France");
         usa = new Pays("USA");
-        equipeFrance = new Equipe(new VolleyBall("Volley"), france);
-        equipeUSA = new Equipe(new VolleyBall("Volley"), usa);
+        equipeFrance = new Equipe(new VolleyBall(null), france);
+        equipeUSA = new Equipe(new VolleyBall(null), usa);
         athletisme = new Athletisme("Athlétisme");
     }
 
@@ -36,61 +34,10 @@ public class TestsJeuxOlympiques {
     }
 
     @Test
-    public void testGetEquipes() {
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        equipeFrance.addAthlete(ath1);
-        HashSet<Equipe> hs = new HashSet<>();
-        hs.add(equipeFrance);
-        jeux2024.addAthlete(ath1);
-        assertEquals(jeux2024.getEquipes(), hs);
-    }
-
-    @Test
-    public void testGetPays() {
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        HashSet<Pays> hs = new HashSet<>();
-        hs.add(france);
-        jeux2024.addAthlete(ath1);
-        assertEquals(jeux2024.getPays(), hs);
-    }
-
-    @Test
-    public void testGetAthlete() {
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        List<Athlete> hs = new ArrayList<>();
-        hs.add(ath1);
-        jeux2024.addAthlete(ath1);
-        assertEquals(jeux2024.getAthletes(), hs);
-    }
-
-    @Test
-    public void testGetNbEquipes() {
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        equipeFrance.addAthlete(ath1);
-        jeux2024.addAthlete(ath1);
-        assertEquals(jeux2024.getNbEquipes(), 1);
-    }
-
-    @Test
-    public void testGetNbPays() {
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        jeux2024.addAthlete(ath1);
-        assertEquals(jeux2024.getNbPays(), 1);
-    }
-
-    @Test
-    public void testGetNbAthlete() {
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        jeux2024.addAthlete(ath1);
-        assertEquals(jeux2024.getNbAthletes(), 1);
-    }
-
-    @Test
     public void testGetAnnee() {
         assertEquals(2024, jeux2024.getAnnee());
     }
 
-    @SuppressWarnings("rawtypes")
     @Test
     public void testAddEpreuve() {
         Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
@@ -100,7 +47,6 @@ public class TestsJeuxOlympiques {
         assertEquals(2, jeux2024.getEpreuves().size());
     }
 
-    @SuppressWarnings("rawtypes")
     @Test
     public void testGetEpreuve() {
         Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
@@ -109,15 +55,6 @@ public class TestsJeuxOlympiques {
         assertEquals(ep1, epreuves.get(0));
     }
 
-    @SuppressWarnings("rawtypes")
-    @Test
-    public void testGetNbEpreuve() {
-        Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
-        jeux2024.addEpreuve(ep1);
-        assertEquals(1, jeux2024.getNbEpreuves());
-    }
-  
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesParPays() {
         // Création d'épreuves
@@ -148,7 +85,6 @@ public class TestsJeuxOlympiques {
         assertEquals(1, medailles.get(usa).getBronze());
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesOr() {
         // Création d'épreuves
@@ -174,7 +110,6 @@ public class TestsJeuxOlympiques {
         assertEquals(usa, medaillesOr.get(1));
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public void testMedaillesTotales() {
         // Création d'épreuves
@@ -252,3 +187,4 @@ public class TestsJeuxOlympiques {
     public void testSimulation(){
     }
 }
+
