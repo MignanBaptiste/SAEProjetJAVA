@@ -102,10 +102,12 @@ public class JeuxOlympiques {
      * Renvoie les pays participant aux Jeux Olympique de cette année
      * @return HashSet<Pays> liste de Pays
      */
-    public HashSet<Pays> getPays(){
-        HashSet<Pays> lesPays = new HashSet<>();
+    public List<Pays> getPays(){
+        List<Pays> lesPays = new ArrayList<>();
         for (Athlete ath : this.getAthletes()){
-            lesPays.add(ath.getPays());
+            if (!lesPays.contains(ath.getPays())){
+                lesPays.add(ath.getPays());
+            }
         }
         return lesPays;
     }
@@ -305,6 +307,9 @@ public class JeuxOlympiques {
                 throw new InvalidTypeException();
             }
             Pays pays = new Pays(liste.get(3));
+            if (this.getPays().contains(pays)){
+                pays = this.getPays().get(this.getPays().indexOf(pays));
+            }
             Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), pays);
             this.lesAthletes.add(ath);
             // Si la catégorie de l'épreuve contient ces mots clés, c'est une épreuve collective
@@ -346,11 +351,13 @@ public class JeuxOlympiques {
             @SuppressWarnings("unchecked")
             List<Participant> classement = epv.classementEpv();
             if (classement.get(0) instanceof Athlete){
+                System.out.println(classement.get(0).getPays());
                 classement.get(0).getPays().getClassement().addOr();
                 classement.get(1).getPays().getClassement().addArgent();
                 classement.get(2).getPays().getClassement().addBronze();
             }
             else if(classement.get(0) instanceof Equipe){
+                System.out.println(classement.get(0).getPays());
                 classement.get(0).getPays().getClassement().addOr();
                 classement.get(1).getPays().getClassement().addArgent();
                 classement.get(2).getPays().getClassement().addBronze();
