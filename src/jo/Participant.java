@@ -8,7 +8,7 @@ public interface Participant {
      * Permet d'ajouter un participant à une épreuve
      * @param epv L'épreuve à laquelle le participant va participer
      */
-    public void participer(Epreuve epv);
+    public void participer(@SuppressWarnings("rawtypes") Epreuve epv);
     
     /**
      * Renvoie le nom d'un participant

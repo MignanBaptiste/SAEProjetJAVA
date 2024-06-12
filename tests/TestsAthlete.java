@@ -105,6 +105,7 @@ public class TestsAthlete {
     public void testParticiper() {
         // Création d'une épreuve individuelle (pour Athlete)
         Sport athletisme = new Athletisme("100m");
+        @SuppressWarnings({ "rawtypes", "unchecked" })
         Epreuve<Athlete> epv1 = new Epreuve(Sexe.HOMME, athletisme);
 
         // Tentative de participation de l'athlète à une épreuve individuelle 

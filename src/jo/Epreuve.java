@@ -71,7 +71,7 @@ public class Epreuve<T extends Participant>{
         HashMap<T, Integer> res = new HashMap<>();
         for(T participant: this.participants){
             int score = 0;
-            score = participant.getForce() * this.sport.getCoeffForce();
+            score += participant.getForce() * this.sport.getCoeffForce();
             score += participant.getAgilite() * this.sport.getCoeffAgilite();
             score += participant.getEndurance() * this.sport.getCoeffEndurance();
             res.put(participant, score);
@@ -79,8 +79,10 @@ public class Epreuve<T extends Participant>{
         List<T> participantsTri = new ArrayList<>(this.participants);
         participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); //tri par ordre décroissant du nombre de points
         participantsTri.get(0).getEquipe().getPays().getClassement().addOr(1); //on ajoute pour les 3 premiers une médaille
-        if (participantsTri.size() >= 2) {participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);}
-        if (participantsTri.size() >= 3) {participantsTri.get(2).getEquipe().getPays().getClassement().addBronze(1);} 
+        if (participantsTri.size() == 2) {participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);}
+        else if (participantsTri.size() >= 3) {
+            participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);
+            participantsTri.get(2).getEquipe().getPays().getClassement().addBronze(1);} 
         return res;
     }
 
@@ -115,7 +117,7 @@ public class Epreuve<T extends Participant>{
         if (o == null){return false;}
         if (this == o){return true;}
         if (!(o instanceof Epreuve)){return false;}
-        Epreuve e = (Epreuve) o;
+        Epreuve<?> e = (Epreuve<?>) o;
         return this.sport.equals(e.getSport()) && this.participants.equals(e.getParticipants());
     }
 

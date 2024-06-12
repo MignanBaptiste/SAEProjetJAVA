@@ -1,7 +1,6 @@
 package jo;
 
 import jo.exception.InvalidTypeException;
-import jo.sport.Sport;
 
 /**
  * Représente un athlète participant à des compétitions.
@@ -145,12 +144,13 @@ public class Athlete implements Participant {
         return this.endurance;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     /**
     * Permet à l'athlète de participer à une épreuve.
     * @param epreuve L'épreuve à laquelle l'athlète participe.
     */
-    public void participer(Epreuve epreuve) {
+    public void participer(@SuppressWarnings("rawtypes") Epreuve epreuve) {
         try {
             epreuve.addParticipant(this);
         } catch (InvalidTypeException e) {
