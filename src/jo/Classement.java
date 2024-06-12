@@ -67,6 +67,27 @@ public class Classement {
     }
 
     /**
+     * Ajoute une médailles d'or au classement.
+     */
+    public void addOr(){
+        ++this.medailleOr;
+    }
+
+    /**
+     * Ajoute une médailles d'argent au classement.
+     */
+    public void addArgent(){
+        ++this.medailleArgent;
+    }
+
+    /**
+     * Ajoute une médailles de bronze au classement.
+     */
+    public void addBronze(){
+        ++this.medailleBronze;
+    }
+
+    /**
      * Renvoie le nombre de médailles totales.
      * @return int Le nombre de médailles totales.
      */

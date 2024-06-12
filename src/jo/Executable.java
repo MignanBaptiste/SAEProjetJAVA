@@ -67,6 +67,7 @@ public class Executable {
             // Simulation des épreuves.
             else if (entrer.equals("S")){ // A priorisé
                 // ...
+                jo.simulation();
                 System.out.println("NE MARCHE PAS POUR LE MOMENT");
                 System.out.println("Les épreuves se sont bien déroulés.");
             }
@@ -78,6 +79,7 @@ public class Executable {
 
             // Récupérer les médailles pour les pays.
             else if (entrer.equals("A")){ // A priorisé
+                System.out.println(jo.medaillesParPays());
                 System.out.println("NE MARCHE PAS POUR LE MOMENT");
             }
 

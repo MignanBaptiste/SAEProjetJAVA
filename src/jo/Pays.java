@@ -53,6 +53,10 @@ public class Pays {
     public Classement getClassement(){
         return this.classement;
     }
+
+    public void resetClassement(){
+        this.classement = new Classement();
+    }
     
     /**
      * Permet d'ajouter une équipe à la liste d'équipes du pays.

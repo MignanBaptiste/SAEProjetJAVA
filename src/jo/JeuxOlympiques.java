@@ -240,7 +240,11 @@ public class JeuxOlympiques {
     public String toString() {
         return "Jeux Olympique de " + this.annee;
     }
-    
+    /**
+     * Permet de charger un fichier contenant des épreuves, athlètes/équipes.
+     * @param chemin
+     * @throws InvalidTypeException
+     */
     public void load_csv(String chemin) throws InvalidTypeException{
         // Chargement d'un fichier CSV où chaque ligne est une liste
         List<List<String>> records = new ArrayList<>();
@@ -312,6 +316,19 @@ public class JeuxOlympiques {
                 }
                 epv.addParticipant(ath);
             }
+        }
+    }
+
+    // Besoin d'une méthode pour faire la simulation des épreuves.
+
+    public void simulation(){
+        this.resetClassement();
+        
+    }
+
+    public void resetClassement(){
+        for (Pays pays: this.getPays()){
+            pays.resetClassement();
         }
     }
 
