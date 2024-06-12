@@ -24,6 +24,22 @@ public class TestsAthlete {
         assertEquals("Manaudou", ath1.getNomAthlete());
         assertEquals("Riner", ath2.getNomAthlete());
         assertEquals("Dumerc", ath3.getNomAthlete());
+        Equipe equ1 = new Equipe(new VolleyBall("Volley"), france);
+        ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france, equ1);    
+    }
+
+
+    /** On veut obtenir l'équipe athlète */
+    @Test
+    public void testGetEquipe() {
+        Equipe equipe1 = new Equipe(new VolleyBall("Volley"), france);
+        Equipe equipe2 = new Equipe(new VolleyBall("Volley"), france);
+        equipe1.addAthlete(ath1);
+        equipe1.addAthlete(ath2);
+        equipe2.addAthlete(ath3);
+        assertEquals(ath1.getEquipe(), equipe1);
+        assertEquals(ath2.getEquipe(), equipe1);
+        assertEquals(ath3.getEquipe(), equipe2);
     }
 
     /** On veut obtenir le nom de l'athlète */
@@ -111,6 +127,31 @@ public class TestsAthlete {
         // Tentative de participation de l'athlète à une épreuve individuelle 
         ath2.participer(epv1);
         assertNotNull(epv1.getParticipants()); // Vérifie si l'athlète a été ajouté à l'épreuve*
+    }
+
+    // Test pour la méthode equals
+    @Test
+    public void testEquals() {
+        Athlete ath4 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        assertNotEquals(ath1, ath2);
+        assertNotEquals(ath2, ath3);
+        assertEquals(ath2, ath4);
+    }
+
+    // Test pour la méthode hashCode
+    @Test
+    public void testHashCode() {
+        assertEquals(ath1.hashCode(), (31*8*7*56*87*78)/17);
+        assertEquals(ath2.hashCode(), (31*5*5*89*67*53)/17);
+        assertEquals(ath3.hashCode(), (31*6*6*45*78*65)/17);
+    }
+
+    // Test pour la méthode toString
+    @Test
+    public void testToString() {
+        assertEquals(ath1.toString(), "Florent Manaudou");
+        assertEquals(ath2.toString(), "Teddy Riner");
+        assertEquals(ath3.toString(), "Céline Dumerc");
     }
 }
    

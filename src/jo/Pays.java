@@ -54,6 +54,9 @@ public class Pays {
         return this.classement;
     }
 
+    /** 
+     * Met le nombre de médaille du pays à zéro
+    */
     public void resetClassement(){
         this.classement = new Classement();
     }
@@ -80,7 +83,7 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "" + this.nomPays;
+        return "Pays : " + this.nomPays;
     }
 
     @Override

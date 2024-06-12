@@ -117,7 +117,7 @@ public class Classement {
      * @return un int représentant la valeur de hachage
      */
     public int hashCode(){
-        return (31 * this.medailleBronze * this.medailleArgent * this.medailleOr) / 17 ;
+        return (31 * this.medailleBronze * this.medailleArgent * this.medailleOr + 17) / 17 ;
     }
 
     @Override

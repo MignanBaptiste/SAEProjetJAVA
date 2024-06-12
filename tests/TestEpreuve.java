@@ -3,6 +3,8 @@ import jo.exception.InvalidTypeException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -14,8 +16,8 @@ public class TestEpreuve {
     @Before
     public void setUp() {
         volleyBall = new VolleyBall("Volley");
-        individuelle = new Epreuve<>(Sexe.HOMME, volleyBall); // Utilisation de type paramétré
-        collective = new Epreuve<>(Sexe.FEMME, volleyBall); // Utilisation de type paramétré
+        individuelle = new Epreuve<>(Sexe.HOMME, volleyBall);
+        collective = new Epreuve<>(Sexe.FEMME, volleyBall); 
     }
 
     /** Test de récupération du sexe de l'épreuve */
@@ -66,11 +68,11 @@ public class TestEpreuve {
     public void testResultats() throws InvalidTypeException {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
-        Equipe equipe = new Equipe(new VolleyBall(null), france);
-        equipe.addAthlete(ath1);
-        equipe.addAthlete(ath2);
-        collective.addParticipant(equipe);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        Equipe equipe1 = new Equipe(volleyBall, france);
+        equipe1.addAthlete(ath1);
+        equipe1.addAthlete(ath2);
+        collective.addParticipant(equipe1);
         
         // Calcul manuel des scores attendus
         int scoreAttendu = 0;
@@ -84,7 +86,7 @@ public class TestEpreuve {
         // Vérification du résultat obtenu
         HashMap<Equipe, Integer> resultats = collective.resultats();
         assertEquals(1, resultats.size());
-        assertEquals((Integer)scoreAttendu, resultats.get(equipe));
+        assertEquals((Integer)scoreAttendu, resultats.get(equipe1));
     }
 
     /** Test du classement de l'épreuve */
@@ -93,7 +95,7 @@ public class TestEpreuve {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
-        Equipe equipe = new Equipe(new VolleyBall(null), france);
+        Equipe equipe = new Equipe(volleyBall, france);
         equipe.addAthlete(ath1);
         equipe.addAthlete(ath2);
         try {
@@ -128,5 +130,43 @@ public class TestEpreuve {
         assertEquals(Arrays.asList(ath1, ath2), individuelle.getParticipants());
         assertEquals(Arrays.asList(equipe), collective.getParticipants());
 
+    }
+
+    // Test pour la méthode equals
+    @Test
+    public void testEquals() {
+        Epreuve<Equipe> collective2 = new Epreuve<>(Sexe.FEMME, volleyBall);
+        Epreuve<Equipe> collective3 = new Epreuve<>(Sexe.FEMME, volleyBall);
+        Pays france = new Pays("France");
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        Equipe equipe1 = new Equipe(volleyBall, france);
+        Equipe equipe2 = new Equipe(volleyBall, france);
+        equipe1.addAthlete(ath1);
+        equipe2.addAthlete(ath2);
+        
+        try {
+            collective.addParticipant(equipe1);
+            collective2.addParticipant(equipe2);
+            collective3.addParticipant(equipe1);
+        } catch (InvalidTypeException e) {
+            // pas possible
+        }
+        assertNotEquals(collective, collective2);
+        assertEquals(collective, collective3);
+    }
+
+    // Test pour la méthode hashCode
+    @Test
+    public void testHashCode() {
+        assertEquals(collective.hashCode(), (31*volleyBall.hashCode()*Sexe.FEMME.hashCode())/17);
+        assertEquals(individuelle.hashCode(), (31*volleyBall.hashCode()*Sexe.HOMME.hashCode())/17);
+    }
+
+    // Test pour la méthode toString
+    @Test
+    public void testToString() {
+        assertEquals(individuelle.toString(), "Epreuve de Volley Masculin");
+        assertEquals(collective.toString(), "Epreuve de Volley Féminin");
     }
 }

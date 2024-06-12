@@ -75,8 +75,8 @@ public class JeuxOlympiques {
     }
 
     /**
-     * Renvoie la liste d'équipes participant aux Jeux Olympique de cette année
-     * @return List<Equipe> liste d'Equipe
+     * Renvoie l'ensemle d'équipes participant aux Jeux Olympique de cette année
+     * @return HashSet<Equipe> liste d'Equipe
      */
     public HashSet<Equipe> getEquipes() {
         HashSet<Equipe> lesEquipes = new HashSet<>();
@@ -98,7 +98,7 @@ public class JeuxOlympiques {
 
     /**
      * Renvoie les pays participant aux Jeux Olympique de cette année
-     * @return List<Pays> liste de Pays
+     * @return HashSet<Pays> liste de Pays
      */
     public HashSet<Pays> getPays(){
         HashSet<Pays> lesPays = new HashSet<>();
@@ -124,6 +124,15 @@ public class JeuxOlympiques {
      */
     public void addEpreuve(@SuppressWarnings("rawtypes") Epreuve epv) {
         this.lesEpreuves.add(epv);
+    }
+
+    /**
+     * Ajoute un athlète à la liste des athlètes des Jeux Olympiques.
+     * 
+     * @param ath L'athlète à ajouter.
+     */
+    public void addAthlete(Athlete ath) {
+        this.lesAthletes.add(ath);
     }
 
     /**
@@ -223,7 +232,7 @@ public class JeuxOlympiques {
         if (this == o){return true;}
         if (!(o instanceof JeuxOlympiques)){return false;}
         JeuxOlympiques jo = (JeuxOlympiques) o;
-        return this.annee == jo.getAnnee() && this.lesEpreuves.equals(jo.getEpreuves());
+        return this.annee == jo.getAnnee();
     }
 
     @Override
@@ -233,7 +242,7 @@ public class JeuxOlympiques {
      * @return un int représentant la valeur de hachage
      */
     public int hashCode(){
-        return (31 * this.annee * this.lesEpreuves.size()) / 17 ;
+        return (31 * this.annee) / 17 ;
     }
 
     @Override
@@ -245,6 +254,7 @@ public class JeuxOlympiques {
     public String toString() {
         return "Jeux Olympique de " + this.annee;
     }
+    
     /**
      * Permet de charger un fichier contenant des épreuves, athlètes/équipes.
      * @param chemin

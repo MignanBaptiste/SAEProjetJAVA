@@ -150,7 +150,7 @@ public class Equipe implements Participant{
         if (this == o){return true;}
         if (!(o instanceof Equipe)){return false;}
         Equipe e = (Equipe) o;
-        return this.pays.equals(e.getPays()) && this.sport.equals(e.getSport());
+        return this.pays.equals(e.getPays()) && this.sport.equals(e.getSport()) && this.athletes.equals(e.getAthletes());
     }
 
     @Override
