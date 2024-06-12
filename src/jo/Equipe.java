@@ -116,8 +116,8 @@ public class Equipe implements Participant{
         return this.sport;
     }
 
-    @SuppressWarnings("unchecked")
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    // @SuppressWarnings("unchecked") C'est quoi ?
+    // @SuppressWarnings({ "rawtypes", "unchecked" })
 
     @Override
     /**
