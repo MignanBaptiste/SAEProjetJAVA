@@ -1,6 +1,7 @@
 package jo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -168,42 +169,70 @@ public class JeuxOlympiques {
     public String toString() {
         return "Jeux Olympique de " + this.annee;
     }
-
-    //public void (String chemin)load_csv{
+    
+    public void load_csv(String chemin) throws InvalidTypeException{
         // Chargement d'un fichier CSV où chaque ligne est une liste
-        //List<List<String>> records = new ArrayList<>();
-        //try (BufferedReader br = new BufferedReader(new FileReader(chemin))) {
-            //String line;
-            //while ((line = br.readLine()) != null) {
-                //String[] values = line.split(",");
-                //records.add(Arrays.asList(values));
-    //}
-        //} catch (IOException e) {
-           // System.out.println("Fichier invalide");
-       //}
+        List<List<String>> records = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(chemin))) {
+            String line = br.readLine();
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                records.add(Arrays.asList(values));
+    }
+        } catch (IOException e) {
+            System.out.println("Fichier invalide");
+        }
         // Création des instances de class
-      //  for (List<String> liste : records){
-      //      Sexe sexe;
-     //       if (liste.get(2).equals("homme")){
-      //          sexe = Sexe.HOMME;
-        //    }
-          //  else{
-              //  sexe = Sexe.FEMME;
-            //}
-        //    Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), 1, new Pays(liste.get(8)));
-        //}
-    //}
+        for (List<String> liste : records){
+            Sexe sexe;
+            if (liste.get(2).equals("homme")){
+                sexe = Sexe.HOMME;
+            }
+            else{
+                sexe = Sexe.FEMME;
+            }
+            Sport sport;
+            if (liste.get(4).contains("Athlétisme") || liste.get(4).contains("Athétisme")){
+                sport = new Athletisme(liste.get(4));
+            }
+            else if (liste.get(4).contains("Escrime")){
+                sport = new Escrime(liste.get(4));
+            }
+            else if (liste.get(4).contains("Handball")){
+                sport = new Handball(liste.get(4));
+            }
+            else if (liste.get(4).contains("Natation")){
+                sport = new Natation(liste.get(4));
+            }
+            else if (liste.get(4).contains("Volley-Ball")){
+                sport = new VolleyBall(liste.get(4));
+            }
+            else{
+                throw new InvalidTypeException();
+            }
+            Athlete ath = new Athlete(liste.get(0), liste.get(1), sexe, Integer.valueOf(liste.get(5)), Integer.valueOf(liste.get(6)), Integer.valueOf(liste.get(7)), new Pays(liste.get(4)));
+            // Si la catégorie de l'épreuve contient ces mots clés, c'est une épreuve collective
+            if (liste.get(4).contains("relais") || liste.get(4).contains("Handball") || liste.get(4).contains("Volley-Ball")){
+                Epreuve<Equipe> epv = new Epreuve<>(sexe, sport);
+                Equipe eqp = new Equipe(ath.getPays());
+                eqp.addAthlete(ath);
+                epv.addParticipant(eqp);
+                this.lesEpreuves.add(epv);
+            }
+            else{
+                Epreuve<Athlete> epv = new Epreuve<>(sexe, sport);
+                epv.addParticipant(ath);
+                this.lesEpreuves.add(epv);
+            }
+        }
+    }
+
 
     public void load_database(){
-
+        
     }
 
     public void save_database(){
 
     }
 }
-
-
-
-
-
