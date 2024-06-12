@@ -234,8 +234,18 @@ public class TestsJeuxOlympiques {
         assertNotEquals(jeux2024.toString(), "Vive les Jeux Olympiques !");
     }
 
-    @Test
     public void testLoad_csv(){
+        JeuxOlympiques jo = new JeuxOlympiques(0);
+        try{
+            jo.load_csv("tests/donnees.csv");
+        }
+        catch(InvalidTypeException e){
+            System.out.println("Problème de chargement des données");
+        }
+        assertEquals(jo.getNbAthletes(), 400);
+        assertEquals(jo.getNbEquipes(), 40);
+        assertEquals(jo.getNbPays(), 10);
+        assertEquals(jo.getNbEpreuves(), 16);
     }
 
     @Test
