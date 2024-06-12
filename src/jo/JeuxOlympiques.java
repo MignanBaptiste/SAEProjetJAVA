@@ -14,6 +14,9 @@ import java.util.HashMap;
 
 import java.util.List;
 
+import jo.exception.*;
+import jo.sport.*;
+
 // Classe représentant les Jeux Olympiques
 public class JeuxOlympiques {
 
