@@ -6,6 +6,7 @@ import java.util.List;
 import jo.exception.InvalidTypeException;
 import jo.sport.*;
 
+
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant{
     private final Pays pays; // Le pays auquel appartient l'équipe
@@ -116,6 +117,8 @@ public class Equipe implements Participant{
     }
 
     @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+
     @Override
     /**
      * Permet à l'équipe de participer à une épreuve en ajoutant l'équipe comme participant.

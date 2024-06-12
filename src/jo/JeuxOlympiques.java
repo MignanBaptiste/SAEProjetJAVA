@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet; 
-import java.util.List;
 
-import jo.exception.InvalidTypeException;
-import jo.sport.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import java.util.List;
 
 // Classe représentant les Jeux Olympiques
 public class JeuxOlympiques {

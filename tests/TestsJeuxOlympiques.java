@@ -116,7 +116,7 @@ public class TestsJeuxOlympiques {
         jeux2024.addEpreuve(ep1);
         assertEquals(1, jeux2024.getNbEpreuves());
     }
-
+  
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesParPays() {
