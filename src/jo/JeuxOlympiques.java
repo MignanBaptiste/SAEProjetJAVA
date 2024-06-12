@@ -331,7 +331,7 @@ public class JeuxOlympiques {
     // Besoin d'une méthode pour faire la simulation des épreuves.
 
     public void simulation(){
-        // this.resetClassement();
+        this.resetClassement();
         for (Epreuve epv: this.lesEpreuves){
             List<Participant> classement = epv.classementEpv();
             if (classement.get(0) instanceof Athlete){
