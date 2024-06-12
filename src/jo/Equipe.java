@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
-import jo.sport.Sport;
 
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant{
@@ -105,6 +104,7 @@ public class Equipe implements Participant{
         return this.pays;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     /**
      * Permet à l'équipe de participer à une épreuve en ajoutant l'équipe comme participant.

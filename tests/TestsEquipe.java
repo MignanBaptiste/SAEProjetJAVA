@@ -81,6 +81,7 @@ public class TestsEquipe {
     @Test
     public void testParticiper(){
         Sport escrime = new Escrime("Escrime");
+        @SuppressWarnings("rawtypes")
         Epreuve epv1 = new Epreuve(Sexe.HOMME, escrime);
         equ1.participer(epv1);
         assertEquals(1, epv1.getParticipants().size());

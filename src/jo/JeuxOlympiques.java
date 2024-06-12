@@ -1,22 +1,15 @@
 package jo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-
-import jo.exception.InvalidTypeException;
-import jo.sport.*;
 
 // Classe représentant les Jeux Olympiques
 public class JeuxOlympiques {
 
     private int annee; // L'année des Jeux Olympiques
+    @SuppressWarnings("rawtypes")
     private List<Epreuve> lesEpreuves; // Liste des épreuves des Jeux Olympiques
 
     /**
@@ -43,6 +36,7 @@ public class JeuxOlympiques {
      * 
      * @return List<Epreuve> Liste de toutes les épreuves des Jeux Olympiques.
      */
+    @SuppressWarnings("rawtypes")
     public List<Epreuve> getEpreuves() {
         return this.lesEpreuves;
     }
@@ -52,7 +46,7 @@ public class JeuxOlympiques {
      * 
      * @param epv L'épreuve à ajouter.
      */
-    public void addEpreuve(Epreuve epv) {
+    public void addEpreuve(@SuppressWarnings("rawtypes") Epreuve epv) {
         this.lesEpreuves.add(epv);
     }
 
@@ -63,10 +57,10 @@ public class JeuxOlympiques {
      */
     public HashMap<Pays, Classement> medaillesParPays() {
         HashMap<Pays, Classement> res = new HashMap<>();
-        HashSet<Equipe> equipesTraitees = new HashSet<>();
         // Parcours de toutes les épreuves
-        for (Epreuve epv : this.lesEpreuves) {
+        for (@SuppressWarnings("rawtypes") Epreuve epv : this.lesEpreuves) {
             // Obtention de tous les participants de l'épreuve
+            @SuppressWarnings("unchecked")
             List<Participant> participants = epv.getParticipants();
             // Parcours de tous les participants
             for (Participant participant : participants) {
@@ -91,8 +85,9 @@ public class JeuxOlympiques {
         HashMap<Pays, Integer> medaillesOr = new HashMap<>();
         
         // Parcours de toutes les épreuves
-        for (Epreuve epv : this.lesEpreuves) {
+        for (@SuppressWarnings("rawtypes") Epreuve epv : this.lesEpreuves) {
             // Obtention de tous les participants de l'épreuve
+            @SuppressWarnings("unchecked")
             List<Participant> participants = epv.getParticipants();
             // Parcours de tous les participants
             for (Participant participant : participants) {
@@ -118,11 +113,11 @@ public class JeuxOlympiques {
     public List<Pays> medaillesTotales() {
         List<Pays> res = new ArrayList<>();
         HashMap<Pays, Integer> medaillesTotales = new HashMap<>();
-        HashSet<Equipe> equipesTraitees = new HashSet<>();
         
         // Parcours de toutes les épreuves
-        for (Epreuve epv : this.lesEpreuves) {
+        for (@SuppressWarnings("rawtypes") Epreuve epv : this.lesEpreuves) {
             // Obtention de tous les participants de l'épreuve
+            @SuppressWarnings("unchecked")
             List<Participant> participants = epv.getParticipants();
             // Parcours de tous les participants
             for (Participant participant : participants) {

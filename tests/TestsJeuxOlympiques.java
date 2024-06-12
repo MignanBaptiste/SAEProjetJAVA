@@ -37,6 +37,7 @@ public class TestsJeuxOlympiques {
         assertEquals(2024, jeux2024.getAnnee());
     }
 
+    @SuppressWarnings("rawtypes")
     @Test
     public void testAddEpreuve() {
         Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
@@ -46,6 +47,7 @@ public class TestsJeuxOlympiques {
         assertEquals(2, jeux2024.getEpreuves().size());
     }
 
+    @SuppressWarnings("rawtypes")
     @Test
     public void testGetEpreuve() {
         Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
@@ -54,6 +56,7 @@ public class TestsJeuxOlympiques {
         assertEquals(ep1, epreuves.get(0));
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesParPays() {
         // Création d'épreuves
@@ -84,6 +87,7 @@ public class TestsJeuxOlympiques {
         assertEquals(1, medailles.get(usa).getBronze());
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesOr() {
         // Création d'épreuves
@@ -109,6 +113,7 @@ public class TestsJeuxOlympiques {
         assertEquals(usa, medaillesOr.get(1));
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public void testMedaillesTotales() {
         // Création d'épreuves
