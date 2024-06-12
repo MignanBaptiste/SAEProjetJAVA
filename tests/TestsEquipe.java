@@ -17,7 +17,7 @@ public class TestsEquipe {
         france = new Pays("France");
         ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
         ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
-        equ1 = new Equipe(france);
+        equ1 = new Equipe(new VolleyBall(null), france);
     }
 
     /** On veut pouvoir créer une nouvelle équipe  */

@@ -22,8 +22,8 @@ public class TestsJeuxOlympiques {
         jeux2024 = new JeuxOlympiques(2024);
         france = new Pays("France");
         usa = new Pays("USA");
-        equipeFrance = new Equipe(france);
-        equipeUSA = new Equipe(usa);
+        equipeFrance = new Equipe(new VolleyBall(null), france);
+        equipeUSA = new Equipe(new VolleyBall(null), usa);
         athletisme = new Athletisme("Athlétisme");
     }
 

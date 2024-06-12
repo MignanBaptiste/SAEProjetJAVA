@@ -4,20 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jo.exception.InvalidTypeException;
+import jo.sport.*;
 
 // Classe représentant une équipe participant à une compétition
 public class Equipe implements Participant{
     private final Pays pays; // Le pays auquel appartient l'équipe
+    private final Sport sport;
     private List<Athlete> athletes; // La liste des athlètes de l'équipe
     
 
     /**
-     * Création d'une nouvelle équipe avec un nom, un pays et une liste d'athlètes.
+     * Création d'une nouvelle équipe avec un sport, un pays et une liste d'athlètes.
      * @param nomEquipe Le nom de l'équipe.
      * @param pays Le pays auquel appartient l'équipe.
      */
-    public Equipe(Pays pays) {
+    public Equipe(Sport sport, Pays pays) {
         this.pays = pays;
+        this.sport = sport;
         this.athletes = new ArrayList<>();
     }
 
@@ -104,13 +107,21 @@ public class Equipe implements Participant{
         return this.pays;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    /**
+     * Renvoie le sport auquel va participer l'équipe
+     * @return
+     */
+    public Sport getSport(){
+        return this.sport;
+    }
+
+    @SuppressWarnings("unchecked")
     @Override
     /**
      * Permet à l'équipe de participer à une épreuve en ajoutant l'équipe comme participant.
      * @param epreuve L'épreuve à laquelle l'équipe participe.
      */
-    public void participer(Epreuve epreuve) {
+    public void participer(@SuppressWarnings("rawtypes") Epreuve epreuve) {
         try {
             epreuve.addParticipant(this);
         } catch (InvalidTypeException e) {
@@ -124,7 +135,7 @@ public class Equipe implements Participant{
      */
     @Override
     public String toString() {
-        return "Cette équipe représente le pays suivant : " + pays.getNom();
+        return "Cette équipe représente le pays suivant : " + pays.getNom() + " en " + this.sport.getCategorie();
     }
 
     @Override
@@ -139,7 +150,7 @@ public class Equipe implements Participant{
         if (this == o){return true;}
         if (!(o instanceof Equipe)){return false;}
         Equipe e = (Equipe) o;
-        return this.pays.equals(e.getPays()) && this.athletes.equals(e.getAthletes());
+        return this.pays.equals(e.getPays()) && this.sport.equals(e.getSport());
     }
 
     @Override
@@ -149,7 +160,7 @@ public class Equipe implements Participant{
      * @return un int représentant la valeur de hachage
      */
     public int hashCode(){
-        return (31 * this.pays.hashCode() * this.athletes.size()) / 17 ;
+        return 31 * this.pays.hashCode() * this.sport.hashCode()/ 17 ;
     }
 }
 
