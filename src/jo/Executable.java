@@ -45,6 +45,7 @@ public class Executable {
                         System.out.println("# Que voulez-vous savoir ? (écrivez simplement la première lettre) #");
                         System.out.println("# E - les Epreuves                                                 #");
                         System.out.println("# A - les Athlètes                                                 #");
+                        System.out.println("# U - les Equipes                                                  #");
                         System.out.println("# P - les Pays                                                     #");
                         System.out.println("# Q - Quitter                                                      #");
                         System.out.println("####################################################################");
@@ -59,12 +60,12 @@ public class Executable {
                     quitter = false;
                 }
             }
-            else if (entrer.equals("M")){
+            else if (entrer.equals("M")){ // Potentielement à retirer au vue de la complexité.
                 System.out.println("NE MARCHE PAS POUR LE MOMENT");
             }
 
             // Simulation des épreuves.
-            else if (entrer.equals("S")){
+            else if (entrer.equals("S")){ // A priorisé
                 // ...
                 System.out.println("NE MARCHE PAS POUR LE MOMENT");
                 System.out.println("Les épreuves se sont bien déroulés.");
@@ -76,7 +77,7 @@ public class Executable {
             }
 
             // Récupérer les médailles pour les pays.
-            else if (entrer.equals("A")){
+            else if (entrer.equals("A")){ // A priorisé
                 System.out.println("NE MARCHE PAS POUR LE MOMENT");
             }
 
