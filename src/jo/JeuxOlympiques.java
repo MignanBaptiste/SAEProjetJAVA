@@ -132,18 +132,22 @@ public class JeuxOlympiques {
     public HashMap<Pays, Classement> medaillesParPays() {
         HashMap<Pays, Classement> res = new HashMap<>();
         // Parcours de toutes les épreuves
-        for (Epreuve epv : this.lesEpreuves) {
-            // Obtention de tous les participants de l'épreuve
-            List<Participant> participants = epv.getParticipants();
-            // Parcours de tous les participants
-            for (Participant participant : participants) {
-                Pays p = participant.getPays();
-                Classement c = p.getClassement();
-                if (!(res.containsKey(p))){
-                    res.put(p, c);
-                }
-            }
+        // for (Epreuve epv : this.lesEpreuves) {
+        //     // Obtention de tous les participants de l'épreuve
+        //     List<Participant> participants = epv.getParticipants();
+        //     // Parcours de tous les participants
+        //     for (Participant participant : participants) {
+        //         Pays p = participant.getPays();
+        //         Classement c = p.getClassement();
+        //         if (!(res.containsKey(p))){
+        //             res.put(p, c);
+        //         }
+        //     }
+        // }
+        for (Pays pays : this.getPays()){
+            res.put(pays, pays.getClassement());
         }
+
         return res;
     }
 
@@ -323,7 +327,19 @@ public class JeuxOlympiques {
 
     public void simulation(){
         this.resetClassement();
-        
+        for (Epreuve epv: this.lesEpreuves){
+            List<Participant> classement = epv.classementEpv();
+            if (classement.get(0) instanceof Athlete){
+                classement.get(0).getPays().getClassement().addOr();
+                classement.get(1).getPays().getClassement().addArgent();
+                classement.get(2).getPays().getClassement().addBronze();
+            }
+            else if(classement.get(0) instanceof Equipe){
+                classement.get(0).getPays().getClassement().addOr();
+                classement.get(1).getPays().getClassement().addArgent();
+                classement.get(2).getPays().getClassement().addBronze();
+            }
+        }
     }
 
     public void resetClassement(){
