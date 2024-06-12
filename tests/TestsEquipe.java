@@ -3,11 +3,13 @@ import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Arrays;
 
 public class TestsEquipe {
     private Pays france;
+    private VolleyBall v;
     private Athlete ath1;
     private Athlete ath2;
     private Equipe equ1;
@@ -15,15 +17,28 @@ public class TestsEquipe {
     @Before
     public void setUp() {
         france = new Pays("France");
+        v = new VolleyBall("Volley");
         ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
         ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
-        equ1 = new Equipe(france);
+        equ1 = new Equipe(v, france);
     }
 
     /** On veut pouvoir créer une nouvelle équipe  */
     @Test
     public void testEquipe(){
         assertNotNull(equ1);
+    }
+
+    /** On veut obtenir l'équipe */
+    @Test
+    public void testGetEquipe(){
+        assertEquals(equ1, equ1.getEquipe());
+    }
+
+    /** On veut obtenir le sport de l'équipe */
+    @Test
+    public void testGetSportEquipe(){
+        assertEquals(v, equ1.getSport());
     }
 
     /** On veut obtenir le nom de l'équipe */
@@ -85,5 +100,31 @@ public class TestsEquipe {
         Epreuve epv1 = new Epreuve(Sexe.HOMME, escrime);
         equ1.participer(epv1);
         assertEquals(1, epv1.getParticipants().size());
+    }
+
+    // Test pour la méthode equals
+    @Test
+    public void testEquals() {
+        Equipe equ2 = new Equipe(v, france);
+        Equipe equ3 = new Equipe(v, france);
+        equ1.addAthlete(ath1);
+        equ2.addAthlete(ath2);
+        equ3.addAthlete(ath2);
+        assertNotEquals(equ1, equ2);
+        assertEquals(equ2, equ3);
+    }
+
+    // Test pour la méthode hashCode
+    @Test
+    public void testHashCode() {
+        assertEquals(equ1.hashCode(), (31*france.hashCode()*v.hashCode())/17);
+        assertNotEquals(equ1.hashCode(), 58);
+    }
+
+    // Test pour la méthode toString
+    @Test
+    public void testToString() {
+        assertEquals(equ1.toString(), "Cette équipe représente le pays suivant : France en Volley");
+        assertNotEquals(equ1.toString(), "Voici une équipe de volley");
     }
 }

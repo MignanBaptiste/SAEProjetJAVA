@@ -28,6 +28,7 @@ replay_pid*
 
 # répertoire
 bin
+out
 doc
 report
 

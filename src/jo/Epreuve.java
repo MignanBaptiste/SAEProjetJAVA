@@ -76,13 +76,6 @@ public class Epreuve<T extends Participant>{
             score += participant.getEndurance() * this.sport.getCoeffEndurance();
             res.put(participant, score);
         }
-        List<T> participantsTri = new ArrayList<>(this.participants);
-        participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); //tri par ordre décroissant du nombre de points
-        participantsTri.get(0).getEquipe().getPays().getClassement().addOr(1); //on ajoute pour les 3 premiers une médaille
-        if (participantsTri.size() == 2) {participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);}
-        else if (participantsTri.size() >= 3) {
-            participantsTri.get(1).getEquipe().getPays().getClassement().addArgent(1);
-            participantsTri.get(2).getEquipe().getPays().getClassement().addBronze(1);} 
         return res;
     }
 
@@ -103,7 +96,12 @@ public class Epreuve<T extends Participant>{
      * @return Représentation sous forme de chaîne.
      */
     public String toString() {
-        return "Epreuve de " + this.sport.getCategorie();
+        if (this.sexe.equals(Sexe.FEMME)){
+            return "Epreuve de " + this.sport.getCategorie() + " Féminin";
+        }
+        else{
+            return "Epreuve de " + this.sport.getCategorie() + " Masculin";
+        }
     }
 
     @Override
@@ -118,7 +116,7 @@ public class Epreuve<T extends Participant>{
         if (this == o){return true;}
         if (!(o instanceof Epreuve)){return false;}
         Epreuve<?> e = (Epreuve<?>) o;
-        return this.sport.equals(e.getSport()) && this.participants.equals(e.getParticipants());
+        return this.sport.equals(e.getSport()) && this.participants.equals(e.getParticipants()) && this.sexe.equals(e.getSexe());
     }
 
     @Override
@@ -128,6 +126,6 @@ public class Epreuve<T extends Participant>{
      * @return un int représentant la valeur de hachage
      */
     public int hashCode(){
-        return (31 * this.sport.hashCode() * this.participants.size()) / 17 ;
+        return (31 * this.sport.hashCode() * this.sexe.hashCode()) / 17 ;
     }
 }

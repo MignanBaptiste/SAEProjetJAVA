@@ -1,7 +1,10 @@
 import jo.*;
+import jo.sport.VolleyBall;
+
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Arrays;
 
@@ -15,8 +18,8 @@ public class TestsPays {
     @Before
     public void setUp() {
         france = new Pays("France");
-        equ1 = new Equipe(france);
-        equ2 = new Equipe(france);
+        equ1 = new Equipe(new VolleyBall(null), france);
+        equ2 = new Equipe(new VolleyBall(null), france);
         ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
         ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
     }
@@ -81,5 +84,22 @@ public class TestsPays {
         assertEquals(2, classementApres.getOr());
         assertEquals(1, classementApres.getArgent());
         assertEquals(3, classementApres.getBronze());
+    }
+
+    // Test pour la méthode equals
+    @Test
+    public void testEquals() {
+        Pays france2 = new Pays("France");
+        Pays italie = new Pays("Italie");
+        assertEquals(france, france2);
+        assertNotEquals(france, italie);
+    }
+
+    // Test pour la méthode toString
+    @Test
+    public void testToString() {
+        Pays italie = new Pays("Italie");
+        assertEquals(france.toString(), "Pays : France");
+        assertEquals(italie.toString(), "Pays : Italie");
     }
 }

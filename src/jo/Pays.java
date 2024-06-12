@@ -53,6 +53,13 @@ public class Pays {
     public Classement getClassement(){
         return this.classement;
     }
+
+    /** 
+     * Met le nombre de médaille du pays à zéro
+    */
+    public void resetClassement(){
+        this.classement = new Classement();
+    }
     
     /**
      * Permet d'ajouter une équipe à la liste d'équipes du pays.
@@ -76,7 +83,7 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "" + this.nomPays;
+        return "Pays : " + this.nomPays;
     }
 
     @Override
