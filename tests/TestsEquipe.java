@@ -1,4 +1,6 @@
 import jo.*;
+import jo.exception.AlreadyInException;
+import jo.exception.InvalidSexeException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
@@ -56,39 +58,61 @@ public class TestsEquipe {
     /** On veut obtenir la force totale de l'équipe */
     @Test
     public void testGetForce(){
-        equ1.addAthlete(ath1);
-        equ1.addAthlete(ath2);
+        
+        try {
+            equ1.addAthlete(ath1);
+            equ1.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion exception
+        }
         assertEquals(145, equ1.getForce());
     }
 
     /** On veut obtenir l'agilité' totale de l'équipe */
     @Test
     public void testGetAgilite(){
-        equ1.addAthlete(ath1);
-        equ1.addAthlete(ath2);
+        try {
+            equ1.addAthlete(ath1);
+            equ1.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion exception
+        }
+        
         assertEquals(154, equ1.getAgilite());
     }
 
     /** On veut obtenir l'endurance totale de l'équipe */
     @Test
     public void testGetEndurance(){
-        equ1.addAthlete(ath1);
-        equ1.addAthlete(ath2);
+        try {
+            equ1.addAthlete(ath1);
+            equ1.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion exception
+        }
         assertEquals(131, equ1.getEndurance());
     }
 
     /** On veut pouvoir ajouter un athlète à l'équipe */
     @Test
     public void testAddAthletes(){
-        equ1.addAthlete(new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france));
+        try {
+            equ1.addAthlete(new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france));
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion exception
+        }
         assertEquals(1, equ1.getAthletes().size());
     }
 
     /** On veut obtenir les athlètes de l'équipe */
     @Test
     public void testGetAthletes(){
-        equ1.addAthlete(ath1);
-        equ1.addAthlete(ath2);
+        try {
+            equ1.addAthlete(ath1);
+            equ1.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion exception
+        }
         assertEquals(Arrays.asList(ath1, ath2), equ1.getAthletes());
     }
 
@@ -98,6 +122,11 @@ public class TestsEquipe {
         Sport escrime = new Escrime("Escrime");
         @SuppressWarnings("rawtypes")
         Epreuve epv1 = new Epreuve(Sexe.HOMME, escrime);
+        try {
+            equ1.addAthlete(ath1);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des exceptions
+        }
         equ1.participer(epv1);
         assertEquals(1, epv1.getParticipants().size());
     }
@@ -107,9 +136,13 @@ public class TestsEquipe {
     public void testEquals() {
         Equipe equ2 = new Equipe(v, new Pays("Suisse"));
         Equipe equ3 = new Equipe(v, new Pays("Suisse"));
-        equ1.addAthlete(ath1);
-        equ2.addAthlete(ath2);
-        equ3.addAthlete(ath2);
+        try {
+            equ1.addAthlete(ath1);
+            equ2.addAthlete(ath2);
+            equ3.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion exception
+        }
         assertNotEquals(equ1, equ2);
         assertEquals(equ2, equ3);
     }

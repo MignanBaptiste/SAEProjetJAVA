@@ -2,8 +2,9 @@ package jo.exception;
 
 public class AlreadyInException extends Exception{
 
-    public AlreadyInException(){
+    public AlreadyInException(String texte){
         super();
+        System.out.println(texte);
     }
     
 }

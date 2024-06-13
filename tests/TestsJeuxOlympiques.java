@@ -1,4 +1,6 @@
 import jo.*;
+import jo.exception.AlreadyInException;
+import jo.exception.InvalidSexeException;
 import jo.exception.InvalidTypeException;
 import jo.sport.*;
 import org.junit.*;
@@ -6,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
 
 public class TestsJeuxOlympiques {
@@ -99,12 +101,20 @@ public class TestsJeuxOlympiques {
         // Ajout des épreuves
         jeux2024.addEpreuve(ep1);
         jeux2024.addEpreuve(ep2);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        try {
+            equipeFrance.addAthlete(ath1);
+            equipeUSA.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des erreurs
+        }
         // Ajout des équipes aux épreuves
         try {
             ep1.addParticipant(equipeFrance);
             ep1.addParticipant(equipeUSA);
             ep2.addParticipant(equipeFrance);
-        } catch (InvalidTypeException e) {
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
             e.printStackTrace();
         }
         // Ajout des résultats (pour simuler)
@@ -125,12 +135,21 @@ public class TestsJeuxOlympiques {
         // Ajout des épreuves
         jeux2024.addEpreuve(ep1);
         jeux2024.addEpreuve(ep2);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        try {
+            equipeFrance.addAthlete(ath1);
+            equipeUSA.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des erreurs
+        }
+        
         // Ajout des équipes aux épreuves
         try {
             ep1.addParticipant(equipeFrance);
             ep1.addParticipant(equipeUSA);
             ep2.addParticipant(equipeFrance);
-        } catch (InvalidTypeException e) {
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
             e.printStackTrace();
         }
         // Ajout des résultats (pour simuler)

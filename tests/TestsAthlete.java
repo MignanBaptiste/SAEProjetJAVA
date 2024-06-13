@@ -1,4 +1,6 @@
 import jo.*;
+import jo.exception.AlreadyInException;
+import jo.exception.InvalidSexeException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -34,9 +36,14 @@ public class TestsAthlete {
     public void testGetEquipe() {
         Equipe equipe1 = new Equipe(new VolleyBall("Volley"), france);
         Equipe equipe2 = new Equipe(new VolleyBall("Volley"), france);
-        equipe1.addAthlete(ath1);
-        equipe1.addAthlete(ath2);
-        equipe2.addAthlete(ath3);
+        
+        try {
+            equipe1.addAthlete(ath1);
+            equipe1.addAthlete(ath2);
+            equipe2.addAthlete(ath3);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des exceptions
+        }
         assertEquals(ath1.getEquipe(), equipe1);
         assertEquals(ath2.getEquipe(), equipe1);
         assertEquals(ath3.getEquipe(), equipe2);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import jo.exception.InvalidTypeException;
+import jo.exception.*;
 import jo.sport.Sport;
 
 /** Class permettant de créer une épreuve ayant des participants */
@@ -40,7 +40,16 @@ public class Epreuve<T extends Participant>{
      * Permet d'ajouter un participant à une épreuve.
      * @param participant Le participant à ajouter.
      */
-    public void addParticipant(T participant) throws InvalidTypeException {
+    public void addParticipant(T participant) throws InvalidTypeException, InvalidSexeException, AlreadyInException {
+        if(this.sexe != participant.getSexe()){
+            if(this.sexe.equals(Sexe.HOMME)){
+                throw new InvalidSexeException("Cette épreuve est une épreuve Masculine");
+            }
+            throw new InvalidSexeException("Cette épreuve est une épreuve Féminine");
+        }
+        if (this.participants.contains(participant)){
+            throw new AlreadyInException("Déjà ajouté à l'épreuve");
+        }
         if(!(this.participants.isEmpty())){
             if(participant instanceof Athlete && participants.get(0) instanceof Athlete){
                 this.participants.add(participant);
@@ -49,7 +58,12 @@ public class Epreuve<T extends Participant>{
                 this.participants.add(participant);
             }
             else{
-                throw new InvalidTypeException();
+                if(participant instanceof Athlete){
+                    throw new InvalidTypeException("Vous ne pouvez pas ajouter un athlète dans une épreuve constituée d'équipes");
+                }
+                else {
+                    throw new InvalidTypeException("Vous ne pouvez pas ajouter une équipe dans une épreuve constituée d'athlète");
+                }
             }
         } // Ces 2 tests permettent de créer des épreuves constituées uniquement d'équipe ou uniquement d'athlete
         else if(this.participants.isEmpty()){
@@ -67,7 +81,9 @@ public class Epreuve<T extends Participant>{
      * Renvoie le résultat de l'épreuve.
      * @return HashMap<T, Integer> Le résultat de l'épreuve.
      */
-    public HashMap<T, Integer> resultats(){
+    public HashMap<T, Integer> resultats() throws NothingInException {
+        if(this.participants.isEmpty()){
+            throw new NothingInException("Il n'y a pas de participants pour cette épreuve");}
         HashMap<T, Integer> res = new HashMap<>();
         for(T participant: this.participants){
             int score = 0;
@@ -84,10 +100,15 @@ public class Epreuve<T extends Participant>{
      * @return List<T> Le classement de l'épreuve.
      */
     public List<T> classementEpv(){
-        HashMap<T, Integer> res = this.resultats();
-        List<T> participantsTri = new ArrayList<>(this.participants);
-        participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); // Tri par ordre décroissant des scores
-        return participantsTri;
+        try {
+            HashMap<T, Integer> res = this.resultats();
+            List<T> participantsTri = new ArrayList<>(this.participants);
+            participantsTri.sort((p1, p2) -> res.get(p2).compareTo(res.get(p1))); // Tri par ordre décroissant des scores
+            return participantsTri;
+        } catch (NothingInException e) {
+            System.out.println("Il n'y a pas de participants pour cette épreuve");
+        }
+    return null;
     }
 
     @Override

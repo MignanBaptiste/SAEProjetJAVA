@@ -3,6 +3,8 @@ package jo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jo.exception.AlreadyInException;
+import jo.exception.InvalidSexeException;
 import jo.exception.InvalidTypeException;
 import jo.sport.*;
 
@@ -12,6 +14,7 @@ public class Equipe implements Participant{
     private final Pays pays; // Le pays auquel appartient l'équipe
     private final Sport sport;
     private List<Athlete> athletes; // La liste des athlètes de l'équipe
+    private Sexe sexe;
     
 
     /**
@@ -34,10 +37,30 @@ public class Equipe implements Participant{
     }
 
     /**
+     * Renvoie le sexe de l'équipe.
+     * @return Sexe de l'athlète.
+     */
+    public Sexe getSexe() {
+        return this.sexe;
+    }
+
+    /**
      * Ajoute un athlète à l'équipe et ajoute l'équipe à l'athlète.
      * @param ath L'athlète à ajouter.
      */
-    public void addAthlete(Athlete ath) {
+    public void addAthlete(Athlete ath) throws InvalidSexeException, AlreadyInException{
+        if (this.athletes.isEmpty()){
+            this.sexe = ath.getSexe();
+        }
+        if(this.athletes.contains(ath)){
+            throw new AlreadyInException("Athlète déjà dans l'équipe");
+        }
+        else if(this.sexe != ath.getSexe()){
+            if(this.sexe.equals(Sexe.HOMME)){
+                throw new InvalidSexeException("Cette équipe est une épreuve Masculine");
+            }
+            throw new InvalidSexeException("Cette équipe est une épreuve Féminine");
+        }
         this.athletes.add(ath);
         ath.ajoutEquipe(this);
     }
@@ -129,6 +152,12 @@ public class Equipe implements Participant{
         try {
             epreuve.addParticipant(this);
         } catch (InvalidTypeException e) {
+            System.out.println("Impossible de participer à cette épreuve.");
+        }
+        catch (InvalidSexeException e2){
+            System.out.println("Impossible de participer à cette épreuve.");
+        }
+        catch (AlreadyInException e3){
             System.out.println("Impossible de participer à cette épreuve.");
         }
     }

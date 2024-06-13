@@ -9,6 +9,12 @@ public interface Participant {
      * @param epv L'épreuve à laquelle le participant va participer
      */
     public void participer(@SuppressWarnings("rawtypes") Epreuve epv);
+
+    /**
+     * Renvoie le sexe d'un participant
+     * @return Le sexe du participant
+     */
+    public Sexe getSexe();
     
     /**
      * Renvoie le nom d'un participant
