@@ -99,7 +99,7 @@ public class TestsPays {
     @Test
     public void testToString() {
         Pays italie = new Pays("Italie");
-        assertEquals(france.toString(), "Pays : France");
-        assertEquals(italie.toString(), "Pays : Italie");
+        assertEquals(france.toString(), "France");
+        assertEquals(italie.toString(), "Italie");
     }
 }

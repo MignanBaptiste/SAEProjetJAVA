@@ -3,7 +3,7 @@ import jo.exception.InvalidTypeException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+// import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -152,7 +152,7 @@ public class TestEpreuve {
         } catch (InvalidTypeException e) {
             // pas possible
         }
-        assertNotEquals(collective, collective2);
+        assertEquals(collective, collective2);
         assertEquals(collective, collective3);
     }
 

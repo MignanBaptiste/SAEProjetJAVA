@@ -119,6 +119,7 @@ public class Equipe implements Participant{
     // @SuppressWarnings("unchecked") C'est quoi ?
     // @SuppressWarnings({ "rawtypes", "unchecked" })
 
+    @SuppressWarnings("unchecked")
     @Override
     /**
      * Permet à l'équipe de participer à une épreuve en ajoutant l'équipe comme participant.

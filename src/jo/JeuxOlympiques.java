@@ -8,10 +8,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet; 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 import java.util.List;
 
 
@@ -325,7 +321,6 @@ public class JeuxOlympiques {
                     epv = this.lesEpreuves.get(this.lesEpreuves.indexOf(epv));
                 }
                 else{
-                    System.out.println(epv);
                     this.lesEpreuves.add(epv);
                 }
                 Equipe eqp = new Equipe(sport, ath.getPays());
@@ -358,13 +353,11 @@ public class JeuxOlympiques {
             @SuppressWarnings("unchecked")
             List<Participant> classement = epv.classementEpv();
             if (classement.get(0) instanceof Athlete){
-                System.out.println(classement.get(0).getPays());
                 classement.get(0).getPays().getClassement().addOr();
                 classement.get(1).getPays().getClassement().addArgent();
                 classement.get(2).getPays().getClassement().addBronze();
             }
             else if(classement.get(0) instanceof Equipe){
-                System.out.println(classement.get(0).getPays());
                 classement.get(0).getPays().getClassement().addOr();
                 classement.get(1).getPays().getClassement().addArgent();
                 classement.get(2).getPays().getClassement().addBronze();

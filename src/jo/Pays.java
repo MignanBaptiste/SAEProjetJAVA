@@ -83,7 +83,7 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "Pays : " + this.nomPays;
+        return this.nomPays;
     }
 
     @Override

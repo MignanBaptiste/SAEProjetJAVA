@@ -105,8 +105,8 @@ public class TestsEquipe {
     // Test pour la méthode equals
     @Test
     public void testEquals() {
-        Equipe equ2 = new Equipe(v, france);
-        Equipe equ3 = new Equipe(v, france);
+        Equipe equ2 = new Equipe(v, new Pays("Suisse"));
+        Equipe equ3 = new Equipe(v, new Pays("Suisse"));
         equ1.addAthlete(ath1);
         equ2.addAthlete(ath2);
         equ3.addAthlete(ath2);
