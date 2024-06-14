@@ -6,4 +6,3 @@ Reste à faire:
 - charger une base de données (pour la semaine prochaine)
 - finir le diaporama (pour la semaine prochaine)
 - répartir les slides entre les membres (pour la semaine prochaine)
-- changer le diagramme de séquence et classe
