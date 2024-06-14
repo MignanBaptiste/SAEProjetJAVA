@@ -146,23 +146,9 @@ public class JeuxOlympiques {
      */
     public HashMap<Pays, Classement> medaillesParPays() {
         HashMap<Pays, Classement> res = new HashMap<>();
-        // Parcours de toutes les épreuves
-        // for (Epreuve epv : this.lesEpreuves) {
-        //     // Obtention de tous les participants de l'épreuve
-        //     List<Participant> participants = epv.getParticipants();
-        //     // Parcours de tous les participants
-        //     for (Participant participant : participants) {
-        //         Pays p = participant.getPays();
-        //         Classement c = p.getClassement();
-        //         if (!(res.containsKey(p))){
-        //             res.put(p, c);
-        //         }
-        //     }
-        // }
         for (Pays pays : this.getPays()){
             res.put(pays, pays.getClassement());
         }
-
         return res;
     }
 
@@ -306,7 +292,7 @@ public class JeuxOlympiques {
                 sport = new VolleyBall(liste.get(4));
             }
             else{
-                throw new InvalidTypeException();
+                throw new InvalidTypeException("Sport inconnu");
             }
             Pays pays = new Pays(liste.get(3));
             if (this.getPays().contains(pays)){
@@ -328,9 +314,17 @@ public class JeuxOlympiques {
                     eqp = epv.getParticipants().get(epv.getParticipants().indexOf(eqp));
                 }
                 else{
-                    epv.addParticipant(eqp);
+                    try {
+                        epv.addParticipant(eqp);
+                    } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
+                        System.out.println("Pas possible d'ajouter l'équipe " + eqp.toString() + " à l'épreuve" + epv.toString());
+                    }
                 }
-                eqp.addAthlete(ath);
+                try {
+                    eqp.addAthlete(ath);
+                } catch (InvalidSexeException | AlreadyInException e) {
+                    System.out.println("Pas possible d'ajouter l'athlète " + ath.toString() + " à l'équipe " + eqp.toString());
+                }
             }
             else{
                 Epreuve<Athlete> epv = new Epreuve<>(sexe, sport);
@@ -340,7 +334,11 @@ public class JeuxOlympiques {
                 else{
                     this.lesEpreuves.add(epv);
                 }
-                epv.addParticipant(ath);
+                try {
+                    epv.addParticipant(ath);
+                } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
+                    System.out.println("Pas possible d'ajouter l'athlète " + epv.toString() + " à l'épreuve " + epv.toString());
+                }
             }
         }
     }

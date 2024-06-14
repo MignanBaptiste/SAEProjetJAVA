@@ -1,5 +1,8 @@
 import jo.*;
+import jo.exception.AlreadyInException;
+import jo.exception.InvalidSexeException;
 import jo.exception.InvalidTypeException;
+import jo.exception.NothingInException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
@@ -41,7 +44,7 @@ public class TestEpreuve {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         try {
             individuelle.addParticipant(ath1);
-        } catch (InvalidTypeException e) {
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
             // gestion de l'exception
         }
         assertEquals(1, individuelle.getParticipants().size());
@@ -52,10 +55,16 @@ public class TestEpreuve {
     @Test
     public void testAddParticipantEquipe() {
         Pays france = new Pays("France");
-        Equipe equipe = new Equipe(new VolleyBall(null), france);
+        Equipe equipe = new Equipe(new VolleyBall("Volley"), france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.FEMME, 56, 87, 78, france);
+        try {
+            equipe.addAthlete(ath1);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion de l'exception
+        }
         try {
             collective.addParticipant(equipe);
-        } catch (InvalidTypeException e) {
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
             // gestion de l'exception
         }
         assertEquals(1, collective.getParticipants().size());
@@ -70,9 +79,13 @@ public class TestEpreuve {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
         Equipe equipe1 = new Equipe(volleyBall, france);
-        equipe1.addAthlete(ath1);
-        equipe1.addAthlete(ath2);
-        collective.addParticipant(equipe1);
+        try {
+            equipe1.addAthlete(ath1);
+            equipe1.addAthlete(ath2);
+            collective.addParticipant(equipe1);
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
+            // gestion de l'exception
+            }
         
         // Calcul manuel des scores attendus
         int scoreAttendu = 0;
@@ -84,26 +97,33 @@ public class TestEpreuve {
         scoreAttendu += ath2.getEndurance() * volleyBall.getCoeffEndurance();
         
         // Vérification du résultat obtenu
+        try{
         HashMap<Equipe, Integer> resultats = collective.resultats();
         assertEquals(1, resultats.size());
         assertEquals((Integer)scoreAttendu, resultats.get(equipe1));
+        } catch (NothingInException e) {
+            // gestion de l'exception
+        }
     }
 
     /** Test du classement de l'épreuve */
     @Test
     public void testClassementEpreuve() {
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.FEMME, 56, 87, 78, france); 
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.FEMME, 89, 67, 53, france); 
         Equipe equipe = new Equipe(volleyBall, france);
-        equipe.addAthlete(ath1);
-        equipe.addAthlete(ath2);
         try {
-            collective.addParticipant(equipe);
-        } catch (InvalidTypeException e) {
+            equipe.addAthlete(ath1);
+            equipe.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
             // gestion de l'exception
         }
-        
+        try {
+            collective.addParticipant(equipe);
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
+            // gestion de l'exception
+        }
         // Vérification du classement
         assertEquals(1, collective.classementEpv().size());
         assertEquals(equipe, collective.classementEpv().get(0));
@@ -115,15 +135,21 @@ public class TestEpreuve {
         Pays france = new Pays("France");
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
         Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france); 
+        Athlete ath3 = new Athlete("Manaudou", "Florent", Sexe.FEMME, 56, 87, 78, france); 
+        Athlete ath4 = new Athlete("Riner", "Teddy", Sexe.FEMME, 89, 67, 53, france);
         Equipe equipe = new Equipe(new VolleyBall(null), france);
-        equipe.addAthlete(ath1);
-        equipe.addAthlete(ath2);
+        try {
+            equipe.addAthlete(ath3);
+            equipe.addAthlete(ath4);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion de l'exception
+        }
         try {
             individuelle.addParticipant(ath1);
             individuelle.addParticipant(ath2);
             collective.addParticipant(equipe);
 
-        } catch (InvalidTypeException e) {
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
             // gestion de l'exception
         }
 
@@ -138,18 +164,21 @@ public class TestEpreuve {
         Epreuve<Equipe> collective2 = new Epreuve<>(Sexe.FEMME, volleyBall);
         Epreuve<Equipe> collective3 = new Epreuve<>(Sexe.FEMME, volleyBall);
         Pays france = new Pays("France");
-        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france); 
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.FEMME, 56, 87, 78, france); 
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.FEMME, 89, 67, 53, france);
         Equipe equipe1 = new Equipe(volleyBall, france);
         Equipe equipe2 = new Equipe(volleyBall, france);
-        equipe1.addAthlete(ath1);
-        equipe2.addAthlete(ath2);
-        
+        try {
+            equipe1.addAthlete(ath1);
+            equipe2.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion de l'exception
+        }
         try {
             collective.addParticipant(equipe1);
             collective2.addParticipant(equipe2);
             collective3.addParticipant(equipe1);
-        } catch (InvalidTypeException e) {
+        } catch (InvalidTypeException | InvalidSexeException | AlreadyInException e) {
             // pas possible
         }
         assertEquals(collective, collective2);

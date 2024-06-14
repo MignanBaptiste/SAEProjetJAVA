@@ -1,5 +1,7 @@
 package jo;
 
+import jo.exception.AlreadyInException;
+import jo.exception.InvalidSexeException;
 import jo.exception.InvalidTypeException;
 
 /**
@@ -154,6 +156,12 @@ public class Athlete implements Participant {
         try {
             epreuve.addParticipant(this);
         } catch (InvalidTypeException e) {
+            System.out.println("Impossible de participer à cette épreuve.");
+        }
+        catch (InvalidSexeException e2){
+            System.out.println("Impossible de participer à cette épreuve.");
+        }
+        catch (AlreadyInException e3){
             System.out.println("Impossible de participer à cette épreuve.");
         }
     }
