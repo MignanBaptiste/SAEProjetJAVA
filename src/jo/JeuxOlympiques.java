@@ -245,7 +245,7 @@ public class JeuxOlympiques {
      * @return une chaîne de caractères représentant les attributs de l'objet
      */
     public String toString() {
-        return "Jeux Olympique de " + this.annee;
+        return "Jeux Olympiques de " + this.annee;
     }
     
     /**
