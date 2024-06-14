@@ -34,10 +34,10 @@ public class Executable {
             // récupération, saisie et modification des données
             if (entrer.equals("V")){
                 System.out.println("Il y a " + jo.getNbEpreuves() + " épreuves aux " + jo);
-                System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participe aux " + jo);
-                System.out.println("Il y a " + jo.getNbEquipes() + " équipe qui participe aux " + jo);
-                System.out.println("Il y a " + jo.getNbPays() + " pays qui participe aux " + jo);
-                System.out.println("Voulez-vous plus d'information ? Y/N");
+                System.out.println("Il y a " + jo.getNbAthletes() + " athlètes qui participent aux " + jo);
+                System.out.println("Il y a " + jo.getNbEquipes() + " équipes qui participent aux " + jo);
+                System.out.println("Il y a " + jo.getNbPays() + " pays qui participent aux " + jo);
+                System.out.println("Voulez-vous plus d'informations ? Y/N");
                 entrer = scanner.next();
                 entrer = entrer.toUpperCase();
                 if (entrer.equals("Y")){
@@ -89,7 +89,7 @@ public class Executable {
             // Simulation des épreuves.
             else if (entrer.equals("S")){
                 jo.simulation();
-                System.out.println("Les épreuves se sont bien déroulés.");
+                System.out.println("Les épreuves se sont bien déroulées.");
             }
 
             // Consultation statistiques des résultats selon divers critères.

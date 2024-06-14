@@ -10,12 +10,12 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-
-//import java.util.HashMap;
+import java.util.HashMap;
 
 import java.util.List;
 
 public class TestsJeuxOlympiques {
+    // Déclaration des variables nécessaires pour les tests
 
     private JeuxOlympiques jeux2024;
     private Pays france;
@@ -24,6 +24,7 @@ public class TestsJeuxOlympiques {
     private Equipe equipeUSA;
     private Athletisme athletisme;
 
+    // Méthode d'initialisation exécutée avant chaque test
     @Before
     public void setUp() {
         jeux2024 = new JeuxOlympiques(2024);
@@ -34,11 +35,13 @@ public class TestsJeuxOlympiques {
         athletisme = new Athletisme("Athlétisme");
     }
 
+    // Test pour vérifier l'instanciation correcte de JeuxOlympiques
     @Test
     public void testJeuxOlympiques() {
         assertNotNull(jeux2024);
     }
 
+    // Test pour vérifier la récupération des équipes
     @Test
     public void testGetEquipes() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -53,6 +56,7 @@ public class TestsJeuxOlympiques {
         assertEquals(jeux2024.getEquipes(), hs);
     }
 
+    // Test pour vérifier la récupération des pays
     @Test
     public void testGetPays() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -62,6 +66,7 @@ public class TestsJeuxOlympiques {
         assertEquals(jeux2024.getPays(), hs);
     }
 
+    // Test pour vérifier la récupération des athlètes
     @Test
     public void testGetAthlete() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -71,6 +76,7 @@ public class TestsJeuxOlympiques {
         assertEquals(jeux2024.getAthletes(), hs);
     }
 
+    // Test pour vérifier la récupération du nombre d'équipes
     @Test
     public void testGetNbEquipes() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -83,6 +89,7 @@ public class TestsJeuxOlympiques {
         assertEquals(jeux2024.getNbEquipes(), 1);
     }
 
+    // Test pour vérifier la récupération du nombre d'épreuves
     @SuppressWarnings("rawtypes")
     @Test
     public void testGetNbEpreuve() {
@@ -91,6 +98,7 @@ public class TestsJeuxOlympiques {
         assertEquals(1, jeux2024.getNbEpreuves());
     }
 
+    // Test pour vérifier la récupération du nombre de pays
     @Test
     public void testGetNbPays() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -98,6 +106,7 @@ public class TestsJeuxOlympiques {
         assertEquals(jeux2024.getNbPays(), 1);
     }
 
+    // Test pour vérifier la récupération du nombre d'athlète
     @Test
     public void testGetNbAthlete() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -105,11 +114,13 @@ public class TestsJeuxOlympiques {
         assertEquals(jeux2024.getNbAthletes(), 1);
     }
 
+    // Test pour vérifier la récupération de l'année des JO
     @Test
     public void testGetAnnee() {
         assertEquals(2024, jeux2024.getAnnee());
     }
 
+    // Test pour vérifier l'ajout des épreuves
     @SuppressWarnings("rawtypes")
     @Test
     public void testAddEpreuve() {
@@ -120,6 +131,7 @@ public class TestsJeuxOlympiques {
         assertEquals(2, jeux2024.getEpreuves().size());
     }
 
+    // Test pour vérifier la récupération des épreuves
     @SuppressWarnings("rawtypes")
     @Test
     public void testGetEpreuve() {
@@ -129,39 +141,53 @@ public class TestsJeuxOlympiques {
         assertEquals(ep1, epreuves.get(0));
     }
 
-    // @SuppressWarnings("unchecked")
-    // @Test
-    // public void testMedaillesParPays() {
-    //     // Création d'épreuves
-    //     @SuppressWarnings("rawtypes")
-    //     Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
-    //     @SuppressWarnings("rawtypes")
-    //     Epreuve ep2 = new Epreuve<>(Sexe.FEMME, athletisme);
-    //     // Ajout des épreuves
-    //     jeux2024.addEpreuve(ep1);
-    //     jeux2024.addEpreuve(ep2);
-    //     // Ajout des équipes aux épreuves
-    //     try {
-    //         ep1.addParticipant(equipeFrance);
-    //         ep1.addParticipant(equipeUSA);
-    //         ep2.addParticipant(equipeFrance);
-    //     } catch (InvalidTypeException e) {
-    //         e.printStackTrace();
-    //     }
-    //     // Ajout des résultats (pour simuler)
-    //     equipeFrance.getPays().getClassement().addOr(2);
-    //     equipeFrance.getPays().getClassement().addArgent(1);
-    //     equipeUSA.getPays().getClassement().addBronze(1);
-    //     // Vérification du nombre de médailles
-    //     HashMap<Pays, Classement> medailles = jeux2024.medaillesParPays();
-    //     assertEquals(2, medailles.get(france).getOr());
-    //     assertEquals(1, medailles.get(france).getArgent());
-    //     assertEquals(0, medailles.get(france).getBronze());
-    //     assertEquals(0, medailles.get(usa).getOr());
-    //     assertEquals(0, medailles.get(usa).getArgent());
-    //     assertEquals(1, medailles.get(usa).getBronze());
-    // }
+    // Test pour vérifier la méthode MedaillesParPays
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testMedaillesParPays() {
+        // Création d'épreuves
+        @SuppressWarnings("rawtypes")
+        Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
+        @SuppressWarnings("rawtypes")
+        Epreuve ep2 = new Epreuve<>(Sexe.HOMME, athletisme);
+        // Ajout des épreuves
+        jeux2024.addEpreuve(ep1);
+        jeux2024.addEpreuve(ep2);
+        //Ajout des athlètes
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, usa);
+        jeux2024.addAthlete(ath1);
+        jeux2024.addAthlete(ath2);
+        try {
+            equipeFrance.addAthlete(ath1);
+            equipeUSA.addAthlete(ath2);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des exceptions
+        }
+        // Ajout des équipes aux épreuves
+        try {
+            ep1.addParticipant(equipeFrance);
+            ep1.addParticipant(equipeUSA);
+            ep2.addParticipant(equipeFrance);
+        } catch (InvalidTypeException |InvalidSexeException | AlreadyInException e) {
+            e.printStackTrace();
+        }
 
+        // Ajout des résultats (pour simuler)
+        equipeFrance.getPays().getClassement().addOr(2);
+        equipeFrance.getPays().getClassement().addArgent(1);
+        equipeUSA.getPays().getClassement().addBronze(1);
+        // Vérification du nombre de médailles
+        HashMap<Pays, Classement> medailles = jeux2024.medaillesParPays();
+        assertEquals(2, medailles.get(france).getOr());
+        assertEquals(1, medailles.get(france).getArgent());
+        assertEquals(0, medailles.get(france).getBronze());
+        assertEquals(0, medailles.get(usa).getOr());
+        assertEquals(0, medailles.get(usa).getArgent());
+        assertEquals(1, medailles.get(usa).getBronze());
+    }
+
+    // Test pour vérifier la méthode MedaillesOr
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesOr() {
@@ -172,7 +198,7 @@ public class TestsJeuxOlympiques {
         jeux2024.addEpreuve(ep1);
         jeux2024.addEpreuve(ep2);
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, usa);
         try {
             equipeFrance.addAthlete(ath1);
             equipeUSA.addAthlete(ath2);
@@ -196,6 +222,7 @@ public class TestsJeuxOlympiques {
         assertEquals(usa, medaillesOr.get(1));
     }
 
+    // Test pour vérifier la méthode MedaillesTotales
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testMedaillesTotales() {
@@ -206,7 +233,7 @@ public class TestsJeuxOlympiques {
         jeux2024.addEpreuve(ep1);
         jeux2024.addEpreuve(ep2);
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
-        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, france);
+        Athlete ath2 = new Athlete("Riner", "Teddy", Sexe.HOMME, 89, 67, 53, usa);
         try {
             equipeFrance.addAthlete(ath1);
             equipeUSA.addAthlete(ath2);
@@ -232,6 +259,7 @@ public class TestsJeuxOlympiques {
         assertEquals(usa, medaillesTotales.get(1));
     }
 
+    // Test pour réinitialiser le classement des pays
     @Test
     public void testResetClassement() {
         Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
@@ -261,10 +289,11 @@ public class TestsJeuxOlympiques {
     // Test pour la méthode toString
     @Test
     public void testToString() {
-        assertEquals(jeux2024.toString(), "Jeux Olympique de 2024");
+        assertEquals(jeux2024.toString(), "Jeux Olympiques de 2024");
         assertNotEquals(jeux2024.toString(), "Vive les Jeux Olympiques !");
     }
 
+     // Test pour charger les données à partir d'un fichier CSV
     public void testLoad_csv(){
         JeuxOlympiques jo = new JeuxOlympiques(0);
         try{
@@ -279,6 +308,7 @@ public class TestsJeuxOlympiques {
         assertEquals(jo.getNbEpreuves(), 16);
     }
 
+    // Test pour la simulation des épreuves des jeux olympiques
     @Test
     public void testSimulation(){
     }

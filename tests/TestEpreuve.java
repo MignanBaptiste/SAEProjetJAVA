@@ -6,8 +6,6 @@ import jo.exception.NothingInException;
 import jo.sport.*;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import java.util.Arrays;
 import java.util.HashMap;
 
