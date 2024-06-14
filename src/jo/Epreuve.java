@@ -41,11 +41,19 @@ public class Epreuve<T extends Participant>{
      * @param participant Le participant à ajouter.
      */
     public void addParticipant(T participant) throws InvalidTypeException, InvalidSexeException, AlreadyInException {
-        if(this.sexe != participant.getSexe()){
-            if(this.sexe.equals(Sexe.HOMME)){
-                throw new InvalidSexeException("Cette épreuve est une épreuve Masculine");
+        if(participant.getSexe() != null){
+            if(this.sexe != participant.getSexe() && participant instanceof Athlete){
+                if(this.sexe.equals(Sexe.HOMME)){
+                    throw new InvalidSexeException("Cette épreuve est une épreuve Masculine (ath)");
+                }
+                throw new InvalidSexeException("Cette épreuve est une épreuve Féminine (ath)");
             }
-            throw new InvalidSexeException("Cette épreuve est une épreuve Féminine");
+            if(this.sexe != participant.getSexe() && participant instanceof Equipe){
+                if(this.sexe.equals(Sexe.HOMME)){
+                    throw new InvalidSexeException("Cette épreuve est une épreuve Masculine (epv)");
+                }
+                throw new InvalidSexeException("Cette épreuve est une épreuve Féminine (epv)");
+            }
         }
         if (this.participants.contains(participant)){
             throw new AlreadyInException("Déjà ajouté à l'épreuve");

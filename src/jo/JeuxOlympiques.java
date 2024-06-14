@@ -276,7 +276,7 @@ public class JeuxOlympiques {
                 sexe = Sexe.FEMME;
             }
             Sport sport;
-            if (liste.get(4).contains("Athlétisme") || liste.get(4).contains("Athétisme")){
+            if (liste.get(4).contains("Ath")){
                 sport = new Athletisme(liste.get(4));
             }
             else if (liste.get(4).contains("Escrime")){
@@ -292,7 +292,7 @@ public class JeuxOlympiques {
                 sport = new VolleyBall(liste.get(4));
             }
             else{
-                throw new InvalidTypeException("Sport inconnu");
+                throw new InvalidTypeException(liste.get(4) + " n'est pas considéré comme un sport");
             }
             Pays pays = new Pays(liste.get(3));
             if (this.getPays().contains(pays)){

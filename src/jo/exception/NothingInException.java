@@ -6,5 +6,9 @@ public class NothingInException extends Exception{
         super();
         System.out.println(texte);
     }
+
+    public NothingInException(){
+        super();
+    }
     
 }

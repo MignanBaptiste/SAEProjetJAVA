@@ -5,5 +5,9 @@ public class InvalidSexeException extends Exception{
         super();
         System.out.println(texte);
     }
+
+    public InvalidSexeException(){
+        super();
+    }
     
 }

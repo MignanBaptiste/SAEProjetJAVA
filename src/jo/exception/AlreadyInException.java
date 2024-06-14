@@ -6,5 +6,9 @@ public class AlreadyInException extends Exception{
         super();
         System.out.println(texte);
     }
+
+    public AlreadyInException(){
+        super();
+    }
     
 }

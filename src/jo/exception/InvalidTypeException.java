@@ -6,4 +6,8 @@ public class InvalidTypeException extends Exception{
         super();
         System.out.println(texte);
     }
+
+    public InvalidTypeException(){
+        super();
+    }
 }
