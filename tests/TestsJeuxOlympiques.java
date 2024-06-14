@@ -8,6 +8,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 //import java.util.HashMap;
 
 import java.util.List;
@@ -26,14 +29,80 @@ public class TestsJeuxOlympiques {
         jeux2024 = new JeuxOlympiques(2024);
         france = new Pays("France");
         usa = new Pays("USA");
-        equipeFrance = new Equipe(new VolleyBall(null), france);
-        equipeUSA = new Equipe(new VolleyBall(null), usa);
+        equipeFrance = new Equipe(new VolleyBall("Volley"), france);
+        equipeUSA = new Equipe(new VolleyBall("Volley"), usa);
         athletisme = new Athletisme("Athlétisme");
     }
 
     @Test
     public void testJeuxOlympiques() {
         assertNotNull(jeux2024);
+    }
+
+    @Test
+    public void testGetEquipes() {
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        try {
+            equipeFrance.addAthlete(ath1);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des exceptions
+        }
+        HashSet<Equipe> hs = new HashSet<>();
+        hs.add(equipeFrance);
+        jeux2024.addAthlete(ath1);
+        assertEquals(jeux2024.getEquipes(), hs);
+    }
+
+    @Test
+    public void testGetPays() {
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        List<Pays> hs = new ArrayList<>();
+        hs.add(france);
+        jeux2024.addAthlete(ath1);
+        assertEquals(jeux2024.getPays(), hs);
+    }
+
+    @Test
+    public void testGetAthlete() {
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        List<Athlete> hs = new ArrayList<>();
+        hs.add(ath1);
+        jeux2024.addAthlete(ath1);
+        assertEquals(jeux2024.getAthletes(), hs);
+    }
+
+    @Test
+    public void testGetNbEquipes() {
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        try {
+            equipeFrance.addAthlete(ath1);
+        } catch (InvalidSexeException | AlreadyInException e) {
+            // gestion des exceptions
+        }
+        jeux2024.addAthlete(ath1);
+        assertEquals(jeux2024.getNbEquipes(), 1);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Test
+    public void testGetNbEpreuve() {
+        Epreuve ep1 = new Epreuve<>(Sexe.HOMME, athletisme);
+        jeux2024.addEpreuve(ep1);
+        assertEquals(1, jeux2024.getNbEpreuves());
+    }
+
+    @Test
+    public void testGetNbPays() {
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        jeux2024.addAthlete(ath1);
+        assertEquals(jeux2024.getNbPays(), 1);
+    }
+
+    @Test
+    public void testGetNbAthlete() {
+        Athlete ath1 = new Athlete("Manaudou", "Florent", Sexe.HOMME, 56, 87, 78, france);
+        jeux2024.addAthlete(ath1);
+        assertEquals(jeux2024.getNbAthletes(), 1);
     }
 
     @Test
